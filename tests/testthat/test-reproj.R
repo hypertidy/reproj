@@ -28,3 +28,14 @@ test_that("basic reprojection works", {
   expect_equivalent(reproj(dat, llproj, laeaproj), pdat)
   expect_equivalent(reproj(pdat, laeaproj, llproj), dat)
 })
+
+test_that("identity reprojection ok", {
+  expect_equivalent(reproj(dat, llproj, llproj), dat)
+  expect_equivalent(reproj(pdat, laeaproj, laeaproj), pdat)
+})
+
+test_that("unit change", {
+  expect_equivalent(reproj(dat, llproj, "+proj=laea +ellps=WGS84 +units=km"), pdat/1000)
+  expect_equivalent(reproj(dat, lproj, laeaproj), pdat)
+})
+
