@@ -1,0 +1,14 @@
+Package: reproj
+Type: Package
+Title: Reprojection for Map Data
+Version: 0.1.0
+Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
+    "mdsumner@gmail.com")
+Description: Reproject coordinates via PROJ.4 using the proj4 package.
+License: GPL-3
+LazyData: TRUE
+Imports:
+    proj4
+Suggests:
+    testthat
+RoxygenNote: 5.0.1
