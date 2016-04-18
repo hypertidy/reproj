@@ -23,7 +23,7 @@ reproj.matrix <- function(x, source, target, ...) {
 #' @rdname reproj
 #' @export
 reproj.data.frame <- function(x, ...) {
-  NextMethod("reproj", as.matrix(x))
+  NextMethod("reproj", as.matrix(x), ...)
 }
 
 #' @rdname reproj
