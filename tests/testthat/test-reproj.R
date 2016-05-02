@@ -36,10 +36,11 @@ test_that("identity reprojection ok", {
 
 test_that("unit change", {
   expect_equivalent(reproj(dat, llproj, "+proj=laea +ellps=WGS84 +units=km"), pdat/1000)
-  expect_equivalent(reproj(dat, lproj, laeaproj), pdat)
+  expect_equivalent(reproj(dat, llproj, laeaproj), pdat)
 })
 
 test_that("basic with data frame works", {
   expect_equivalent(reproj(as.data.frame(dat), llproj, laeaproj), pdat)
   expect_equivalent(reproj(as.data.frame(pdat), laeaproj, llproj), dat)
 })
+
