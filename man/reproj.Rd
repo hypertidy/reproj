@@ -4,7 +4,6 @@
 \alias{reproj}
 \alias{reproj.data.frame}
 \alias{reproj.matrix}
-\alias{reproj.tbl_df}
 \title{Title}
 \usage{
 reproj(x, ...)
@@ -12,8 +11,6 @@ reproj(x, ...)
 \method{reproj}{matrix}(x, source, target, ...)
 
 \method{reproj}{data.frame}(x, ...)
-
-\method{reproj}{tbl_df}(x, ...)
 }
 \arguments{
 \item{x}{coordinates}

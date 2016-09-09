@@ -13,7 +13,7 @@ reproj <- function(x, ...) {
 
 #' @rdname reproj
 #' @export
-reproj_.matrix <- function(x, source, target, ...) {
+reproj.matrix <- function(x, source, target, ...) {
   srcmult <- if (is_ll(source)) {pi/180} else {1}
   tarmult <-  if(is_ll(target)) {180/pi} else {1}
   proj4::ptransform(x * srcmult, source, target, ...)[,1:2] * tarmult
@@ -22,26 +22,26 @@ reproj_.matrix <- function(x, source, target, ...) {
 ## maybe use x/y name detection here?
 #' @rdname reproj
 #' @export
-reproj_.data.frame <- function(x, ...) {
+reproj.data.frame <- function(x, ...) {
   reproj(as.matrix(x), ...)
 }
 
-#' @rdname reproj
-#' @export
-reproj.tbl_df <- reproj.data.frame
-
+# #' @rdname reproj
+# #' @export
+# reproj.tbl_df <- reproj.data.frame
+# 
 is_ll <- function(x) grepl("longlat", x) | grepl("lonlat", x)
-
-reproj <- function (.data, ...) 
-{
-  reproj_(.data, .dots = lazyeval::lazy_dots(...))
-}
-reproj_ <- function(.data, ..., dots) UseMethod("reproj_")
-
-reproj_.data.frame <- function(.data, ..., .dots, source, target) {
-  dots <- lazyeval::all_dots(.dots, ...)
-  dots$source <- dots$target <- NULL
-  vars <- dplyr::select_vars_(names(.data), dots)
-  res <- reproj(as.matrix(.data[, vars]), source, target)
-  res
-}
+# 
+# reproj <- function (.data, ...) 
+# {
+#   reproj_(.data, .dots = lazyeval::lazy_dots(...))
+# }
+# reproj_ <- function(.data, ..., dots) UseMethod("reproj_")
+# 
+# reproj_.data.frame <- function(.data, ..., .dots, source, target) {
+#   dots <- lazyeval::all_dots(.dots, ...)
+#   dots$source <- dots$target <- NULL
+#   vars <- dplyr::select_vars_(names(.data), dots)
+#   res <- reproj(as.matrix(.data[, vars]), source, target)
+#   res
+# }
