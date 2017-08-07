@@ -7,7 +7,7 @@
 #' @importFrom proj4 ptransform
 #' @return matrix
 #' @export
-reproj <- function(x, ...) {
+reproj <- function(x, source, target, ...) {
   UseMethod("reproj")
 }
 
@@ -22,8 +22,8 @@ reproj.matrix <- function(x, source, target, ...) {
 ## maybe use x/y name detection here?
 #' @rdname reproj
 #' @export
-reproj.data.frame <- function(x, ...) {
-  reproj(as.matrix(x), ...)
+reproj.data.frame <- function(x, source, target, ...) {
+  reproj(as.matrix(x), source, target, ...)
 }
 
 # #' @rdname reproj

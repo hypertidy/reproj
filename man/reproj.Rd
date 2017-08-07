@@ -2,24 +2,24 @@
 % Please edit documentation in R/reproj.r
 \name{reproj}
 \alias{reproj}
-\alias{reproj.data.frame}
 \alias{reproj.matrix}
+\alias{reproj.data.frame}
 \title{Title}
 \usage{
-reproj(x, ...)
+reproj(x, source, target, ...)
 
 \method{reproj}{matrix}(x, source, target, ...)
 
-\method{reproj}{data.frame}(x, ...)
+\method{reproj}{data.frame}(x, source, target, ...)
 }
 \arguments{
 \item{x}{coordinates}
 
-\item{...}{arguments passed to \code{\link{ptransform}}}
-
 \item{source}{source PROJ.4 string}
 
 \item{target}{target PROJ.4 string}
+
+\item{...}{arguments passed to \code{\link{ptransform}}}
 }
 \value{
 matrix
@@ -27,4 +27,3 @@ matrix
 \description{
 Title
 }
-
