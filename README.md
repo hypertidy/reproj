@@ -37,9 +37,13 @@ remotes::install_github("hypertidy/reproj")
 This example shows how to convert between coordinate systems:
 
 ``` r
-## basic example code
+library(reproj)
+reproj(cbind(c(147, 148), c(-42, -45)), target = "+proj=laea +datum=WGS84", source = 4326)
+#>         [,1]      [,2] [,3]
+#> [1,] 5969744  -9803200    0
+#> [2,] 5362760 -10052226    0
 ```
 
 Please note that the ‘reproj’ project is released with a [Contributor
 Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
-you agree to abide by its terms. \>
+you agree to abide by its terms.

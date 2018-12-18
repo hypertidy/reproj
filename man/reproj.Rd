@@ -38,6 +38,10 @@ to radians on input or output as required.
 At the moment reproj always returns a 3-column matrix.
 
 Ideally `proj4` will be replaced by a more modern interface to the PROJ library.
+
+On some systems we cannot use an epsg integer code, particularly CRAN's
+'winbuilder' because it won't work with "+init=epsg:code" forms. So we 
+don't test or document examples of those.
 }
 \section{Warning}{
  there are a number of limitations to the proj4 package, please use
@@ -46,6 +50,6 @@ for datum transformations. We have not even checked if proj4 can do that.
 }
 
 \examples{
-reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84", source = 4326)
-
+reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84", 
+                         source = "+proj=longlat +datum=WGS84")
 }
