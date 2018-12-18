@@ -65,7 +65,7 @@ projection and a target projection." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reproj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -148,7 +148,11 @@ projection and a target projection.</p>
 this is to help catch mistakes being made. The `target` is the second argument in `reproj`
 though it is the third argument in `proj4::ptransform`. This function also converts
 to radians on input or output as required.</p>
+<p>At the moment reproj always returns a 3-column matrix.</p>
 <p>Ideally `proj4` will be replaced by a more modern interface to the PROJ library.</p>
+<p>On some systems we cannot use an epsg integer code, particularly CRAN's
+'winbuilder' because it won't work with "+init=epsg:code" forms. So we 
+don't test or document examples of those.</p>
     
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
@@ -158,8 +162,9 @@ for datum transformations. We have not even checked if proj4 can do that.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>reproj</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='fl'>147</span>, -<span class='fl'>42</span>), <span class='kw'>target</span> <span class='kw'>=</span> <span class='st'>"+proj=laea +datum=WGS84"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='fl'>4326</span>)</div><div class='output co'>#&gt; [1]  5969744 -9803200</div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>reproj</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='fl'>147</span>, -<span class='fl'>42</span>), <span class='kw'>target</span> <span class='kw'>=</span> <span class='st'>"+proj=laea +datum=WGS84"</span>,
+                         <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"+proj=longlat +datum=WGS84"</span>)</div><div class='output co'>#&gt;         [,1]     [,2] [,3]
+#&gt; [1,] 5969744 -9803200    0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
