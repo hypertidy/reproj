@@ -6,7 +6,7 @@
 \title{Reproject data from source to target coordinate system.}
 \description{
 reproj provides helpers for easily reprojecting generic data, by depending
-only on a reprojection engine (proj4 for now).
+on a reprojection engine (proj4 for now).
 }
 \details{
 The function `reproj` is designed to take an input data set `x` and then a

@@ -41,7 +41,10 @@ reproj.matrix <- function(x, target, ..., source = NULL) {
   validate_proj(target)
   srcmult <- if (is_ll(source)) {pi/180} else {1}
   tarmult <-  if(is_ll(target)) {180/pi} else {1}
-  proj4::ptransform(x * srcmult, source, target, ...) * tarmult
+  x[, 1:2] <- x[,1:2] * srcmult
+  out <- proj4::ptransform(x, source, target, ...) 
+  out[,1:2] <- out[, 1:2] * tarmult
+  out
 }
 
 #' @rdname reproj
