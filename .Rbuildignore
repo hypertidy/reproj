@@ -1,4 +1,8 @@
+^CODE_OF_CONDUCT\.md$
+^appveyor\.yml$
+^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^README-.*\.png$
+^docs$

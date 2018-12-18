@@ -3,8 +3,8 @@ context("reproj")
 ## TODO: Rename context
 ## TODO: Add more tests
 
-llproj <- "+proj=longlat +ellps=WGS84"
-laeaproj <- "+proj=laea +ellps=WGS84"
+llproj <- "+proj=longlat +datum=WGS84"
+laeaproj <- "+proj=laea +datum=WGS84"
 
 # library(proj4)
 # dat <- as.matrix(expand.grid(x = seq(-180, 180), y = seq(-90, 90)))
@@ -24,23 +24,31 @@ pdat <- structure(c(-9752052.25396846, -8119467.86794594, -2678218.88894421,
             3555900.89373428), .Dim = c(10L,
                                                                       2L))
 
+## assume 3 column
+pdat <- cbind(pdat, 0)
+dat <- cbind(dat, 0)
 test_that("basic reprojection works", {
-  expect_equivalent(reproj(dat, llproj, laeaproj), pdat)
-  expect_equivalent(reproj(pdat, laeaproj, llproj), dat)
+  expect_equivalent(reproj(dat, source = llproj, target = laeaproj), pdat)
+  expect_equivalent(reproj(pdat, source = laeaproj, target = llproj), dat)
 })
 
 test_that("identity reprojection ok", {
-  expect_equivalent(reproj(dat, llproj, llproj), dat)
-  expect_equivalent(reproj(pdat, laeaproj, laeaproj), pdat)
+  expect_equivalent(reproj(dat, source = llproj, target = llproj), dat)
+  expect_equivalent(reproj(pdat, source = laeaproj, target = laeaproj), pdat)
 })
 
 test_that("unit change", {
-  expect_equivalent(reproj(dat, llproj, "+proj=laea +ellps=WGS84 +units=km"), pdat/1000)
-  expect_equivalent(reproj(dat, llproj, laeaproj), pdat)
+  expect_equivalent(reproj(dat, source = llproj, target = "+proj=laea +ellps=WGS84 +units=km"), pdat/1000)
+  expect_equivalent(reproj(dat, source = llproj, target = laeaproj), pdat)
 })
 
 test_that("basic with data frame works", {
-  expect_equivalent(reproj(as.data.frame(dat), llproj, laeaproj), pdat)
-  expect_equivalent(reproj(as.data.frame(pdat), laeaproj, llproj), dat)
+  expect_equivalent(reproj(as.data.frame(dat), source = llproj, target = laeaproj), pdat)
+  expect_equivalent(reproj(as.data.frame(pdat), source = laeaproj, target = llproj), dat)
+})
+
+test_that("bad arguments fail", {
+  expect_error(reproj(dat, llproj, target = llproj))
+  expect_error(reproj(pdat, laeaproj, target = laeaproj))
 })
 

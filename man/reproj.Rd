@@ -4,26 +4,48 @@
 \alias{reproj}
 \alias{reproj.matrix}
 \alias{reproj.data.frame}
-\title{Title}
+\title{Reproject coordinates.}
 \usage{
-reproj(x, source, target, ...)
+reproj(x, target, ..., source = NULL)
 
-\method{reproj}{matrix}(x, source, target, ...)
+\method{reproj}{matrix}(x, target, ..., source = NULL)
 
-\method{reproj}{data.frame}(x, source, target, ...)
+\method{reproj}{data.frame}(x, target, ..., source = NULL)
 }
 \arguments{
 \item{x}{coordinates}
 
-\item{source}{source PROJ.4 string}
-
-\item{target}{target PROJ.4 string}
+\item{target}{target specification (PROJ.4 string or epsg code)}
 
 \item{...}{arguments passed to \code{\link{ptransform}}}
+
+\item{source}{source specification (PROJ.4 string or epsg code)}
 }
 \value{
 matrix
 }
 \description{
-Title
+reproj drives the function `proj4::ptransform` and sorts out the requirements for 
+it so that we can simply give coordinates in data frame or matrix form, with a source
+projection and a target projection.
+}
+\details{
+The `source` argument must be named explicitly, i.e. `reproj(xy, t_srs, source = s_srs)`, 
+this is to help catch mistakes being made. The `target` is the second argument in `reproj`
+though it is the third argument in `proj4::ptransform`. This function also converts
+to radians on input or output as required.
+
+At the moment reproj always returns a 3-column matrix.
+
+Ideally `proj4` will be replaced by a more modern interface to the PROJ library.
+}
+\section{Warning}{
+ there are a number of limitations to the proj4 package, please use
+at your own risk. The sf package provides a better supported facility to modern code and
+for datum transformations. We have not even checked if proj4 can do that.
+}
+
+\examples{
+reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84", source = 4326)
+
 }

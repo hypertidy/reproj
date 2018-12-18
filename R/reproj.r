@@ -1,47 +1,53 @@
-#' Title
+#' Reproject coordinates. 
 #'
+#' reproj drives the function `proj4::ptransform` and sorts out the requirements for 
+#' it so that we can simply give coordinates in data frame or matrix form, with a source
+#' projection and a target projection. 
+#' 
+#' The `source` argument must be named explicitly, i.e. `reproj(xy, t_srs, source = s_srs)`, 
+#' this is to help catch mistakes being made. The `target` is the second argument in `reproj`
+#' though it is the third argument in `proj4::ptransform`. This function also converts
+#' to radians on input or output as required. 
+#' 
+#' At the moment reproj always returns a 3-column matrix. 
+#' 
+#' Ideally `proj4` will be replaced by a more modern interface to the PROJ library. 
+#' 
+#' @section Warning: there are a number of limitations to the proj4 package, please use
+#' at your own risk. The sf package provides a better supported facility to modern code and
+#' for datum transformations. We have not even checked if proj4 can do that. 
+#' 
 #' @param x coordinates
-#' @param source source PROJ.4 string
-#' @param target target PROJ.4 string
+#' @param source source specification (PROJ.4 string or epsg code)
+#' @param target target specification (PROJ.4 string or epsg code)
 #' @param ... arguments passed to \code{\link{ptransform}}
 #' @importFrom proj4 ptransform
 #' @return matrix
 #' @export
-reproj <- function(x, source, target, ...) {
+#' @examples
+#' reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84", source = 4326)
+#' 
+reproj <- function(x, target, ..., source = NULL) {
   UseMethod("reproj")
 }
 
 #' @rdname reproj
 #' @export
-reproj.matrix <- function(x, source, target, ...) {
+reproj.matrix <- function(x, target, ..., source = NULL) {
+  source <- to_proj(source)
+  target <- to_proj(target)
+  if (is.null(source)) stop("'source' projection must be included, as a named argument")
+  validate_proj(source)
+  validate_proj(target)
   srcmult <- if (is_ll(source)) {pi/180} else {1}
   tarmult <-  if(is_ll(target)) {180/pi} else {1}
-  proj4::ptransform(x * srcmult, source, target, ...)[,1:2] * tarmult
+  proj4::ptransform(x * srcmult, source, target, ...) * tarmult
 }
 
-## maybe use x/y name detection here?
 #' @rdname reproj
 #' @export
-reproj.data.frame <- function(x, source, target, ...) {
-  reproj(as.matrix(x), source, target, ...)
+reproj.data.frame <- function(x, target, ..., source = NULL) {
+  reproj(as.matrix(x), target = target, ..., source = source)
 }
 
-# #' @rdname reproj
-# #' @export
-# reproj.tbl_df <- reproj.data.frame
-# 
-is_ll <- function(x) grepl("longlat", x) | grepl("lonlat", x)
-# 
-# reproj <- function (.data, ...) 
-# {
-#   reproj_(.data, .dots = lazyeval::lazy_dots(...))
-# }
-# reproj_ <- function(.data, ..., dots) UseMethod("reproj_")
-# 
-# reproj_.data.frame <- function(.data, ..., .dots, source, target) {
-#   dots <- lazyeval::all_dots(.dots, ...)
-#   dots$source <- dots$target <- NULL
-#   vars <- dplyr::select_vars_(names(.data), dots)
-#   res <- reproj(as.matrix(.data[, vars]), source, target)
-#   res
-# }
+
