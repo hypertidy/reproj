@@ -5,7 +5,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-  [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/r-gris/reproj.svg?branch=master)](https://travis-ci.org/r-gris/reproj)[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/r-gris/reproj?branch=master&svg=true)](https://ci.appveyor.com/project/r-gris/reproj)  [![CRAN status](https://www.r-pkg.org/badges/version/reproj)](https://cran.r-project.org/package=reproj)
+  [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/hyptidy/reproj.svg?branch=master)](https://travis-ci.org/hypertidy/reproj)[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/mdsumner/reproj?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/reproj)  [![CRAN status](https://www.r-pkg.org/badges/version/reproj)](https://cran.r-project.org/package=reproj)
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
