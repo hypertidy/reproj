@@ -14,7 +14,8 @@ LazyData: TRUE
 Imports:
     proj4
 Suggests:
-    testthat
+    testthat,
+    covr
 RoxygenNote: 6.1.1
 Encoding: UTF-8
 SystemRequirements: PROJ (>= 4.4.6)
