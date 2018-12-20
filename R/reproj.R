@@ -24,7 +24,7 @@
 #' @param x coordinates
 #' @param source source specification (PROJ.4 string or epsg code)
 #' @param target target specification (PROJ.4 string or epsg code)
-#' @param ... arguments passed to \code{\link{ptransform}}
+#' @param ... arguments passed to `proj4::ptransform`
 #' @importFrom proj4 ptransform
 #' @return matrix
 #' @export
