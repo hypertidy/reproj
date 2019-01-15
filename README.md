@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis build
-status](https://travis-ci.org/hyptidy/reproj.svg?branch=master)](https://travis-ci.org/hypertidy/reproj)[![AppVeyor
+status](https://travis-ci.org/hypertidy/reproj.svg?branch=master)](https://travis-ci.org/hypertidy/reproj)[![AppVeyor
 build
-status](https://ci.appveyor.com/api/projects/status/github/mdsumner/reproj?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/reproj)
+status](https://ci.appveyor.com/api/projects/status/github/hypertidy/reproj?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/reproj)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/reproj)](https://cran.r-project.org/package=reproj)
 

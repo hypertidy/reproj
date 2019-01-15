@@ -14,7 +14,7 @@
 #' Ideally `proj4` will be replaced by a more modern interface to the PROJ library. 
 #' 
 #' On some systems we cannot use an epsg integer code, particularly CRAN's
-#' 'winbuilder' because it won't work with "+init=epsg:code" forms. So we 
+#' 'winbuilder' because it won't work with '+init=epsg:code' forms. So we 
 #' don't test or document examples of those. 
 #' 
 #' @section Warning: there are a number of limitations to the proj4 package, please use
@@ -24,7 +24,7 @@
 #' @param x coordinates
 #' @param source source specification (PROJ.4 string or epsg code)
 #' @param target target specification (PROJ.4 string or epsg code)
-#' @param ... arguments passed to \code{\link{ptransform}}
+#' @param ... arguments passed to [proj4::ptransform()]
 #' @importFrom proj4 ptransform
 #' @return matrix
 #' @export

@@ -1,3 +1,5 @@
+^codecov\.yml$
+^CRAN-RELEASE$
 ^CODE_OF_CONDUCT\.md$
 ^appveyor\.yml$
 ^\.travis\.yml$

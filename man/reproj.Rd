@@ -17,7 +17,7 @@ reproj(x, target, ..., source = NULL)
 
 \item{target}{target specification (PROJ.4 string or epsg code)}
 
-\item{...}{arguments passed to \code{\link{ptransform}}}
+\item{...}{arguments passed to \code{\link[proj4:ptransform]{proj4::ptransform()}}}
 
 \item{source}{source specification (PROJ.4 string or epsg code)}
 }
@@ -25,22 +25,22 @@ reproj(x, target, ..., source = NULL)
 matrix
 }
 \description{
-reproj drives the function `proj4::ptransform` and sorts out the requirements for 
+reproj drives the function \code{proj4::ptransform} and sorts out the requirements for
 it so that we can simply give coordinates in data frame or matrix form, with a source
 projection and a target projection.
 }
 \details{
-The `source` argument must be named explicitly, i.e. `reproj(xy, t_srs, source = s_srs)`, 
-this is to help catch mistakes being made. The `target` is the second argument in `reproj`
-though it is the third argument in `proj4::ptransform`. This function also converts
+The \code{source} argument must be named explicitly, i.e. \code{reproj(xy, t_srs, source = s_srs)},
+this is to help catch mistakes being made. The \code{target} is the second argument in \code{reproj}
+though it is the third argument in \code{proj4::ptransform}. This function also converts
 to radians on input or output as required.
 
 At the moment reproj always returns a 3-column matrix.
 
-Ideally `proj4` will be replaced by a more modern interface to the PROJ library.
+Ideally \code{proj4} will be replaced by a more modern interface to the PROJ library.
 
 On some systems we cannot use an epsg integer code, particularly CRAN's
-'winbuilder' because it won't work with "+init=epsg:code" forms. So we 
+'winbuilder' because it won't work with '+init=epsg:code' forms. So we
 don't test or document examples of those.
 }
 \section{Warning}{

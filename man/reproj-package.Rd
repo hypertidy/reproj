@@ -9,14 +9,14 @@ reproj provides helpers for easily reprojecting generic data, by depending
 on a reprojection engine (proj4 for now).
 }
 \details{
-The function `reproj` is designed to take an input data set `x` and then a
-`target` coordinate system specification. The `source` argument is not positional
-(must be named) and must be provided. 
-Currently the coordinate system may be a 'PROJ string' or 'EPSG code' either 
+The function \code{reproj} is designed to take an input data set \code{x} and then a
+\code{target} coordinate system specification. The \code{source} argument is not positional
+(must be named) and must be provided.
+Currently the coordinate system may be a 'PROJ string' or 'EPSG code' either
 as  a number or text.
 
 Methods are provided for data frame and matrix, add S3 methods for
 you classes in your own package. For classed objects, or objects with a known
-method for finding the 'source' coordinate system your method can provide 
+method for finding the 'source' coordinate system your method can provide
 that logic.
 }
