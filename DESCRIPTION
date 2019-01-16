@@ -17,6 +17,6 @@ Suggests:
     testthat,
     covr
 RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 SystemRequirements: PROJ (>= 4.4.6)
-Roxygen: list(markdown = TRUE)
