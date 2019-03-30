@@ -38,9 +38,10 @@ reproj <- function(x, target, ..., source = NULL) {
 #' @rdname reproj
 #' @export
 reproj.matrix <- function(x, target, ..., source = NULL) {
+  if (is.null(source)) stop("'source' projection must be included, as a named argument")
+  
   source <- to_proj(source)
   target <- to_proj(target)
-  if (is.null(source)) stop("'source' projection must be included, as a named argument")
   validate_proj(source)
   validate_proj(target)
   srcmult <- if (is_ll(source)) {pi/180} else {1}
