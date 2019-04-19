@@ -6,7 +6,7 @@ to_proj <- function(x) {
     x <- sprintf("+init=epsg:%i", as.integer(x))
   }
   ## TODO: otherwise doesn't look like a proj string ...
-  if (!substr(gsub(x, "\\s+", "", x, perl = TRUE), 1, 1) == "+") stop("not a proj-like string")
+  if (!substr(gsub(x, "^\\s+", "", x, perl = TRUE), 1, 1) == "+") stop("not a proj-like string")
   x
 }
 validate_proj <- function(x) {
