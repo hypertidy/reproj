@@ -30,6 +30,10 @@ dat <- cbind(dat, 0)
 test_that("basic reprojection works", {
   expect_equivalent(reproj(dat, source = llproj, target = laeaproj), pdat)
   expect_equivalent(reproj(pdat, source = laeaproj, target = llproj), dat)
+  
+  leading <- " +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"
+  nospace <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"
+  expect_equal(to_proj(leading), leading)
 })
 
 test_that("identity reprojection ok", {
