@@ -7,7 +7,8 @@ status](https://travis-ci.org/hypertidy/reproj.svg?branch=master)](https://travi
 build
 status](https://ci.appveyor.com/api/projects/status/github/hypertidy/reproj?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/reproj)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/reproj)](https://cran.r-project.org/package=reproj)[![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/reproj)](https://cran.r-project.org/package=reproj)
+status](https://www.r-pkg.org/badges/version/reproj)](https://cran.r-project.org/package=reproj)[![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/reproj)](https://cran.r-project.org/package=reproj)[![Coverage
+Status](https://img.shields.io/codecov/c/github/hypertidy/reproj/master.svg)](https://codecov.io/github/hypertidy/reproj?branch=master)
 
 # reproj
 
