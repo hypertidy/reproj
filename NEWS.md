@@ -1,4 +1,4 @@
-# reproj dev
+# reproj 0.3.0
 
 * Fix bug to remove leading space in PROJ.4 string. 
 
