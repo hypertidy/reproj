@@ -4,6 +4,7 @@
 \alias{reproj}
 \alias{reproj.matrix}
 \alias{reproj.data.frame}
+\alias{reproj.sc}
 \title{Reproject coordinates.}
 \usage{
 reproj(x, target, ..., source = NULL)
@@ -11,6 +12,8 @@ reproj(x, target, ..., source = NULL)
 \method{reproj}{matrix}(x, target, ..., source = NULL)
 
 \method{reproj}{data.frame}(x, target, ..., source = NULL)
+
+\method{reproj}{sc}(x, target, ..., source = NULL)
 }
 \arguments{
 \item{x}{coordinates}
