@@ -2,5 +2,6 @@
 
 S3method(reproj,data.frame)
 S3method(reproj,matrix)
+S3method(reproj,sc)
 export(reproj)
 importFrom(proj4,ptransform)

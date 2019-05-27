@@ -58,4 +58,10 @@ reproj.data.frame <- function(x, target, ..., source = NULL) {
   reproj(as.matrix(x), target = target, ..., source = source)
 }
 
-
+#' @rdname reproj
+#' @export
+reproj.sc <- function(x, target, ..., source = NULL) {
+  x[["vertex"]][c("x_", "y_")] <- reproj(as.matrix(x[["vertex"]][c("x_", "y_")]), target = target, ..., source = x$meta$proj[1L])[, 1:2, drop = FALSE]
+  x[["meta"]] <- rbind(tibble::tibble(proj = target, ctime = Sys.time()), x[["meta"]])
+  x
+}
