@@ -4,10 +4,19 @@
 #' it so that we can simply give coordinates in data frame or matrix form, with a source
 #' projection and a target projection. 
 #' 
-#' The `source` argument must be named explicitly, i.e. `reproj(xy, t_srs, source = s_srs)`, 
+#' The behaviour is controlled by user-settable options which on start up are 
+#' `reproj.assume.longlat = TRUE` and 
+#' `reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"`. 
+#' 
+#' If the option `reproj.assume.longlat` is set to FALSE then the `source` argument must 
+#' be named explicitly, i.e. `reproj(xy, t_srs, source = s_srs)`, 
 #' this is to help catch mistakes being made. The `target` is the second argument in `reproj`
 #' though it is the third argument in `proj4::ptransform`. This function also converts
 #' to radians on input or output as required. 
+#' 
+#' If the option `reproj.assume.longlat` is set to TRUE and the input data appear to be 
+#' sensible longitude/latitude values, then the value of `reproj.default.longlat` is used
+#' as the assumed source projection. 
 #' 
 #' At the moment reproj always returns a 3-column matrix. 
 #' 
@@ -38,14 +47,24 @@ reproj <- function(x, target, ..., source = NULL) {
 #' @rdname reproj
 #' @export
 reproj.matrix <- function(x, target, ..., source = NULL) {
-  if (is.null(source)) stop("'source' projection must be included, as a named argument")
+  target <- to_proj(target)
+  validate_proj(target)
+  if (is.null(source) || is.na(source)) {
+    if (ok_lon_lat(x) && isTRUE(getOption("reproj.assume.longlat"))) {
+      source <- getOption("reproj.default.longlat")
+      warning(sprintf("'source' projection not included, but looks like longitude/latitude values:\n   using '%s'", source))
+      
+    } else {
+      stop("no 'source' projection included, and does not look like longitude/latitude values")
+    }
+  }
   
   source <- to_proj(source)
-  target <- to_proj(target)
   validate_proj(source)
-  validate_proj(target)
+  
   srcmult <- if (is_ll(source)) {pi/180} else {1}
   tarmult <-  if(is_ll(target)) {180/pi} else {1}
+
   x[, 1:2] <- x[,1:2] * srcmult
   out <- proj4::ptransform(x, source, target, ...) 
   out[,1:2] <- out[, 1:2] * tarmult
@@ -58,10 +77,3 @@ reproj.data.frame <- function(x, target, ..., source = NULL) {
   reproj(as.matrix(x), target = target, ..., source = source)
 }
 
-#' @rdname reproj
-#' @export
-reproj.sc <- function(x, target, ..., source = NULL) {
-  x[["vertex"]][c("x_", "y_")] <- reproj(as.matrix(x[["vertex"]][c("x_", "y_")]), target = target, ..., source = x$meta$proj[1L])[, 1:2, drop = FALSE]
-  x[["meta"]] <- rbind(tibble::tibble(proj = target, ctime = Sys.time()), x[["meta"]])
-  x
-}
