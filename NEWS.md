@@ -2,8 +2,9 @@
 
 ## New behaviour
 
-* New behaviour for `reproj` which will now assume input data is longitude/latitude if
- this seems reasonable, and controlled by user-settable options. See `?reproj` for details. 
+* New behaviour for `reproj` which will now assume input data is longitude/latitude 
+ if this seems reasonable, and controlled by user-settable options. See `?reproj` 
+ for details. 
 
 ## New features
 

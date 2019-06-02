@@ -1,8 +1,8 @@
 ## Test environments
 
-* local Ubuntu install, R 3.5.3
-* ubuntu 14.04 (on travis-ci), R 3.5.3
-* win-builder (devel and release)
+* local Ubuntu install (release)
+* ubuntu 14.04 (on travis-ci, release)
+* win-builder (devel)
 
 ## R CMD check results
 
