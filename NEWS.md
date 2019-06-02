@@ -1,4 +1,4 @@
-# reproj 0.3.0.9002
+# reproj 0.4.0
 
 ## New behaviour
 
