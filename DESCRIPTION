@@ -11,6 +11,7 @@ Description: Transform coordinates via 'PROJ' using the library directly, by
  at <https://proj4.org/>.  
 License: GPL-3
 LazyData: TRUE
+Depends: R (>= 3.2.5)
 Imports:
     proj4,
     tibble

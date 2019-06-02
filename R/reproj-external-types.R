@@ -10,7 +10,7 @@ reproj.sc <- function(x, target, ..., source = NULL) {
 #' @export
 reproj.mesh3d <- function(x, target, ..., source = NULL) {
   xy <- t(x$vb[1:2, , drop = FALSE])
-  x$vb[1:2, ] <- t(reproj(xy, target = target, source = source, ...)[, 1:2, drop = FALSE])
+  x$vb[1:2, ] <- t(reproj(xy, target = target, source = x$crs, ...)[, 1:2, drop = FALSE])
   x
 }
 
