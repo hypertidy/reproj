@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reproject coordinates. — reproj • reproj</title>
+<title>Reproject coordinates. — reproj.sc • reproj</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Reproject coordinates. — reproj" />
+<meta property="og:title" content="Reproject coordinates. — reproj.sc" />
 
 <meta property="og:description" content="reproj drives the function proj4::ptransform and sorts out the requirements for
 it so that we can simply give coordinates in data frame or matrix form, with a source
@@ -65,7 +65,7 @@ projection and a target projection." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reproj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@ projection and a target projection." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Reproject coordinates.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hypertidy/reproj/blob/master/R/reproj.R'><code>R/reproj.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/hypertidy/reproj/blob/master/R/reproj-external-types.R'><code>R/reproj-external-types.R</code></a>, <a href='https://github.com/hypertidy/reproj/blob/master/R/reproj.R'><code>R/reproj.R</code></a></small>
     <div class="hidden name"><code>reproj.Rd</code></div>
     </div>
 
@@ -117,7 +117,13 @@ projection and a target projection.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='co'># S3 method for sc</span>
+<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for mesh3d</span>
+<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for matrix</span>
 <span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
@@ -152,10 +158,17 @@ projection and a target projection.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>source</code> argument must be named explicitly, i.e. <code>reproj(xy, t_srs, source = s_srs)</code>,
+    <p>The behaviour is controlled by user-settable options which on start up are
+<code>reproj.assume.longlat = TRUE</code> and
+<code>reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"</code>.</p>
+<p>If the option <code>reproj.assume.longlat</code> is set to FALSE then the <code>source</code> argument must
+be named explicitly, i.e. <code>reproj(xy, t_srs, source = s_srs)</code>,
 this is to help catch mistakes being made. The <code>target</code> is the second argument in <code>reproj</code>
 though it is the third argument in <code><a href='https://www.rdocumentation.org/packages/proj4/topics/transform'>proj4::ptransform</a></code>. This function also converts
 to radians on input or output as required.</p>
+<p>If the option <code>reproj.assume.longlat</code> is set to TRUE and the input data appear to be
+sensible longitude/latitude values, then the value of <code>reproj.default.longlat</code> is used
+as the assumed source projection.</p>
 <p>At the moment reproj always returns a 3-column matrix.</p>
 <p>Ideally <code>proj4</code> will be replaced by a more modern interface to the PROJ library.</p>
 <p>On some systems we cannot use an epsg integer code, particularly CRAN's
