@@ -9,3 +9,5 @@
 ^README-.*\.png$
 ^docs$
 ^cran-comments\.md$
+^data-raw$
+^revdep$
