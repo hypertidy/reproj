@@ -1,3 +1,9 @@
+# reproj dev
+
+* Tested on PROJ version 6 version of the R package proj4. 
+
+* Trim whitespace on PROJ strings, you're welcome. 
+
 # reproj 0.4.0
 
 ## New behaviour
