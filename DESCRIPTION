@@ -8,7 +8,7 @@ Description: Transform coordinates via 'PROJ' using the library directly, by
  wrapping the 'proj4' package. The 'reproj' function handles the need for
  radian units for either source or target and allows removing an explicit 
  source definition in methods that extend the generic. The 'PROJ' library is available 
- at <https://proj4.org/>.  
+ at <https://proj.org/>.  
 License: GPL-3
 LazyData: TRUE
 Depends: R (>= 3.2.5)
