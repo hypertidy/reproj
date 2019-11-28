@@ -9,7 +9,7 @@ to_proj <- function(x) {
   }
   x <- trimws(x, which = "left")
   ## TODO: otherwise doesn't look like a proj string ...
-  if (!substr(x, 1, 1) == "+") stop("not a proj-like string")
+  if (!substr(x, 1, 1) == "+") warning("not a proj-like string")
   x
 }
 validate_proj <- function(x) {
