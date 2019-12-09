@@ -12,11 +12,11 @@
 
 \method{reproj}{mesh3d}(x, target, ..., source = NULL)
 
-reproj(x, target, ..., source = NULL)
+reproj(x, target, ..., source = NULL, four = FALSE)
 
-\method{reproj}{matrix}(x, target, ..., source = NULL)
+\method{reproj}{matrix}(x, target, ..., source = NULL, four = FALSE)
 
-\method{reproj}{data.frame}(x, target, ..., source = NULL)
+\method{reproj}{data.frame}(x, target, ..., source = NULL, four = FALSE)
 }
 \arguments{
 \item{x}{coordinates}
@@ -26,6 +26,8 @@ reproj(x, target, ..., source = NULL)
 \item{...}{arguments passed to \code{\link[proj4:ptransform]{proj4::ptransform()}}}
 
 \item{source}{source specification (PROJ.4 string or epsg code)}
+
+\item{four}{if \code{TRUE}, and PROJ version 6 is available return four columns xyzt (not just three xyz)}
 }
 \value{
 matrix

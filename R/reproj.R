@@ -33,22 +33,22 @@
 #' @param x coordinates
 #' @param source source specification (PROJ.4 string or epsg code)
 #' @param target target specification (PROJ.4 string or epsg code)
+#' @param four if `TRUE`, and PROJ version 6 is available return four columns xyzt (not just three xyz)
 #' @param ... arguments passed to [proj4::ptransform()]
+#'
 #' @importFrom proj4 ptransform
 #' @return matrix
 #' @export
 #' @examples
 #' reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84", 
 #'                          source = "+proj=longlat +datum=WGS84")
-reproj <- function(x, target, ..., source = NULL) {
+reproj <- function(x, target, ..., source = NULL, four = FALSE) {
   UseMethod("reproj")
 }
 
 #' @rdname reproj
 #' @export
-reproj.matrix <- function(x, target, ..., source = NULL) {
-  target <- to_proj(target)
-  validate_proj(target)
+reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
   if (is.null(source) || is.na(source)) {
     if (ok_lon_lat(x) && isTRUE(getOption("reproj.assume.longlat"))) {
       source <- getOption("reproj.default.longlat")
@@ -58,7 +58,15 @@ reproj.matrix <- function(x, target, ..., source = NULL) {
       stop("no 'source' projection included, and does not look like longitude/latitude values")
     }
   }
-  
+  if (PROJ::ok_proj6()) {
+    out <- PROJ::proj_trans_generic(x, target = target, ..., source = source)
+    if (!four) out <- out[ , 1:3, drop = FALSE]
+  } else {
+    
+  target <- to_proj(target)
+  validate_proj(target)
+
+
   source <- to_proj(source)
   validate_proj(source)
   
@@ -68,12 +76,15 @@ reproj.matrix <- function(x, target, ..., source = NULL) {
   x[, 1:2] <- x[,1:2] * srcmult
   out <- proj4::ptransform(x, source, target, ...) 
   out[,1:2] <- out[, 1:2] * tarmult
+  if (four) warning("argument 'four' is ignored when PROJ version 6 not available")
+  }
   out
 }
 
 #' @rdname reproj
 #' @export
-reproj.data.frame <- function(x, target, ..., source = NULL) {
-  reproj(as.matrix(x), target = target, ..., source = source)
+reproj.data.frame <- function(x, target, ..., source = NULL, four = FALSE) {
+  reproj(as.matrix(x), target = target, ..., source = source, four = four)
 }
+
 
