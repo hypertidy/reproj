@@ -13,7 +13,7 @@ The function `reproj` is designed to take an input data set `x` and then a
 `target` coordinate system specification. The `source` argument is not positional
 (must be named) and must be provided. 
 Currently the coordinate system may be a 'PROJ string' or 'EPSG code' either 
-as  a number or text.
+as  a number or text. 
 
 Methods are provided for data frame and matrix, add S3 methods for
 you classes in your own package. For classed objects, or objects with a known

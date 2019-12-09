@@ -33,11 +33,11 @@ projection and a target projection.
 The `source` argument must be named explicitly, i.e. `reproj(xy, t_srs, source = s_srs)`, 
 this is to help catch mistakes being made. The `target` is the second argument in `reproj`
 though it is the third argument in `proj4::ptransform`. This function also converts
-to radians on input or output as required.
+to radians on input or output as required. 
 
-At the moment reproj always returns a 3-column matrix.
+At the moment reproj always returns a 3-column matrix. 
 
-Ideally `proj4` will be replaced by a more modern interface to the PROJ library.
+Ideally `proj4` will be replaced by a more modern interface to the PROJ library. 
 
 On some systems we cannot use an epsg integer code, particularly CRAN's
 'winbuilder' because it won't work with "+init=epsg:code" forms. So we 
