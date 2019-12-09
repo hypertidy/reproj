@@ -1,5 +1,6 @@
-context("reproj")
+context("reproj-proj4")
 
+testthat::skip_if_not(!PROJ::ok_proj6())
 ## TODO: Rename context
 ## TODO: Add more tests
 

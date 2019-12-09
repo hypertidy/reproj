@@ -1,5 +1,10 @@
 # reproj dev
 
+* `reproj()` gains a new argument `four = FALSE`, this can be used to return
+ the fourth (time) coordinate when using PROJ 6 or higher. 
+ 
+* Now using PROJ package, for version 6 or above. 
+
 * Tested on PROJ version 6 version of the R package proj4. 
 
 * Trim whitespace on PROJ strings, you're welcome. 
