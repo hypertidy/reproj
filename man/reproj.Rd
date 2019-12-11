@@ -8,7 +8,7 @@
 \alias{reproj.data.frame}
 \title{Reproject coordinates.}
 \usage{
-\method{reproj}{sc}(x, target, ..., source = NULL)
+\method{reproj}{sc}(x, target = NULL, ..., source = NULL)
 
 \method{reproj}{mesh3d}(x, target, ..., source = NULL)
 
