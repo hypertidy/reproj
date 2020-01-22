@@ -82,5 +82,5 @@ test_that("mesh3d works", {
 })
 
 test_that("sc works", {
-  expect_silent(reproj(.sc, "+proj=laea +datum=WGS84"))
+  expect_equal(class(reproj(.sc, "+proj=laea +datum=WGS84")), c("SC", "sc"))
 })
