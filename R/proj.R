@@ -4,7 +4,7 @@ to_proj <- function(x) {
 
   ## integer of 4 or 5 digits,
   ## or is a character string
-  if (is.numeric(x) || (nchar(x) %in% c(4, 5) && grepl("^[0-9]{1,5}$", x))) {
+  if (is.numeric(x) || (nchar(x) %in% c(4, 5, 6) && grepl("^[0-9]{1,5}$", x))) {
     x <- sprintf("+init=epsg:%i", as.integer(x))
   }
   x <- trimws(x, which = "left")
