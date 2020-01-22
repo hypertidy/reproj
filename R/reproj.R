@@ -57,9 +57,13 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
     } else {
       stop("no 'source' projection included, and does not look like longitude/latitude values")
     }
+  } else {
+    source <- to_proj(source)
   }
   if (PROJ::ok_proj6()) {
+
     out <- PROJ::proj_trans_generic(x, target = target, ..., source = source)
+    out <- do.call(cbind, out)
     if (!four) out <- out[ , 1:3, drop = FALSE]
   } else {
     
