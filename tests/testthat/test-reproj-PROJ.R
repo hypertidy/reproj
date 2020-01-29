@@ -81,12 +81,12 @@ test_that("integer inputs become epsg strings", {
   
   expect_error(validate_proj(3434))
 
-  expect_silent(.onLoad())
+  ##expect_silent(.onLoad())
 })
 
 
 test_that("mesh3d works", {
-  expect_silent(reproj(.mesh3d, "+proj=laea +datum=WGS84"))
+  expect_warning(reproj(.mesh3d, "+proj=laea +datum=WGS84"))
 })
 
 test_that("sc works", {
