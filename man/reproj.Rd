@@ -3,6 +3,8 @@
 \name{reproj.sc}
 \alias{reproj.sc}
 \alias{reproj.mesh3d}
+\alias{reproj.quadmesh}
+\alias{reproj.triangmesh}
 \alias{reproj}
 \alias{reproj.matrix}
 \alias{reproj.data.frame}
@@ -11,6 +13,10 @@
 \method{reproj}{sc}(x, target = NULL, ..., source = NULL)
 
 \method{reproj}{mesh3d}(x, target, ..., source = NULL)
+
+\method{reproj}{quadmesh}(x, target, ..., source = NULL)
+
+\method{reproj}{triangmesh}(x, target, ..., source = NULL)
 
 reproj(x, target, ..., source = NULL, four = FALSE)
 

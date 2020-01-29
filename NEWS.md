@@ -1,5 +1,7 @@
 # reproj dev
 
+* New reproj methods for quadmesh and trimesh. 
+
 * `reproj()` gains a new argument `four = FALSE`, this can be used to return
  the fourth (time) coordinate when using PROJ 6 or higher. 
  
