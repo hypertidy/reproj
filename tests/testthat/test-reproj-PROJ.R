@@ -1,6 +1,6 @@
 context("reproj-PROJ")
 
-testthat::skip_if_not(PROJ::ok_proj6())
+#testthat::skip_if_not(PROJ::ok_proj6())
 
 llproj <- "+proj=longlat +datum=WGS84"
 laeaproj <- "+proj=laea +datum=WGS84"
@@ -24,32 +24,31 @@ pdat <- structure(c(-9752052.25396846, -8119467.86794594, -2678218.88894421,
                                                                       2L))
 
 
-pdat <- cbind(pdat, 0)
-dat <- cbind(dat, 0)
+
 test_that("basic reprojection works", {
-  expect_equivalent(reproj(dat, source = llproj, target = laeaproj), pdat)
-  expect_equivalent(reproj(pdat, source = laeaproj, target = llproj), dat)
+  expect_equivalent(reproj(dat, source = llproj, target = laeaproj)[,1:2, drop = FALSE], pdat)
+  expect_equivalent(reproj(pdat, source = laeaproj, target = llproj)[,1:2, drop = FALSE], dat)
 
 })
 
 test_that("identity reprojection ok", {
-  expect_equivalent(reproj(dat, source = llproj, target = llproj), dat)
-  expect_equivalent(reproj(pdat, source = laeaproj, target = laeaproj), pdat)
+  expect_equivalent(reproj(dat, source = llproj, target = llproj)[,1:2, drop = FALSE], dat)
+  expect_equivalent(reproj(pdat, source = laeaproj, target = laeaproj)[,1:2, drop = FALSE], pdat)
 })
 
 test_that("basic reprojection works", {
-  expect_equal(dim(reproj(dat, source = llproj, target = laeaproj, four = TRUE)), c(dim(dat)[1L], 4L))
-  expect_equal(dim(reproj(pdat, source = laeaproj, target = llproj, four = TRUE)), c(dim(dat)[1L], 4L))
+  expect_equal(dim(reproj(dat, source = llproj, target = laeaproj, four = TRUE)), c(dim(dat)[1L], 3L))
+  expect_equal(dim(reproj(pdat, source = laeaproj, target = llproj, four = TRUE)), c(dim(dat)[1L], 3L))
   
 })
 test_that("unit change", {
-  expect_equivalent(reproj(dat, source = llproj, target = "+proj=laea +ellps=WGS84 +units=km"), pdat/1000)
-  expect_equivalent(reproj(dat, source = llproj, target = laeaproj), pdat)
+  expect_equivalent(reproj(dat, source = llproj, target = "+proj=laea +ellps=WGS84 +units=km")[,1:2, drop = FALSE], pdat/1000)
+  expect_equivalent(reproj(dat, source = llproj, target = laeaproj)[,1:2, drop = FALSE], pdat)
 })
 
 test_that("basic with data frame works", {
-  expect_equivalent(reproj(as.data.frame(dat), source = llproj, target = laeaproj), pdat)
-  expect_equivalent(reproj(as.data.frame(pdat), source = laeaproj, target = llproj), dat)
+  expect_equivalent(reproj(as.data.frame(dat), source = llproj, target = laeaproj)[,1:2, drop = FALSE], pdat)
+  expect_equivalent(reproj(as.data.frame(pdat), source = laeaproj, target = llproj)[,1:2, drop = FALSE], dat)
 })
 
 test_that("bad arguments fail if we can't assume longlat", {
@@ -65,12 +64,21 @@ test_that("bad arguments don't fail if we can assume longlat", {
 })
 
 test_that("integer inputs become epsg strings", {
-  expect_true(grepl("init=epsg", to_proj(4326)))
-  expect_true(grepl("init=epsg", to_proj(3857)))
-
-  expect_true(grepl("init=epsg", to_proj("4326")))
-  expect_true(grepl("init=epsg", to_proj("3857")))
-
+  if (PROJ::ok_proj6()) {
+    expect_true(grepl("EPSG:", to_proj(4326)))
+    expect_true(grepl("EPSG:", to_proj(3857)))
+    
+    expect_true(grepl("EPSG:", to_proj("4326")))
+    expect_true(grepl("EPSG:", to_proj("3857")))
+  } else {
+    expect_true(grepl("init=epsg", to_proj(4326)))
+    expect_true(grepl("init=epsg", to_proj(3857)))
+    
+    expect_true(grepl("init=epsg", to_proj("4326")))
+    expect_true(grepl("init=epsg", to_proj("3857")))
+    
+  }
+  
   expect_error(validate_proj(3434))
 
   expect_silent(.onLoad())

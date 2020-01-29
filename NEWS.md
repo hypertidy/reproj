@@ -3,6 +3,10 @@
 * `reproj()` gains a new argument `four = FALSE`, this can be used to return
  the fourth (time) coordinate when using PROJ 6 or higher. 
  
+* Behaviour has changed in a breaking way, we now can only input 2-columns and 
+ an optional `z_` may be input. 3-columns are always returned unless `four = TRUE`, 
+ and the option `t_` may also be input. 
+ 
 * Now using PROJ package, for version 6 or above. 
 
 * Tested on PROJ version 6 version of the R package proj4. 

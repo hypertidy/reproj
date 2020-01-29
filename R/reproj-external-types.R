@@ -19,7 +19,7 @@ if (is.null(source)) source <- get_proj_sc(x)
     x$quad <- NULL
   }
   mat <- as.matrix(verts[c("x_", "y_", "z_")])
-  mat <- reproj::reproj(mat,
+  mat <- reproj::reproj(mat[,1:2, drop = FALSE], z_ = mat[,3, drop = TRUE],
                  source = source,
                  target = target)
   colnames(mat) <- c("x_", "y_", "z_")
