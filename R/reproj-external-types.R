@@ -42,4 +42,18 @@ reproj.mesh3d <- function(x, target, ..., source = NULL) {
   x$vb[1:2, ] <- t(reproj(xy, target = target, source = to_proj(x$crs), ...)[, 1:2, drop = FALSE])
   x
 }
-
+#' @rdname reproj
+#' @export
+reproj.quadmesh <- function(x, target, ..., source = NULL) {
+  existingproj <- x$crs
+  x$vb[1:3, ] <- t(reproj::reproj(t(x$vb[1:3, ]), target = target, source = existingproj))
+  x$raster_metadata <- x$crs <- NULL
+  warning("quadmesh raster information cannot be preserved after reprojection, dropping to mesh3d class")
+  class(x) <- setdiff( class(x), "quadmesh")
+  x
+}
+#' @rdname reproj
+#' @export
+reproj.triangmesh <- function(x, target, ..., source = NULL) {
+  reproj.quadmesh(x, target = target, source = source)
+}
