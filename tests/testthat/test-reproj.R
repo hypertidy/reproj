@@ -71,8 +71,13 @@ test_that("integer inputs become epsg strings", {
   expect_true(grepl("init=epsg", to_proj("3857")))
 
   expect_error(validate_proj(3434))
-
   expect_silent(.onLoad())
+  op <- options(reproj.assume.longlat = NULL)
+  expect_true(!"reproj.assume.longlat" %in% names(options()))
+  expect_silent(reproj:::.onLoad())
+  expect_true("reproj.assume.longlat" %in% names(options()))
+
+  expect_warning(to_proj("I am longlat"))
 })
 
 

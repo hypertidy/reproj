@@ -1,4 +1,7 @@
-is_ll <- function(x) grepl("longlat", x) | grepl("lonlat", x) | grepl("4326", x)
+is_ll <- function(x) {
+  ss <- substr(trimws(x), 1, 1)
+  (grepl("longlat", x) && ss == "+") | (grepl("lonlat", x) && ss == "+") | grepl("4326", x)
+}
 to_proj <- function(x) {
 
 

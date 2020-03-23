@@ -1,4 +1,6 @@
-# reproj dev
+# reproj 0.4.1
+
+* Now imports crsmeta to obtain meta strings from silicate. 
 
 * Tested on PROJ version 6 version of the R package proj4. 
 
