@@ -1,6 +1,30 @@
 is_ll <- function(x) {
+  if (is.factor(x)) x <- levels(x)[x]
+  x <- tolower(trimws(as.character(x)))
   ss <- substr(trimws(x), 1, 1)
-  (grepl("longlat", x) && ss == "+") | (grepl("lonlat", x) && ss == "+") | grepl("4326", x)
+  out <- (grepl("longlat", x) && ss == "+") | (grepl("lonlat", x) && ss == "+")
+  if (isTRUE(out)) {
+    return(out)  ## shortcut
+  } else {
+    ## I await my punishment
+    codes <- as.character(.epsg_code)  ## internal data
+    for (i in seq_along(codes)) {
+      ## we might have the code, or an init string, or a new style EPSG:code string
+      out <- codes[i] == x ||
+        grepl(sprintf("^\\+init=epsg:%s", codes[i]), x) ||
+        grepl(sprintf("^epsg:%s", codes[i]), x)
+      #print(codes[i])
+      if (out) {
+        ## we only grepped above so
+        codecode <- as.integer(gsub("[^0-9.-]", "", x))
+        if (!is.finite(codecode) || codecode >= 10000) {
+          out <- FALSE
+        }
+        return(out)
+      }
+    }
+  }
+  FALSE  ## we tried
 }
 to_proj <- function(x) {
 
