@@ -88,3 +88,33 @@ test_that("mesh3d works", {
 test_that("sc works", {
   expect_equal(class(reproj(.sc, "+proj=laea +datum=WGS84")), c("SC", "sc"))
 })
+
+test_that("is_ll works", {
+  expect_true(is_ll(4326))
+  expect_true(is_ll(4267))
+  expect_true(is_ll("4326"))
+  expect_true(is_ll("4267"))
+  expect_true(is_ll("+init=EPSG:4326"))
+  expect_true(is_ll("+init=EPSG:4267"))
+  expect_true(is_ll("+init=epsg:4326"))
+  expect_true(is_ll("+init=epsg:4267"))
+  expect_true(is_ll("EPSG:4326"))
+  expect_true(is_ll("EPSG:4267"))
+  expect_true(is_ll("epsg:4326"))
+  expect_true(is_ll("epsg:4267"))
+
+  expect_true(!is_ll(10000))
+  expect_true(!is_ll(10000))
+
+  expect_true(!is_ll("10000"))
+  expect_true(!is_ll("10000"))
+
+  expect_true(!is_ll("EPSG:10000"))
+  expect_true(!is_ll("epsg:10000"))
+
+  expect_true(!is_ll("+init=EPSG:10000"))
+  expect_true(!is_ll("+init=epsg:10000"))
+
+  expect_true(!is_ll("EPSG:7373773"))
+
+})
