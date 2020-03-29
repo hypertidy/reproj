@@ -1,8 +1,14 @@
 #' Reproject coordinates.
 #'
-#' reproj drives the function `proj4::ptransform` and sorts out the requirements for
-#' it so that we can simply give coordinates in data frame or matrix form, with a source
-#' projection and a target projection.
+#' Reproject coordinates from a matrix or data frame by explicitly specifying the
+#' 'source' and 'target' projections.
+#'
+#' If the modern version of the library 'proj' is available, `reproj()` uses
+#' the PROJ package, otherwise it falls pack to the proj4 package.
+#'
+#' If using proj4, reproj drives the function `proj4::ptransform` and sorts out
+#' the requirements for it so that we can simply give coordinates in data frame
+#' or matrix form, with a source projection and a target projection.
 #'
 #' The behaviour is controlled by user-settable options which on start up are
 #' `reproj.assume.longlat = TRUE` and
