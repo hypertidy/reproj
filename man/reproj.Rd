@@ -73,6 +73,6 @@ for datum transformations. We have not even checked if proj4 can do that.
 }
 
 \examples{
-reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84", 
+reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84",
                          source = "+proj=longlat +datum=WGS84")
 }
