@@ -15,8 +15,8 @@ Depends: R (>= 3.2.5)
 Imports:
     proj4,
     tibble,
-    PROJ (>= 0.0.3),
-    crsmeta (>= 0.2.0)
+    PROJ (>= 0.1.5),
+    crsmeta (>= 0.3.0)
 Suggests:
     testthat,
     covr
@@ -26,4 +26,3 @@ Encoding: UTF-8
 SystemRequirements: PROJ (>= 4.4.6)
 BugReports: https://github.com/hypertidy/reproj/issues/
 URL: https://github.com/hypertidy/reproj/
-Remotes: hypertidy/PROJ
