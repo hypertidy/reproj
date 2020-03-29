@@ -39,7 +39,7 @@ test_that("identity reprojection ok", {
 test_that("basic reprojection works", {
   expect_equal(dim(reproj(dat, source = llproj, target = laeaproj, four = TRUE)), c(dim(dat)[1L], 3L))
   expect_equal(dim(reproj(pdat, source = laeaproj, target = llproj, four = TRUE)), c(dim(dat)[1L], 3L))
-  
+
 })
 test_that("unit change", {
   expect_equivalent(reproj(dat, source = llproj, target = "+proj=laea +ellps=WGS84 +units=km")[,1:2, drop = FALSE], pdat/1000)
@@ -67,24 +67,31 @@ test_that("integer inputs become epsg strings", {
   if (PROJ::ok_proj6()) {
     expect_true(grepl("EPSG:", to_proj(4326)))
     expect_true(grepl("EPSG:", to_proj(3857)))
-    
+
     expect_true(grepl("EPSG:", to_proj("4326")))
     expect_true(grepl("EPSG:", to_proj("3857")))
   } else {
     expect_true(grepl("init=epsg", to_proj(4326)))
     expect_true(grepl("init=epsg", to_proj(3857)))
-    
+
     expect_true(grepl("init=epsg", to_proj("4326")))
     expect_true(grepl("init=epsg", to_proj("3857")))
-    
+
   }
-  
+
   expect_error(validate_proj(3434))
 
   ##expect_silent(.onLoad())
 })
 
-
+test_that("z and t works", {
+  expect_silent({
+    reproj(cbind(0, 0, 1), "+proj=laea +lon_0=1", source = "+proj=longlat")
+  })
+  expect_silent({
+    reproj(cbind(0, 0, 1, 0), "+proj=laea +lon_0=1", source = "+proj=longlat")
+  })
+})
 test_that("mesh3d works", {
   expect_warning(reproj(.mesh3d, "+proj=laea +datum=WGS84"))
 })
