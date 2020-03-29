@@ -59,6 +59,22 @@ test_that("bad arguments don't fail if we can assume longlat", {
   expect_error(reproj(pdat, laeaproj, target = laeaproj))
 })
 
+test_that("integer inputs become epsg strings", {
+  expect_true(grepl("init=epsg", to_proj(4326)))
+  expect_true(grepl("init=epsg", to_proj(3857)))
+
+  expect_true(grepl("init=epsg", to_proj("4326")))
+  expect_true(grepl("init=epsg", to_proj("3857")))
+
+  expect_error(validate_proj(3434))
+  expect_silent(.onLoad())
+  op <- options(reproj.assume.longlat = NULL)
+  expect_true(!"reproj.assume.longlat" %in% names(options()))
+  expect_silent(reproj:::.onLoad())
+  expect_true("reproj.assume.longlat" %in% names(options()))
+
+  expect_warning(to_proj("I am longlat"))
+})
 
 
 test_that("mesh3d works", {
@@ -67,4 +83,34 @@ test_that("mesh3d works", {
 
 test_that("sc works", {
   expect_equal(class(reproj(.sc, "+proj=laea +datum=WGS84")), c("SC", "sc"))
+})
+
+test_that("is_ll works", {
+  expect_true(is_ll(4326))
+  expect_true(is_ll(4267))
+  expect_true(is_ll("4326"))
+  expect_true(is_ll("4267"))
+  expect_true(is_ll("+init=EPSG:4326"))
+  expect_true(is_ll("+init=EPSG:4267"))
+  expect_true(is_ll("+init=epsg:4326"))
+  expect_true(is_ll("+init=epsg:4267"))
+  expect_true(is_ll("EPSG:4326"))
+  expect_true(is_ll("EPSG:4267"))
+  expect_true(is_ll("epsg:4326"))
+  expect_true(is_ll("epsg:4267"))
+
+  expect_true(!is_ll(10000))
+  expect_true(!is_ll(10000))
+
+  expect_true(!is_ll("10000"))
+  expect_true(!is_ll("10000"))
+
+  expect_true(!is_ll("EPSG:10000"))
+  expect_true(!is_ll("epsg:10000"))
+
+  expect_true(!is_ll("+init=EPSG:10000"))
+  expect_true(!is_ll("+init=epsg:10000"))
+
+  expect_true(!is_ll("EPSG:7373773"))
+
 })
