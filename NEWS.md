@@ -1,4 +1,8 @@
-# reproj dev
+# reproj 0.4.1.9001
+
+* Now checking for longlat condition from more EPSG codes. 
+
+* Now imports crsmeta to obtain meta strings from silicate. 
 
 * New reproj methods for quadmesh and trimesh. 
 

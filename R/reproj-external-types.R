@@ -1,5 +1,5 @@
 get_proj_sc <- function(x, ...) {
-  x$meta$proj
+  crsmeta::crs_proj(x)
 }
 get_vertex_sc <- function(x, ...) {
   x$vertex
