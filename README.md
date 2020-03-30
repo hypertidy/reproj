@@ -62,22 +62,22 @@ This example shows how to convert between coordinate systems:
 ``` r
 library(reproj)
 (pt <- (reproj(cbind(c(147, 148), c(-42, -45)), target = "+proj=laea +datum=WGS84", source = 4326)))
-#>         [,1]      [,2] [,3]
-#> [1,] 5969744  -9803200    0
-#> [2,] 5362760 -10052226    0
+#>           x_        y_ z_
+#> [1,] 5969744  -9803200  0
+#> [2,] 5362760 -10052226  0
 
 ## to another coordinate system
 (pt1 <- reproj(pt, target = "+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84", source = "+proj=laea +datum=WGS84"))
-#>          [,1]     [,2] [,3]
-#> [1,] 12701201 -9158714    0
-#> [2,] 12538357 -9514556    0
+#>            x_       y_ z_
+#> [1,] 12701201 -9158714  0
+#> [2,] 12538357 -9514556  0
 
 ## and back again
 
 reproj(pt1, target = "+proj=longlat +datum=WGS84", source = "+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84")
-#>      [,1] [,2] [,3]
-#> [1,]  147  -42    0
-#> [2,]  148  -45    0
+#>       x_  y_ z_
+#> [1,] 147 -42  0
+#> [2,] 148 -45  0
 ```
 
 Note that the output is always in ‘xyz’ form, even if the z value is

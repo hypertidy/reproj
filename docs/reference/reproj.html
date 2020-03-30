@@ -8,21 +8,29 @@
 
 <title>Reproject coordinates. — reproj.sc • reproj</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +38,11 @@
 
 
 
-<meta property="og:title" content="Reproject coordinates. — reproj.sc" />
 
-<meta property="og:description" content="reproj drives the function proj4::ptransform and sorts out the requirements for
-it so that we can simply give coordinates in data frame or matrix form, with a source
-projection and a target projection." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Reproject coordinates. — reproj.sc" />
+<meta property="og:description" content="Reproject coordinates from a matrix or data frame by explicitly specifying the
+'source' and 'target' projections." />
+
 
 
 
@@ -49,9 +56,10 @@ projection and a target projection." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -65,7 +73,7 @@ projection and a target projection." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reproj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9002</span>
       </span>
     </div>
 
@@ -73,7 +81,7 @@ projection and a target projection." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -84,11 +92,10 @@ projection and a target projection." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/hypertidy/reproj">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/hypertidy/reproj/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -99,6 +106,7 @@ projection and a target projection." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -110,27 +118,30 @@ projection and a target projection." />
     </div>
 
     <div class="ref-description">
-    
-    <p>reproj drives the function <code><a href='https://www.rdocumentation.org/packages/proj4/topics/transform'>proj4::ptransform</a></code> and sorts out the requirements for
-it so that we can simply give coordinates in data frame or matrix form, with a source
-projection and a target projection.</p>
-    
+    <p>Reproject coordinates from a matrix or data frame by explicitly specifying the
+'source' and 'target' projections.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for sc</span>
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for mesh3d</span>
 <span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
+<span class='co'># S3 method for quadmesh</span>
 <span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for triangmesh</span>
+<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>four</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>four</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>four</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -144,27 +155,35 @@ projection and a target projection.</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>arguments passed to <code><a href='https://www.rdocumentation.org/packages/proj4/topics/transform'>proj4::ptransform()</a></code></p></td>
+      <td><p>arguments passed to <code><a href='https://rdrr.io/pkg/proj4/man/transform.html'>proj4::ptransform()</a></code></p></td>
     </tr>
     <tr>
       <th>source</th>
       <td><p>source specification (PROJ.4 string or epsg code)</p></td>
     </tr>
+    <tr>
+      <th>four</th>
+      <td><p>if <code>TRUE</code>, and PROJ version 6 is available return four columns xyzt (not just three xyz)</p></td>
+    </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>matrix</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The behaviour is controlled by user-settable options which on start up are
+    <p>If the modern version of the library 'proj' is available, <code>reproj()</code> uses
+the PROJ package, otherwise it falls pack to the proj4 package.</p>
+<p>If using proj4, reproj drives the function <code><a href='https://rdrr.io/pkg/proj4/man/transform.html'>proj4::ptransform</a></code> and sorts out
+the requirements for it so that we can simply give coordinates in data frame
+or matrix form, with a source projection and a target projection.</p>
+<p>The behaviour is controlled by user-settable options which on start up are
 <code>reproj.assume.longlat = TRUE</code> and
 <code>reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"</code>.</p>
 <p>If the option <code>reproj.assume.longlat</code> is set to FALSE then the <code>source</code> argument must
 be named explicitly, i.e. <code>reproj(xy, t_srs, source = s_srs)</code>,
 this is to help catch mistakes being made. The <code>target</code> is the second argument in <code>reproj</code>
-though it is the third argument in <code><a href='https://www.rdocumentation.org/packages/proj4/topics/transform'>proj4::ptransform</a></code>. This function also converts
+though it is the third argument in <code><a href='https://rdrr.io/pkg/proj4/man/transform.html'>proj4::ptransform</a></code>. This function also converts
 to radians on input or output as required.</p>
 <p>If the option <code>reproj.assume.longlat</code> is set to TRUE and the input data appear to be
 sensible longitude/latitude values, then the value of <code>reproj.default.longlat</code> is used
@@ -174,35 +193,24 @@ as the assumed source projection.</p>
 <p>On some systems we cannot use an epsg integer code, particularly CRAN's
 'winbuilder' because it won't work with '+init=epsg:code' forms. So we
 don't test or document examples of those.</p>
-    
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     <p>there are a number of limitations to the proj4 package, please use
 at your own risk. The sf package provides a better supported facility to modern code and
 for datum transformations. We have not even checked if proj4 can do that.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>reproj</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='fl'>147</span>, -<span class='fl'>42</span>), <span class='kw'>target</span> <span class='kw'>=</span> <span class='st'>"+proj=laea +datum=WGS84"</span>,
-                         <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"+proj=longlat +datum=WGS84"</span>)</div><div class='output co'>#&gt;         [,1]     [,2] [,3]
-#&gt; [1,] 5969744 -9803200    0</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>reproj</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fl'>147</span>, -<span class='fl'>42</span>), <span class='kw'>target</span> <span class='kw'>=</span> <span class='st'>"+proj=laea +datum=WGS84"</span>,
+                         <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"+proj=longlat +datum=WGS84"</span>)</div><div class='output co'>#&gt;           x_       y_ z_
+#&gt; [1,] 5969744 -9803200  0</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#warning">Warning</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -210,13 +218,16 @@ for datum transformations. We have not even checked if proj4 can do that.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
