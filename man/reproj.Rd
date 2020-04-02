@@ -39,11 +39,17 @@ reproj(x, target, ..., source = NULL, four = FALSE)
 matrix
 }
 \description{
-reproj drives the function \code{proj4::ptransform} and sorts out the requirements for
-it so that we can simply give coordinates in data frame or matrix form, with a source
-projection and a target projection.
+Reproject coordinates from a matrix or data frame by explicitly specifying the
+'source' and 'target' projections.
 }
 \details{
+If the modern version of the library 'proj' is available, \code{reproj()} uses
+the PROJ package, otherwise it falls pack to the proj4 package.
+
+If using proj4, reproj drives the function \code{proj4::ptransform} and sorts out
+the requirements for it so that we can simply give coordinates in data frame
+or matrix form, with a source projection and a target projection.
+
 The behaviour is controlled by user-settable options which on start up are
 \code{reproj.assume.longlat = TRUE} and
 \code{reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"}.
@@ -73,6 +79,6 @@ for datum transformations. We have not even checked if proj4 can do that.
 }
 
 \examples{
-reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84", 
+reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84",
                          source = "+proj=longlat +datum=WGS84")
 }
