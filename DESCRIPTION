@@ -15,7 +15,7 @@ Depends: R (>= 3.2.5)
 Imports:
     proj4,
     tibble,
-    PROJ (>= 0.1.5),
+    PROJ (>= 0.1.5.9001),
     crsmeta (>= 0.3.0)
 Suggests:
     testthat,
