@@ -1,4 +1,4 @@
-# reproj 0.4.1.9001
+# reproj 0.4.2
 
 * Now checking for longlat condition from more EPSG codes. 
 
