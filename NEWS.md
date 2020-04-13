@@ -1,5 +1,9 @@
 # reproj 0.4.2
 
+* New global option `reproj.mock.noproj6` to simulate when no PROJ function is
+available (i.e. force fallback to proj4, no matter what version of that library
+is in use).
+ 
 * Now importing PROJ package for use of underlying PROJ  
  for versions (>= 6.0.0). 
  
@@ -12,9 +16,9 @@
 * `reproj()` gains a new argument `four = FALSE`, this can be used to return
  the fourth (time) coordinate when using PROJ 6 or higher. 
  
-* Behaviour has changed in a breaking way, we now can only input 2-columns and 
- an optional `z_` may be input. 3-columns are always returned unless `four = TRUE`, 
- and the option `t_` may also be input. 
+* Behaviour has changed in a breaking way, we now can only input 2-columns and
+an optional `z_` may be input. 3-columns are always returned unless `four =
+TRUE`, and the option `t_` may also be input.
  
 * Now using PROJ package, for version 6 or above. 
 
@@ -26,9 +30,9 @@
 
 ## New behaviour
 
-* New behaviour for `reproj` which will now assume input data is longitude/latitude 
- if this seems reasonable, and controlled by user-settable options. See `?reproj` 
- for details. 
+* New behaviour for `reproj` which will now assume input data is
+longitude/latitude if this seems reasonable, and controlled by user-settable
+options. See `?reproj` for details.
 
 ## New features
 

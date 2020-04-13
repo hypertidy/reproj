@@ -64,6 +64,9 @@ If the option \code{reproj.assume.longlat} is set to TRUE and the input data app
 sensible longitude/latitude values, then the value of \code{reproj.default.longlat} is used
 as the assumed source projection.
 
+See \link{reproj-package} for another option set \code{reproj.mock.noproj6} for package
+testing.
+
 At the moment reproj always returns a 3-column matrix.
 
 Ideally \code{proj4} will be replaced by a more modern interface to the PROJ library.
