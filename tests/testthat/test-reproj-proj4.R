@@ -78,7 +78,7 @@ test_that("integer inputs become epsg strings", {
 
 
 test_that("mesh3d works", {
-  expect_silent(reproj(.mesh3d, "+proj=laea +datum=WGS84"))
+  expect_warning(reproj(.mesh3d, "+proj=laea +datum=WGS84"), "cannot be preserved")
 })
 
 test_that("sc works", {
