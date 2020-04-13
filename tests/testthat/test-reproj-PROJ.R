@@ -37,6 +37,7 @@ test_that("identity reprojection ok", {
 })
 
 test_that("basic reprojection works", {
+  skip_if_not(PROJ::ok_proj6())
   expect_equal(dim(reproj(dat, source = llproj, target = laeaproj, four = TRUE)), c(dim(dat)[1L], 4L))
   expect_equal(dim(reproj(pdat, source = laeaproj, target = llproj, four = TRUE)), c(dim(dat)[1L], 4L))
 
@@ -85,6 +86,7 @@ test_that("integer inputs become epsg strings", {
 })
 
 test_that("z and t works", {
+  skip_if_not(PROJ::ok_proj6())
   expect_silent({
     reproj(cbind(0, 0, 1), "+proj=laea +lon_0=1", source = "+proj=longlat")
   })
