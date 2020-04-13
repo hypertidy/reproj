@@ -55,6 +55,7 @@ reproj <- function(x, target, ..., source = NULL, four = FALSE) {
 #' @rdname reproj
 #' @export
 reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
+
   if (is.null(source) || is.na(source)) {
     if (ok_lon_lat(x) && isTRUE(getOption("reproj.assume.longlat"))) {
       source <- getOption("reproj.default.longlat")
