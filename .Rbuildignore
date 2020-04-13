@@ -12,3 +12,4 @@
 ^data-raw$
 ^revdep$
 ^reproj\.Rproj$
+^\.github$
