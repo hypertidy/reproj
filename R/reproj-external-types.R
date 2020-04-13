@@ -19,7 +19,7 @@ if (is.null(source)) source <- get_proj_sc(x)
     x$quad <- NULL
   }
   mat <- as.matrix(verts[c("x_", "y_", "z_")])
-  mat <- reproj::reproj(mat[,1:2, drop = FALSE], z_ = mat[,3, drop = TRUE],
+  mat <- reproj::reproj(mat,
                  source = source,
                  target = target)
   colnames(mat) <- c("x_", "y_", "z_")
@@ -39,14 +39,14 @@ if (is.null(source)) source <- get_proj_sc(x)
 #' @export
 reproj.mesh3d <- function(x, target, ..., source = NULL) {
   xy <- t(x$vb[1:2, , drop = FALSE])
-  x$vb[1:2, ] <- t(reproj(xy, target = target, source = to_proj(x$crs), ..., z = x$vb[3, , drop = TRUE]))
+  x$vb[1:2, ] <- t(reproj(cbind(xy, z = x$vb[3, , drop = TRUE]), target = target, source = to_proj(x$crs), ...))
   x
 }
 #' @rdname reproj
 #' @export
 reproj.quadmesh <- function(x, target, ..., source = NULL) {
   existingproj <- x$crs
-  x$vb[1:3, ] <- t(reproj::reproj(t(x$vb[1:2, , drop = FALSE]), target = target, source = existingproj, z_ = x$vb[3, , drop = TRUE]))
+  x$vb[1:3, ] <- t(reproj::reproj(t(x$vb[1:3, , drop = FALSE]), target = target, source = existingproj))
   x$raster_metadata <- x$crs <- NULL
   warning("quadmesh raster information cannot be preserved after reprojection, dropping to mesh3d class")
   class(x) <- setdiff( class(x), "quadmesh")
