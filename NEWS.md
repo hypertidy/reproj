@@ -1,5 +1,8 @@
 # reproj 0.4.2
 
+* Now importing PROJ package for use of underlying PROJ  
+ for versions (>= 6.0.0). 
+ 
 * Now checking for longlat condition from more EPSG codes. 
 
 * Now imports crsmeta to obtain meta strings from silicate. 
