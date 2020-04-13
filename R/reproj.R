@@ -84,6 +84,14 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
 
     out <- do.call(cbind, out)
     if (!four) out <- out[ , 1:3, drop = FALSE]
+    if (four) {
+      if (dim(out)[2] == 2) {
+        out <- cbind(out, 0, 0)
+      }
+      if (dim(out)[2] == 3) {
+        out <- cbind(out, 0)
+      }
+    }
   } else {
 
   target <- to_proj(target)
