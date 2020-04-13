@@ -37,8 +37,8 @@ test_that("identity reprojection ok", {
 })
 
 test_that("basic reprojection works", {
-  expect_equal(dim(reproj(dat, source = llproj, target = laeaproj, four = TRUE)), c(dim(dat)[1L], 3L))
-  expect_equal(dim(reproj(pdat, source = laeaproj, target = llproj, four = TRUE)), c(dim(dat)[1L], 3L))
+  expect_equal(dim(reproj(dat, source = llproj, target = laeaproj, four = TRUE)), c(dim(dat)[1L], 4L))
+  expect_equal(dim(reproj(pdat, source = laeaproj, target = llproj, four = TRUE)), c(dim(dat)[1L], 4L))
 
 })
 test_that("unit change", {
