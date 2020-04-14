@@ -1,5 +1,8 @@
 # reproj 0.4.2
 
+* Removed tibble dependency (was use to write-in-place
+to silicate vertex table). 
+
 * New global option `reproj.mock.noproj6` to simulate when no PROJ function is
 available (i.e. force fallback to proj4, no matter what version of that library
 is in use).

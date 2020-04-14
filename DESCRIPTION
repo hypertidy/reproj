@@ -14,7 +14,6 @@ LazyData: TRUE
 Depends: R (>= 3.2.5)
 Imports:
     proj4,
-    tibble,
     PROJ (>= 0.1.6),
     crsmeta (>= 0.3.0)
 Suggests:
