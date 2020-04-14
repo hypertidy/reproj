@@ -24,7 +24,7 @@ if (is.null(source)) source <- get_proj_sc(x)
                  target = target)
   colnames(mat) <- c("x_", "y_", "z_")
 
-  x$vertex[c("x_", "y_", "z_")] <- tibble::as_tibble(mat)
+  x$vertex[c("x_", "y_", "z_")] <- as.data.frame(mat)
   meta <- get_meta_sc(x)
   ## take a punt
   if (all(x$vertex$z_ == 0)) x$vertex$z_ <- NULL
