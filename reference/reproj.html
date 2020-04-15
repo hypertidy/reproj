@@ -190,16 +190,18 @@ sensible longitude/latitude values, then the value of <code>reproj.default.longl
 as the assumed source projection.</p>
 <p>See <a href='reproj-package.html'>reproj-package</a> for another option set <code>reproj.mock.noproj6</code> for package
 testing.</p>
-<p>At the moment reproj always returns a 3-column matrix.</p>
-<p>Ideally <code>proj4</code> will be replaced by a more modern interface to the PROJ library.</p>
-<p>On some systems we cannot use an epsg integer code, particularly CRAN's
-'winbuilder' because it won't work with '+init=epsg:code' forms. So we
-don't test or document examples of those.</p>
+<p><code>reproj()</code> always returns a 3-column matrix <em>unless</em> <code>four = TRUE</code>,
+and <code><a href='https://rdrr.io/pkg/PROJ/man/ok_proj6.html'>PROJ::ok_proj6()</a></code> is <code>TRUE</code> when a 4-column matrix is returned.</p>
+<p>Note that any integer input for <code>source</code> or <code>target</code> will be formatted to a
+character string like "EPSG:%i" ('PROJ' package in use) or "+init=epsg:%i"
+('proj4' package in use), depending on the outcome of <code><a href='https://rdrr.io/pkg/PROJ/man/ok_proj6.html'>PROJ::ok_proj6()</a></code>.
+This test function can be configured to alternatively use 'proj4' for expert
+use.</p>
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
-    <p>there are a number of limitations to the proj4 package, please use
-at your own risk. The sf package provides a better supported facility to modern code and
-for datum transformations. We have not even checked if proj4 can do that.</p>
+    <p>there are a number of limitations to the PROJ library
+please use at your own risk. The sf package provides a better supported
+facility to modern code and especially for datum transformations.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>reproj</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fl'>147</span>, -<span class='fl'>42</span>), <span class='kw'>target</span> <span class='kw'>=</span> <span class='st'>"+proj=laea +datum=WGS84"</span>,
