@@ -67,18 +67,19 @@ as the assumed source projection.
 See \link{reproj-package} for another option set \code{reproj.mock.noproj6} for package
 testing.
 
-At the moment reproj always returns a 3-column matrix.
+\code{reproj()} always returns a 3-column matrix \emph{unless} \code{four = TRUE},
+and \code{\link[PROJ:ok_proj6]{PROJ::ok_proj6()}} is \code{TRUE} when a 4-column matrix is returned.
 
-Ideally \code{proj4} will be replaced by a more modern interface to the PROJ library.
-
-On some systems we cannot use an epsg integer code, particularly CRAN's
-'winbuilder' because it won't work with '+init=epsg:code' forms. So we
-don't test or document examples of those.
+Note that any integer input for \code{source} or \code{target} will be formatted to a
+character string like "EPSG:\%i" ('PROJ' package in use) or "+init=epsg:\%i"
+('proj4' package in use), depending on the outcome of \code{PROJ::ok_proj6()}.
+This test function can be configured to alternatively use 'proj4' for expert
+use.
 }
 \section{Warning}{
- there are a number of limitations to the proj4 package, please use
-at your own risk. The sf package provides a better supported facility to modern code and
-for datum transformations. We have not even checked if proj4 can do that.
+ there are a number of limitations to the PROJ library
+please use at your own risk. The sf package provides a better supported
+facility to modern code and especially for datum transformations.
 }
 
 \examples{

@@ -27,17 +27,18 @@
 #' See [reproj-package] for another option set `reproj.mock.noproj6` for package
 #' testing.
 #'
-#' At the moment reproj always returns a 3-column matrix.
+#' `reproj()` always returns a 3-column matrix _unless_ `four = TRUE`,
+#' and [PROJ::ok_proj6()] is `TRUE` when a 4-column matrix is returned.
 #'
-#' Ideally `proj4` will be replaced by a more modern interface to the PROJ library.
+#' Note that any integer input for `source` or `target` will be formatted to a
+#' character string like "EPSG:%i" ('PROJ' package in use) or "+init=epsg:%i"
+#' ('proj4' package in use), depending on the outcome of `PROJ::ok_proj6()`.
+#' This test function can be configured to alternatively use 'proj4' for expert
+#' use.
 #'
-#' On some systems we cannot use an epsg integer code, particularly CRAN's
-#' 'winbuilder' because it won't work with '+init=epsg:code' forms. So we
-#' don't test or document examples of those.
-#'
-#' @section Warning: there are a number of limitations to the proj4 package, please use
-#' at your own risk. The sf package provides a better supported facility to modern code and
-#' for datum transformations. We have not even checked if proj4 can do that.
+#' @section Warning: there are a number of limitations to the PROJ library
+#'   please use at your own risk. The sf package provides a better supported
+#'   facility to modern code and especially for datum transformations.
 #'
 #' @param x coordinates
 #' @param source source specification (PROJ.4 string or epsg code)
@@ -70,6 +71,7 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
   } else {
     source <- to_proj(source)
   }
+  target <- to_proj(target)  ## just sprintf("EPSG:%i", target) or sprintf("+init=epsg:%i", target)
   if (PROJ::ok_proj6()) {
 
     if (dim(x)[2L] == 2L) {

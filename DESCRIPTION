@@ -6,14 +6,14 @@ Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com", comment=c(ORCID = "0000-0002-2471-7511"))
 Description: Transform coordinates via from a specified source to a specified 
  target map projection. This uses the 'PROJ' library directly, by wrapping the 
- 'PROJ' package (if functional), otherwise the'proj4' package. The 'reproj()' 
+ 'PROJ' package (if functional), otherwise the 'proj4' package. The 'reproj()' 
  function is generic, methods may be added to remove the need for an explicit 
  source definition. If 'proj4' is in use 'reproj()' handles the requirement for 
- conversion to and from radians where necessary. Used primarily for
- transformations with generic data formats and direct leverage of the underlying
- 'PROJ' library. There are transformations that aren't possible with 'PROJ' that
- are provided for by using 'GDAL' library, so 'GDAL'-based software should be 
- used for thos. The 'PROJ' library is available at <https://proj.org/>.  
+ conversion of angular units where necessary. This is for use primarily to 
+ transform generic data formats and direct leverage of the underlying
+ 'PROJ' library. (There are transformations that aren't possible with 'PROJ' and
+ this package that are provided by the 'GDAL' library.) The 'PROJ' library is 
+ available at <https://proj.org/>.  
 License: GPL-3
 LazyData: TRUE
 Depends: R (>= 3.2.5)
@@ -30,4 +30,3 @@ Encoding: UTF-8
 SystemRequirements: PROJ (>= 4.4.6)
 BugReports: https://github.com/hypertidy/reproj/issues/
 URL: https://github.com/hypertidy/reproj/
-Remotes: hypertidy/PROJ
