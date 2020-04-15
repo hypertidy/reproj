@@ -1,14 +1,19 @@
 Package: reproj
 Type: Package
-Title: Coordinate System Transformations for Map Data
+Title: Coordinate System Transformations for Generic Map Data
 Version: 0.4.2
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com", comment=c(ORCID = "0000-0002-2471-7511"))
-Description: Transform coordinates via 'PROJ' using the library directly, by 
- wrapping the 'PROJ' package (if functional), otherwise the'proj4' package. 
- The 'reproj' function handles the need for radian units for either source or 
- target and allows removing an explicit source definition in methods that extend 
- the generic. The 'PROJ' library is available at <https://proj.org/>.  
+Description: Transform coordinates via from a specified source to a specified 
+ target map projection. This uses the 'PROJ' library directly, by wrapping the 
+ 'PROJ' package (if functional), otherwise the'proj4' package. The 'reproj()' 
+ function is generic, methods may be added to remove the need for an explicit 
+ source definition. If 'proj4' is in use 'reproj()' handles the requirement for 
+ conversion to and from radians where necessary. Used primarily for
+ transformations with generic data formats and direct leverage of the underlying
+ 'PROJ' library. There are transformations that aren't possible with 'PROJ' that
+ are provided for by using 'GDAL' library, so 'GDAL'-based software should be 
+ used for thos. The 'PROJ' library is available at <https://proj.org/>.  
 License: GPL-3
 LazyData: TRUE
 Depends: R (>= 3.2.5)
