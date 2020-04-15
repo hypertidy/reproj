@@ -1,6 +1,6 @@
 context("reproj-PROJ")
-
-#testthat::skip_if_not(PROJ::ok_proj6())
+#options(reproj.mock.noproj6 = TRUE)
+testthat::skip_if_not(PROJ::ok_proj6())
 
 llproj <- "+proj=longlat +datum=WGS84"
 laeaproj <- "+proj=laea +datum=WGS84"
@@ -53,31 +53,22 @@ test_that("basic with data frame works", {
 
 test_that("bad arguments fail if we can't assume longlat", {
   options(reproj.assume.longlat = FALSE)
-  expect_error(reproj(dat, llproj, target = llproj))
-  expect_error(reproj(pdat, laeaproj, target = laeaproj))
+  expect_error(reproj(dat, target = llproj))
+  expect_error(reproj(pdat, laeaproj))
 })
 
 test_that("bad arguments don't fail if we can assume longlat", {
   options(reproj.assume.longlat = TRUE)
-  expect_warning(reproj(dat, llproj, target = llproj))
-  expect_error(reproj(pdat, laeaproj, target = laeaproj))
+  expect_warning(reproj(dat, target = laeaproj))
+  expect_silent(reproj(pdat, llproj, source = laeaproj))
 })
 
 test_that("integer inputs become epsg strings", {
-  if (PROJ::ok_proj6()) {
     expect_true(grepl("EPSG:", to_proj(4326)))
     expect_true(grepl("EPSG:", to_proj(3857)))
 
     expect_true(grepl("EPSG:", to_proj("4326")))
     expect_true(grepl("EPSG:", to_proj("3857")))
-  } else {
-    expect_true(grepl("init=epsg", to_proj(4326)))
-    expect_true(grepl("init=epsg", to_proj(3857)))
-
-    expect_true(grepl("init=epsg", to_proj("4326")))
-    expect_true(grepl("init=epsg", to_proj("3857")))
-
-  }
 
   expect_error(validate_proj(3434))
 
