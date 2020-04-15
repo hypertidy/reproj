@@ -17,7 +17,7 @@
 #'
 #' The basic function `reproj()` takes input in generic form (matrix or data
 #' frame) and returns a 3-column matrix (or 4-column if `four = TRUE`), by
-#' transforming from map projection specfied by the  `source` argument to that
+#' transforming from map projection specified by the  `source` argument to that
 #' specified by the `target` argument.  Only column order is respected, column
 #' names are ignored.
 #'
