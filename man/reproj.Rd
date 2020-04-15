@@ -33,49 +33,91 @@ reproj(x, target, ..., source = NULL, four = FALSE)
 
 \item{source}{source specification (PROJ.4 string or epsg code)}
 
-\item{four}{if \code{TRUE}, and PROJ version 6 is available return four columns xyzt (not just three xyz)}
+\item{four}{if \code{TRUE}, and PROJ version 6 is available return four columns
+xyzt (not just three xyz)}
 }
 \value{
 matrix
 }
 \description{
-Reproject coordinates from a matrix or data frame by explicitly specifying the
-'source' and 'target' projections.
+Reproject coordinates from a matrix or data frame by explicitly specifying
+the 'source' and 'target' projections.
 }
 \details{
-If the modern version of the library 'proj' is available, \code{reproj()} uses
-the PROJ package, otherwise it falls pack to the proj4 package.
+If the modern version of the library 'proj' is available, \code{reproj()} uses the
+PROJ package, otherwise it falls pack to the proj4 package.
 
 If using proj4, reproj drives the function \code{proj4::ptransform} and sorts out
 the requirements for it so that we can simply give coordinates in data frame
 or matrix form, with a source projection and a target projection.
 
-The behaviour is controlled by user-settable options which on start up are
-\code{reproj.assume.longlat = TRUE} and
-\code{reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"}.
+The basic function \code{reproj()} takes input in diverse forms (matrix, data
+frame) and returns a 3-column matrix (or 4-column if \code{four = TRUE}), by
+transforming from map projection specfied by the  \code{source} argument to that
+specified by the \code{target} argument.
 
-If the option \code{reproj.assume.longlat} is set to FALSE then the \code{source} argument must
-be named explicitly, i.e. \code{reproj(xy, t_srs, source = s_srs)},
-this is to help catch mistakes being made. The \code{target} is the second argument in \code{reproj}
-though it is the third argument in \code{proj4::ptransform}. This function also converts
-to radians on input or output as required.
+Matrix and data frame is not exactly massive diversity, but this model also
+allows adding methods for specific data formats that already carry a suitable
+\code{source} projection string. Currently we support types from the silicate and
+quadmesh and rgl packages, and only the \code{target} string need be specified.
+This model has obvious flexibility, for packages to import the generic and
+call it with the correct \code{source} (from the data format) and the \code{target}
+from user, or process controlled mechanism.
 
-If the option \code{reproj.assume.longlat} is set to TRUE and the input data appear to be
-sensible longitude/latitude values, then the value of \code{reproj.default.longlat} is used
-as the assumed source projection.
+The \code{source} argument must be named, and if it is not present a light check
+is made that the source data could be "longitude/latitude" and transformation
+to \code{target} is applied (this can be controlled by setting options).
 
-At the moment reproj always returns a 3-column matrix.
+Until recently the \code{proj4} package was the only one available for generic
+data that will transform between arbitrary coordinate systems specified by
+\emph{source} and \emph{target} coordinate systems and with control over 'xy' versus
+'xyz' input and output.  This package adds some further features by wrapping
+the need to convert longitude/latitude data to or from radians.
 
-Ideally \code{proj4} will be replaced by a more modern interface to the PROJ library.
+Other R packages for transforming coordinates are not geared toward data
+that's not in a particular format. It's true that only GDAL provides the full
+gamut of available geographic map projections, but this leaves a huge variety
+of workflows and applications that don't need that level of functionality.
 
-On some systems we cannot use an epsg integer code, particularly CRAN's
-'winbuilder' because it won't work with '+init=epsg:code' forms. So we
-don't test or document examples of those.
+Dependencies
+\itemize{
+\item The \href{https://CRAN.r-project.org/package=PROJ}{PROJ} package is used
+preferentially if is functional, using the underlying 'PROJ-lib' at version 6
+or higher. * The \href{https://CRAN.r-project.org/package=proj4}{proj4} package is
+used if PROJ is not functional.
 }
+
+The proj4 package works perfectly well with the PROJ-lib at versions 4, 5, 6,
+or 7 and if this is preferred reproj can be set to ignore the PROJ R package
+(see
+\href{https://hypertidy.github.io/reproj/reference/reproj-package.html}{reproj-package}).
+}
+\section{Global options}{
+
+
+Assuming longitude/latitude input:
+
+The behaviour is controlled by user-settable options which on start up are
+\code{reproj.assume.longlat = TRUE} and \code{reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"}.
+
+If the option \code{reproj.assume.longlat} is set to FALSE then the \code{source}
+argument must be named explicitly, i.e. \code{reproj(xy, t_srs, source = s_srs)},
+this is to help catch mistakes being made. The \code{target} is the second
+argument in \code{reproj} though it is the third argument in \code{proj4::ptransform}.
+This function also converts to radians on input or output as required.
+
+If the option \code{reproj.assume.longlat} is set to TRUE and the input data
+appear to be sensible longitude/latitude values, then the value of
+\code{reproj.default.longlat} is used as the assumed source projection.
+}
+
 \section{Warning}{
- there are a number of limitations to the proj4 package, please use
-at your own risk. The sf package provides a better supported facility to modern code and
-for datum transformations. We have not even checked if proj4 can do that.
+
+
+There are a number of limitations to the PROJ-lib, please use at
+your own risk. The sf package provides a better supported facility to modern
+code and for datum transformations. If you are just making maps and exploring
+broad-scale data then non-centimetre level precision is probably fine.
 }
 
 \examples{
