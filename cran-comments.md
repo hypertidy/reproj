@@ -1,6 +1,6 @@
 ## reproj 0.4.2
 
-
+New release to utilize lower level PROJ package. 
 
 ## Test environments
 
