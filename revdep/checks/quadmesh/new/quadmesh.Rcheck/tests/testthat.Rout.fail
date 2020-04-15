@@ -1,0 +1,50 @@
+
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+Warning message:
+package 'testthat' was built under R version 3.6.3 
+> library(quadmesh)
+Registered S3 method overwritten by 'quadmesh':
+  method          from  
+  reproj.quadmesh reproj
+> 
+> test_check("quadmesh")
+[31m--[39m [31m1. Failure: mesh_plot works (@test-image.R#24) [39m [31m-----------------------------[39m
+`func_etopo_plot()` produced output.
+
+[31m--[39m [31m2. Failure: globe conversion works (@test-reproject.R#42) [39m [31m------------------[39m
+reproj::reproj(...) not equivalent to llh2xyz(cbind(cds, 0)).
+75/75 mismatches (average diff: 111261)
+[1]  1362339 -  1362339 ==   0.154
+[2]  1434551 -  1434550 ==   1.463
+[3] -2284760 - -2284753 ==  -6.469
+[4]  6372760 -  6372742 ==  18.044
+[5]  -111267 -  -111267 ==  -0.315
+[6] -2894397 - -2894389 ==  -8.195
+[7] -3090883 - -3090874 ==  -8.752
+[8] -4560277 - -4560264 == -12.912
+[9] -5925015 - -5924998 == -16.776
+...
+
+== testthat results  ===========================================================
+[ OK: 31 | SKIPPED: 2 | WARNINGS: 1 | FAILED: 2 ]
+1. Failure: mesh_plot works (@test-image.R#24) 
+2. Failure: globe conversion works (@test-reproject.R#42) 
+
+Error: testthat unit tests failed
+Execution halted

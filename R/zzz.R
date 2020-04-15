@@ -1,5 +1,6 @@
 reproj_default_options <- function() {
   list(
+  reproj.mock.noproj6 = FALSE,
   reproj.assume.longlat = TRUE,
   reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"
 )}

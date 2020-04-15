@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Reproject coordinates.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for reproj.sc {reproj}"><tr><td>reproj.sc {reproj}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Reproject coordinates.</h2>
+
+<h3>Description</h3>
+
+<p>Reproject coordinates from a matrix or data frame by explicitly specifying the
+'source' and 'target' projections.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'sc'
+reproj(x, target = NULL, ..., source = NULL)
+
+## S3 method for class 'mesh3d'
+reproj(x, target, ..., source = NULL)
+
+## S3 method for class 'quadmesh'
+reproj(x, target, ..., source = NULL)
+
+## S3 method for class 'triangmesh'
+reproj(x, target, ..., source = NULL)
+
+reproj(x, target, ..., source = NULL, four = FALSE)
+
+## S3 method for class 'matrix'
+reproj(x, target, ..., source = NULL, four = FALSE)
+
+## S3 method for class 'data.frame'
+reproj(x, target, ..., source = NULL, four = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>coordinates</p>
+</td></tr>
+<tr valign="top"><td><code>target</code></td>
+<td>
+<p>target specification (PROJ.4 string or epsg code)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to <code><a href="../../proj4/html/ptransform.html">proj4::ptransform()</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>source</code></td>
+<td>
+<p>source specification (PROJ.4 string or epsg code)</p>
+</td></tr>
+<tr valign="top"><td><code>four</code></td>
+<td>
+<p>if <code>TRUE</code>, and PROJ version 6 is available return four columns xyzt (not just three xyz)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If the modern version of the library 'proj' is available, <code>reproj()</code> uses
+the PROJ package, otherwise it falls pack to the proj4 package.
+</p>
+<p>If using proj4, reproj drives the function <code>proj4::ptransform</code> and sorts out
+the requirements for it so that we can simply give coordinates in data frame
+or matrix form, with a source projection and a target projection.
+</p>
+<p>The behaviour is controlled by user-settable options which on start up are
+<code>reproj.assume.longlat = TRUE</code> and
+<code>reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"</code>.
+</p>
+<p>If the option <code>reproj.assume.longlat</code> is set to FALSE then the <code>source</code> argument must
+be named explicitly, i.e. <code>reproj(xy, t_srs, source = s_srs)</code>,
+this is to help catch mistakes being made. The <code>target</code> is the second argument in <code>reproj</code>
+though it is the third argument in <code>proj4::ptransform</code>. This function also converts
+to radians on input or output as required.
+</p>
+<p>If the option <code>reproj.assume.longlat</code> is set to TRUE and the input data appear to be
+sensible longitude/latitude values, then the value of <code>reproj.default.longlat</code> is used
+as the assumed source projection.
+</p>
+<p>See <a href="reproj-package.html">reproj-package</a> for another option set <code>reproj.mock.noproj6</code> for package
+testing.
+</p>
+<p>At the moment reproj always returns a 3-column matrix.
+</p>
+<p>Ideally <code>proj4</code> will be replaced by a more modern interface to the PROJ library.
+</p>
+<p>On some systems we cannot use an epsg integer code, particularly CRAN's
+'winbuilder' because it won't work with '+init=epsg:code' forms. So we
+don't test or document examples of those.
+</p>
+
+
+<h3>Value</h3>
+
+<p>matrix
+</p>
+
+
+<h3>Warning</h3>
+
+<p>there are a number of limitations to the proj4 package, please use
+at your own risk. The sf package provides a better supported facility to modern code and
+for datum transformations. We have not even checked if proj4 can do that.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84",
+                         source = "+proj=longlat +datum=WGS84")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>reproj</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>
