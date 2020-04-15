@@ -46,6 +46,9 @@ reproj.mesh3d <- function(x, target, ..., source = NULL) {
 #' @export
 reproj.quadmesh <- function(x, target, ..., source = NULL) {
   existingproj <- x$crs
+  if (existingproj == "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0") {
+    existingproj <- "+proj=longlat +datum=WGS84"  ## pretty harmless https://github.com/hypertidy/reproj/issues/10
+  }
   x$vb[1:3, ] <- t(reproj::reproj(t(x$vb[1:3, , drop = FALSE]), target = target, source = existingproj))
   x$raster_metadata <- x$crs <- NULL
   warning("quadmesh raster information cannot be preserved after reprojection, dropping to mesh3d class")
