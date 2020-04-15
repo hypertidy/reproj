@@ -1,0 +1,231 @@
+
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "quadmesh"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('quadmesh')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("bary_index")
+> ### * bary_index
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bary_index
+> ### Title: Barycentric triangle index for interpolation
+> ### Aliases: bary_index
+> 
+> ### ** Examples
+> 
+> library(raster)
+Warning: package 'raster' was built under R version 3.6.3
+Loading required package: sp
+Warning: package 'sp' was built under R version 3.6.3
+> p_srs <- "+proj=stere +lat_0=-90 +lat_ts=-71 +datum=WGS84"
+> polar <- raster(extent(-5e6, 5e6, -5e6, 5e6), crs = p_srs, res = 25000)
+> etopo <- aggregate(etopo, fact = 4)
+> index <- bary_index(etopo, grid = polar)
+> ok <- !is.na(index$idx)
+> r <- setValues(polar, NA_integer_)
+> r[ok] <- colSums(matrix(values(etopo)[index$tri[, index$idx[ok]]], nrow = 3) * t(index$p)[, ok])
+> plot(r)
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:raster', 'package:sp'
+
+> nameEx("mesh_plot")
+> ### * mesh_plot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mesh_plot
+> ### Title: Plot as a mesh
+> ### Aliases: mesh_plot mesh_plot.BasicRaster mesh_plot.RasterLayer
+> ###   mesh_plot.TRI mesh_plot.quadmesh
+> 
+> ### ** Examples
+> 
+> ##mesh_plot(worldll)
+> ## crop otherwise out of bounds from PROJ
+> rr <- raster::crop(worldll, raster::extent(-179, 179, -89, 89))
+> mesh_plot(rr, crs = "+proj=laea +datum=WGS84")
+> mesh_plot(worldll, crs = "+proj=moll +datum=WGS84")
+> prj <- "+proj=lcc +datum=WGS84 +lon_0=147 +lat_0=-40 +lat_1=-55 +lat_2=-20"
+> mesh_plot(etopo, crs = prj, add = FALSE, colfun = function(n = 20) grey(seq(0, 1, length = n)))
+> mesh_plot(worldll, crs = prj, add = TRUE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("qm_as_raster")
+> ### * qm_as_raster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: qm_as_raster
+> ### Title: Quadmesh to raster
+> ### Aliases: qm_as_raster
+> 
+> ### ** Examples
+> 
+> qm_as_raster(quadmesh(etopo))
+class      : RasterLayer 
+dimensions : 135, 540, 72900  (nrow, ncol, ncell)
+resolution : 0.6666667, 0.6666666  (x, y)
+extent     : -180, 180, -90, 0  (xmin, xmax, ymin, ymax)
+crs        : +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0 
+source     : memory
+names      : layer 
+values     : -6784.148, 4603.07  (min, max)
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("qsc")
+> ### * qsc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: qsc
+> ### Title: Quadrilateralized Spherical Cube (QSC)
+> ### Aliases: qsc
+> 
+> ### ** Examples
+> 
+> library(rgl); #rgl.clear()
+Warning: package 'rgl' was built under R version 3.6.3
+> wire3d(qsc())
+> if ( rgl::rgl.useNULL()) rglwidget()
+Loading required namespace: rmarkdown
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:rgl'
+
+> nameEx("quadmesh")
+> ### * quadmesh
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: quadmesh
+> ### Title: Create a quad-type mesh for use in rgl.
+> ### Aliases: quadmesh dquadmesh dquadmesh.default quadmesh.BasicRaster
+> ###   quadmesh.matrix
+> 
+> ### ** Examples
+> 
+> library(raster)
+Warning: package 'raster' was built under R version 3.6.3
+Loading required package: sp
+Warning: package 'sp' was built under R version 3.6.3
+> data(volcano)
+> r <- setExtent(raster(volcano), extent(0, 100, 0, 200))
+> qm <- quadmesh(r)
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:raster', 'package:sp'
+
+> nameEx("triangmesh")
+> ### * triangmesh
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: triangmesh
+> ### Title: Create a triangle-type mesh for use in rgl.
+> ### Aliases: triangmesh dtriangmesh triangmesh.matrix
+> ###   triangmesh.BasicRaster dtriangmesh.default
+> 
+> ### ** Examples
+> 
+> library(raster)
+Warning: package 'raster' was built under R version 3.6.3
+Loading required package: sp
+Warning: package 'sp' was built under R version 3.6.3
+> r <- setExtent(raster(volcano), extent(0, nrow(volcano), 0, ncol(volcano)))
+> tm <- triangmesh(r)
+> #rgl::shade3d(tm)
+> 
+> ## jitter the mesh just enough to show that they are distinct in the discrete case
+> a <- dtriangmesh(r)
+> a$vb[3L, ] <- jitter(a$vb[3L, ], factor = 10)
+> ##rgl.clear(); rgl::shade3d(a, col = "grey"); aspect3d(1, 1, 0.2); rglwidget()
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:raster', 'package:sp'
+
+> nameEx("triangulate_quads")
+> ### * triangulate_quads
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: triangulate_quads
+> ### Title: Triangles from quads
+> ### Aliases: triangulate_quads
+> 
+> ### ** Examples
+> 
+> triangulate_quads(cbind(c(1, 2, 4, 3), c(3, 4, 6, 5)))
+     [,1] [,2] [,3] [,4]
+[1,]    1    3    3    5
+[2,]    3    4    5    6
+[3,]    2    2    4    4
+> 
+> qm <- quadmesh(raster::crop(etopo, raster::extent(140, 160, -50, -30)))
+> tri <- triangulate_quads(qm$ib)
+> plot(t(qm$vb))
+> tri_avg <- colMeans(matrix(qm$vb[3, tri], nrow = 3), na.rm = TRUE)
+> scl <- function(x) (x - min(x))/diff(range(x))
+> tri_col <- grey(seq(0, 1, length = 100))[scl(tri_avg) * 99 + 1]
+> ## tri is qm$ib converted to triangles for the same vertex set
+> polygon(t(qm$vb)[rbind(tri, NA), ])
+> polygon(t(qm$vb)[rbind(tri, NA), ], col = tri_col)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  13 0.78 14.65 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
