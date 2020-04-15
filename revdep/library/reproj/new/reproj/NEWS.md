@@ -8,7 +8,7 @@ available (i.e. force fallback to proj4, no matter what version of that library
 is in use).
  
 * Now importing PROJ package for use of underlying PROJ  
- for versions (>= 6.0.0). 
+ library (for versions projlib >= 6.0.0). 
  
 * Now checking for longlat condition from more EPSG codes. 
 
