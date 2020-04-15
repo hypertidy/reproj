@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #' Reproject coordinates.
 #'
 #' Reproject coordinates from a matrix or data frame by explicitly specifying
@@ -281,4 +281,3 @@ reproj.data.frame <- function(x, target, ..., source = NULL, four = FALSE) {
 }
 
 
->>>>>>> 282b3c3eee5ab9ee35eab022498d7b16de29aee5
