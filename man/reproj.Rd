@@ -57,7 +57,7 @@ order", i.e. longitude then latitude, easting then northing (as X, Y).
 
 The basic function \code{reproj()} takes input in generic form (matrix or data
 frame) and returns a 3-column matrix (or 4-column if \code{four = TRUE}), by
-transforming from map projection specfied by the  \code{source} argument to that
+transforming from map projection specified by the  \code{source} argument to that
 specified by the \code{target} argument.  Only column order is respected, column
 names are ignored.
 
