@@ -58,7 +58,8 @@
 #'
 #' * The [PROJ](https://CRAN.r-project.org/package=PROJ) package is used
 #' preferentially if is functional, using the underlying 'PROJ-lib' at version 6
-#' or higher. * The [proj4](https://CRAN.r-project.org/package=proj4) package is
+#' or higher. 
+#' * The [proj4](https://CRAN.r-project.org/package=proj4) package is
 #' used if PROJ is not functional.
 #' The proj4 package works perfectly well with the PROJ-lib at versions 4, 5, 6,
 #' or 7 and if this is preferred reproj can be set to ignore the PROJ R package
