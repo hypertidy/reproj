@@ -90,3 +90,8 @@ test_that("mesh3d works", {
 test_that("sc works", {
   expect_silent(reproj(.sc, "+proj=laea +datum=WGS84"))
 })
+
+test_that("geocentric works", {
+  xyz <- reproj::reproj(cbind(147, -42), target = "+proj=geocent", source = "EPSG:4326")
+  expect_equal(c(xyz > 0), c(FALSE, TRUE, FALSE))
+})
