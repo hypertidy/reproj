@@ -114,3 +114,8 @@ test_that("is_ll works", {
   expect_true(!is_ll("EPSG:7373773"))
 
 })
+
+test_that("geocentric works", {
+  xyz <- reproj::reproj(cbind(147, -42), target = "+proj=geocent", source = "+proj=longlat")
+  expect_equal(c(xyz > 0), c(FALSE, TRUE, FALSE))
+})
