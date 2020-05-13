@@ -1,36 +1,76 @@
-
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
-language: R
-sudo: required
-cache: packages
+language: r
 warnings_are_errors: false
-
-addons:
-  apt:
-    sources:
-      - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'
-    packages:
-      - libproj-dev 
-
+sudo: true
+dist: xenial
+latex: false
+cache: packages
 
 matrix:
-    include:
-        - os: linux
-          r: release
-          dist: trusty # 14.04
-          env:
-           - BUILD_NAME=trusty_release
-           - DETAILS="release build"
-        - os: osx
-          r: release
-          before_install: ''
-          disable_homebrew: true
-          env:
-           - BUILD_NAME=osx_release
-           - DETAILS="release build"
+  fast_finish: true
+  include:
+    - os: linux
+      r: release
+      sudo: required
+      dist: xenial
+      cache:
+        apt: true
+      env:
+        - BUILD_NAME=no_proj
+        - R_CODECOV=true
+        - DETAILS=""
+    - os: linux
+      r: release
+      sudo: required
+      dist: xenial
+      cache:
+        apt: true
+      env:
+        - BUILD_NAME=proj4
+        - R_CODECOV=true
+        - DETAILS=""
+    - os: linux
+      r: release
+      sudo: required
+      dist: xenial
+      cache:
+        apt: true
+      env:
+        - BUILD_NAME=proj5
+        - R_CODECOV=true
+        - DETAILS=""
+    - os: linux
+      r: release
+      sudo: required
+      dist: xenial
+      cache:
+        apt: true
+      env:
+        - BUILD_NAME=proj6
+        - R_CODECOV=true
+        - DETAILS=""
+    - os: linux
+      r: release
+      sudo: required
+      dist: xenial
+      cache:
+        apt: true
+      env:
+        - BUILD_NAME=proj7
+        - R_CODECOV=true
+        - DETAILS=""
+    # - os: linux
+    #   r: release
+    #   sudo: required
+    #   dist: xenial
+    #   cache:
+    #     apt: true
+    #   env:
+    #     - BUILD_NAME=ppa-libproj-dev
+    #     - R_CODECOV=true
+    #     - DETAILS=""
 
-
+before_install:
+  - ./ci/travis/${BUILD_NAME}/before_install.sh
 
 after_success:
   - Rscript -e 'covr::codecov()'
