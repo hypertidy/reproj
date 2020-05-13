@@ -116,6 +116,8 @@ test_that("is_ll works", {
 })
 
 test_that("geocentric works", {
-  xyz <- reproj::reproj(cbind(147, -42), target = "+proj=geocent", source = "+proj=longlat")
+  xyz <- reproj::reproj(cbind(147, -42),
+                        target = "+proj=geocent +datum=WGS84",
+                        source = "+proj=longlat +datum=WGS84")
   expect_equal(c(xyz > 0), c(FALSE, TRUE, FALSE))
 })
