@@ -3,4 +3,6 @@ reproj	reproj
 reproj.data.frame	reproj
 reproj.matrix	reproj
 reproj.mesh3d	reproj
+reproj.quadmesh	reproj
 reproj.sc	reproj
+reproj.triangmesh	reproj
