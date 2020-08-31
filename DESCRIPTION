@@ -6,7 +6,7 @@ Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com", comment=c(ORCID = "0000-0002-2471-7511"))
 Description: Transform coordinates from a specified source to a specified 
  target map projection. This uses the 'PROJ' library directly, by wrapping the 
- 'PROJ' package (if functional), otherwise the 'proj4' package. The 'reproj()' 
+ 'PROJ' package which leverages 'libproj', otherwise the 'proj4' package. The 'reproj()' 
  function is generic, methods may be added to remove the need for an explicit 
  source definition. If 'proj4' is in use 'reproj()' handles the requirement for 
  conversion of angular units where necessary. This is for use primarily to 
@@ -25,7 +25,7 @@ Imports:
 Suggests:
     testthat,
     covr
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 SystemRequirements: PROJ (>= 4.4.6)

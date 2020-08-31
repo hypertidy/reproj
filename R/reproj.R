@@ -129,21 +129,25 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
   if (PROJ::ok_proj6()) {
 
     if (dim(x)[2L] == 2L) {
-      out <- PROJ::proj_trans_generic(x, target = target, ..., source = source)
+      out <- PROJ::proj_trans(x, target = target, ..., source = source)
+      out <- cbind(do.call(cbind, out), 0)
+      
     }
     if (dim(x)[2L] == 3L) {
-      out <- PROJ::proj_trans_generic(x[,1:2, drop = FALSE], target = target, ..., source = source,
+      out <- PROJ::proj_trans(x[,1:2, drop = FALSE], target = target, ..., source = source,
                                       z_ = x[, 3L, drop = TRUE])
+      out <- do.call(cbind, out)
+      if (!four) out <- out[ , 1:3, drop = FALSE]
     }
     if (dim(x)[2L] > 3L) {
-      out <- PROJ::proj_trans_generic(x[,1:2, drop = FALSE], target = target, ..., source = source,
+      out <- PROJ::proj_trans(x[,1:2, drop = FALSE], target = target, ..., source = source,
                                       z_ = x[, 3L, drop = TRUE],
                                       t_ = x[, 4L, drop = TRUE])
+      out <- do.call(cbind, out)
+      if (!four) out <- out[ , 1:3, drop = FALSE]
     }
 
-
-    out <- do.call(cbind, out)
-    if (!four) out <- out[ , 1:3, drop = FALSE]
+    
     if (four) {
       if (dim(out)[2] == 2) {
         out <- cbind(out, 0, 0)

@@ -13,3 +13,4 @@
 ^revdep$
 ^reproj\.Rproj$
 ^\.github$
+^ci$
