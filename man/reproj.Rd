@@ -29,7 +29,7 @@ reproj(x, target, ..., source = NULL, four = FALSE)
 
 \item{target}{target specification (PROJ.4 string or epsg code)}
 
-\item{...}{arguments passed to \code{\link[proj4:ptransform]{proj4::ptransform()}}}
+\item{...}{arguments passed to \code{\link[proj4:transform]{proj4::ptransform()}}}
 
 \item{source}{source specification (PROJ.4 string or epsg code)}
 
@@ -46,7 +46,7 @@ Reproject coordinates from a matrix or data frame by explicitly specifying the
 If the modern version of the library 'proj' is available, \code{reproj()} uses
 the PROJ package, otherwise it falls pack to the proj4 package.
 
-If using proj4, reproj drives the function \code{\link[proj4:ptransform]{proj4::ptransform()}} and sorts out
+If using proj4, reproj drives the function \code{\link[proj4:transform]{proj4::ptransform()}} and sorts out
 the requirements for it so that we can simply give coordinates in data frame
 or matrix form, with a source projection and a target projection.
 
