@@ -123,24 +123,24 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for sc</span>
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>reproj</span>(<span class='kw'>x</span>, target = <span class='kw'>NULL</span>, <span class='kw'>...</span>, source = <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for mesh3d</span>
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>reproj</span>(<span class='kw'>x</span>, <span class='kw'>target</span>, <span class='kw'>...</span>, source = <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for quadmesh</span>
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>reproj</span>(<span class='kw'>x</span>, <span class='kw'>target</span>, <span class='kw'>...</span>, source = <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for triangmesh</span>
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>reproj</span>(<span class='kw'>x</span>, <span class='kw'>target</span>, <span class='kw'>...</span>, source = <span class='kw'>NULL</span>)
 
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>four</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>reproj</span>(<span class='kw'>x</span>, <span class='kw'>target</span>, <span class='kw'>...</span>, source = <span class='kw'>NULL</span>, four = <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>four</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>reproj</span>(<span class='kw'>x</span>, <span class='kw'>target</span>, <span class='kw'>...</span>, source = <span class='kw'>NULL</span>, four = <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>reproj</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='no'>...</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>four</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>reproj</span>(<span class='kw'>x</span>, <span class='kw'>target</span>, <span class='kw'>...</span>, source = <span class='kw'>NULL</span>, four = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,7 +230,7 @@ or 7 and if this is preferred reproj can be set to ignore the PROJ R package
 
     
 
-<h3>Assuming longitude/latitude input</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Assuming longitude/latitude input</h3>
 
 
 <p>The behaviour is controlled by user-settable options which on start up are
@@ -245,7 +245,7 @@ This function also converts to radians on input or output as required.</p>
 appear to be sensible longitude/latitude values, then the value of
 <code>reproj.default.longlat</code> is used as the assumed source projection.</p>
 
-<h3>Controlling use or PROJ or proj4</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Controlling use or PROJ or proj4</h3>
 
 
 <p>See <a href='reproj-package.html'>reproj-package</a> for another option set <code>reproj.mock.noproj6</code> for package
@@ -261,9 +261,10 @@ risk. The sf package provides a better supported facility to modern code and
 especially for datum transformations.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>reproj</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fl'>147</span>, -<span class='fl'>42</span>), <span class='kw'>target</span> <span class='kw'>=</span> <span class='st'>"+proj=laea +datum=WGS84"</span>,
-                         <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"+proj=longlat +datum=WGS84"</span>)</div><div class='output co'>#&gt;         [,1]     [,2] [,3]
-#&gt; [1,] 5969744 -9803200    0</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>reproj</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fl'>147</span>, <span class='op'>-</span><span class='fl'>42</span>), target = <span class='st'>"+proj=laea +datum=WGS84"</span>,
+                         source = <span class='st'>"+proj=longlat +datum=WGS84"</span>)
+</div><div class='output co'>#&gt;           x_       y_  
+#&gt; [1,] 5969744 -9803200 0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

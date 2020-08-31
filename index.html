@@ -14,7 +14,7 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="Coordinate System Transformations for Generic Map Data">
 <meta property="og:description" content="Transform coordinates from a specified source to a specified 
  target map projection. This uses the PROJ library directly, by wrapping the 
- PROJ package (if functional), otherwise the proj4 package. The reproj() 
+ PROJ package which leverages libproj, otherwise the proj4 package. The reproj() 
  function is generic, methods may be added to remove the need for an explicit 
  source definition. If proj4 is in use reproj() handles the requirement for 
  conversion of angular units where necessary. This is for use primarily to 
@@ -97,30 +97,34 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the dev version of reproj from <a href="https://github.com/hypertidy/reproj/">github</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"hypertidy/reproj"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"hypertidy/reproj"</span>)
+</pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This example shows how to convert between coordinate systems:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">reproj</span>)
-(<span class="no">pt</span> <span class="kw">&lt;-</span> (<span class="fu"><a href="reference/reproj.html">reproj</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">147</span>, <span class="fl">148</span>), <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">42</span>, -<span class="fl">45</span>)), <span class="kw">target</span> <span class="kw">=</span> <span class="st">"+proj=laea +datum=WGS84"</span>, <span class="kw">source</span> <span class="kw">=</span> <span class="fl">4326</span>)))
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/hypertidy/reproj">reproj</a></span>)
+(<span class="kw">pt</span> <span class="op">&lt;-</span> (<span class="fu"><a href="reference/reproj.sc.html">reproj</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">147</span>, <span class="fl">148</span>), <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">42</span>, <span class="op">-</span><span class="fl">45</span>)), target = <span class="st">"+proj=laea +datum=WGS84"</span>, source = <span class="fl">4326</span>)))
 <span class="co">#&gt;           x_        y_ z_</span>
 <span class="co">#&gt; [1,] 5969744  -9803200  0</span>
 <span class="co">#&gt; [2,] 5362760 -10052226  0</span>
 
 <span class="co">## to another coordinate system</span>
-(<span class="no">pt1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/reproj.html">reproj</a></span>(<span class="no">pt</span>, <span class="kw">target</span> <span class="kw">=</span> <span class="st">"+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84"</span>, <span class="kw">source</span> <span class="kw">=</span> <span class="st">"+proj=laea +datum=WGS84"</span>))
+(<span class="kw">pt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/reproj.sc.html">reproj</a></span>(<span class="kw">pt</span>, target = <span class="st">"+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84"</span>, source = <span class="st">"+proj=laea +datum=WGS84"</span>))
 <span class="co">#&gt;            x_       y_ z_</span>
 <span class="co">#&gt; [1,] 12701201 -9158714  0</span>
 <span class="co">#&gt; [2,] 12538357 -9514556  0</span>
 
 <span class="co">## and back again</span>
 
-<span class="fu"><a href="reference/reproj.html">reproj</a></span>(<span class="no">pt1</span>, <span class="kw">target</span> <span class="kw">=</span> <span class="st">"+proj=longlat +datum=WGS84"</span>, <span class="kw">source</span> <span class="kw">=</span> <span class="st">"+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84"</span>)
+<span class="fu"><a href="reference/reproj.sc.html">reproj</a></span>(<span class="kw">pt1</span>, target = <span class="st">"+proj=longlat +datum=WGS84"</span>, source = <span class="st">"+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84"</span>)
 <span class="co">#&gt;       x_  y_ z_</span>
 <span class="co">#&gt; [1,] 147 -42  0</span>
-<span class="co">#&gt; [2,] 148 -45  0</span></pre></div>
+<span class="co">#&gt; [2,] 148 -45  0</span>
+</pre></div>
 <p>Note that the output is always in ‘xyz’ form, even if the z value is implied zero. The input may also be ‘xyz’ and it is the user’s job to ensure this is specified correctly. It’s not possible to automate every case, because among the three main cases:</p>
 <ul>
 <li>longitude latitude and elevation,</li>
