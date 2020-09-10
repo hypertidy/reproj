@@ -6,7 +6,7 @@ Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com", comment=c(ORCID = "0000-0002-2471-7511"))
 Description: Transform coordinates from a specified source to a specified 
  target map projection. This uses the 'PROJ' library directly, by wrapping the 
- 'PROJ' package (if functional), otherwise the 'proj4' package. The 'reproj()' 
+ 'PROJ' package which leverages 'libproj', otherwise the 'proj4' package. The 'reproj()' 
  function is generic, methods may be added to remove the need for an explicit 
  source definition. If 'proj4' is in use 'reproj()' handles the requirement for 
  conversion of angular units where necessary. This is for use primarily to 
@@ -20,7 +20,7 @@ LazyData: TRUE
 Depends: R (>= 3.2.5)
 Imports: proj4, PROJ (> 0.1.6), crsmeta (>= 0.3.0)
 Suggests: testthat, covr
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 SystemRequirements: PROJ (>= 4.4.6)
@@ -30,7 +30,7 @@ Remotes: hypertidy/PROJ
 RemoteType: local
 RemoteUrl: /perm_storage/home/mdsumner/Git/reproj
 NeedsCompilation: no
-Packaged: 2020-07-22 04:20:15 UTC; mdsumner
+Packaged: 2020-08-31 06:25:12 UTC; mdsumner
 Author: Michael D. Sumner [aut, cre] (<https://orcid.org/0000-0002-2471-7511>)
 Maintainer: Michael D. Sumner <mdsumner@gmail.com>
-Built: R 4.0.2; ; 2020-07-22 04:20:16 UTC; unix
+Built: R 4.0.2; ; 2020-08-31 06:25:13 UTC; unix
