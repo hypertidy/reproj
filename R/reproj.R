@@ -126,7 +126,7 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
     source <- to_proj(source)
   }
   target <- to_proj(target)  ## just sprintf("EPSG:%i", target) or sprintf("+init=epsg:%i", target)
-  if (PROJ::ok_proj6()) {
+  if (ok_PROJ()) {
 
     if (dim(x)[2L] == 2L) {
       out <- PROJ::proj_trans(x, target = target, ..., source = source)

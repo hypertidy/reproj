@@ -20,10 +20,10 @@ LazyData: TRUE
 Depends: R (>= 3.2.5)
 Imports:
     proj4,
-    PROJ (> 0.1.6),
     crsmeta (>= 0.3.0)
 Suggests:
     testthat,
+    PROJ (> 0.1.6),
     covr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)

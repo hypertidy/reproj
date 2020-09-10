@@ -9,5 +9,8 @@ ok_lon_lat.matrix <- function(x, ...) {
   ok_lon_lat(c(range(x[, 1L], na.rm = TRUE), range(x[, 2L], na.rm = TRUE)))
 }
 
+ok_PROJ <- function() {
+  requireNamespace("PROJ", quietly = TRUE) 
+}
 
 
