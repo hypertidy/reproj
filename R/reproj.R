@@ -110,6 +110,7 @@ reproj <- function(x, target, ..., source = NULL, four = FALSE) {
   UseMethod("reproj")
 }
 
+
 #' @rdname reproj
 #' @export
 reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
@@ -131,7 +132,7 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
     if (dim(x)[2L] == 2L) {
       out <- PROJ::proj_trans(x, target = target, ..., source = source)
       out <- cbind(do.call(cbind, out), 0)
-      
+
     }
     if (dim(x)[2L] == 3L) {
       out <- PROJ::proj_trans(x[,1:2, drop = FALSE], target = target, ..., source = source,
@@ -147,7 +148,7 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
       if (!four) out <- out[ , 1:3, drop = FALSE]
     }
 
-    
+
     if (four) {
       if (dim(out)[2] == 2) {
         out <- cbind(out, 0, 0)
@@ -180,6 +181,27 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
 #' @export
 reproj.data.frame <- function(x, target, ..., source = NULL, four = FALSE) {
   reproj(as.matrix(x), target = target, ..., source = source, four = four)
+}
+
+
+#' Reproject to specific number of columns
+#'
+#'`` _xy``, `_xyz` for the obvious cases.
+#'
+#' @inheritParams reproj
+#'
+#' @return
+#' @export
+#'
+#' @examples
+reproj_xy <- function(x, target, ..., source = NULL) {
+  reproj(x, target = target, source = source, ...)[,1:2]
+}
+
+#' @export
+#' @aliases reproj_xy
+reproj_xyz <- function(x, target, ..., source = NULL) {
+  reproj(x, target = target, source = source, ...)[,1:3]
 }
 
 
