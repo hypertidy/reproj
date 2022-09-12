@@ -70,6 +70,9 @@ test_that("integer inputs become epsg strings", {
     expect_true(grepl("EPSG:", to_proj("4326")))
     expect_true(grepl("EPSG:", to_proj("3857")))
 
+    expect_silent(reproj(dat, laeaproj, source = "OGC:CRS84"))
+    expect_silent(reproj(pdat, "OGC:CRS84", source = laeaproj))
+
   expect_error(validate_proj(3434))
 
   ##expect_silent(.onLoad())

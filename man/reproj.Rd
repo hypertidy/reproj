@@ -8,6 +8,8 @@
 \alias{reproj}
 \alias{reproj.matrix}
 \alias{reproj.data.frame}
+\alias{reproj_xy}
+\alias{reproj_xyz}
 \title{Reproject coordinates.}
 \usage{
 \method{reproj}{sc}(x, target = NULL, ..., source = NULL)
@@ -23,6 +25,10 @@ reproj(x, target, ..., source = NULL, four = FALSE)
 \method{reproj}{matrix}(x, target, ..., source = NULL, four = FALSE)
 
 \method{reproj}{data.frame}(x, target, ..., source = NULL, four = FALSE)
+
+reproj_xy(x, target, ..., source = NULL)
+
+reproj_xyz(x, target, ..., source = NULL)
 }
 \arguments{
 \item{x}{coordinates}
@@ -36,7 +42,9 @@ reproj(x, target, ..., source = NULL, four = FALSE)
 \item{four}{if \code{TRUE}, and PROJ version 6 is available return four columns xyzt (not just three xyz)}
 }
 \value{
-matrix
+numeric matrix of the transformed coordinates, either 2, 3, or 4 columns depending on the
+shape of the input, or the argument 'four' in \code{\link[=reproj]{reproj()}}. Use \code{\link[=reproj_xy]{reproj_xy()}} or
+\code{\link[=reproj_xyz]{reproj_xyz()}} for those specific 2- and 3-column cases.
 }
 \description{
 Reproject coordinates from a matrix or data frame by explicitly specifying the
@@ -76,6 +84,9 @@ to \code{target} is applied (this can be controlled by setting options).
 
 The function\code{reproj()} always returns a 3-column matrix \emph{unless} \code{four = TRUE}, and \code{\link[PROJ:ok_proj6]{PROJ::ok_proj6()}} is \code{TRUE} and then a 4-column matrix is returned.
 
+Functions \code{reproj_xy()} and \code{reproj_xyz()} are helpers for \code{reproj()} and always
+return 2- or 3-column matrix respectively.
+
 Note that any integer input for \code{source} or \code{target} will be formatted to a
 character string like "EPSG:<integer_code>" ('PROJ' package in use) or
 "+init=epsg:<integer_code>" ('proj4' package in use), depending on the
@@ -96,15 +107,14 @@ of workflows and applications that don't need that level of functionality.
 \section{Dependencies}{
 
 \itemize{
-\item The \href{https://CRAN.r-project.org/package=PROJ}{PROJ} package is used
-preferentially if is functional, using the underlying 'PROJ-lib' at version 6
-or higher. * The \href{https://CRAN.r-project.org/package=proj4}{proj4} package is
-used if PROJ is not functional.
+\item The \href{https://CRAN.r-project.org/package=PROJ}{PROJ} package is a stub atm
+and is not used.
+}
+
 The proj4 package works perfectly well with the PROJ-lib at versions 4, 5, 6,
 or 7 and if this is preferred reproj can be set to ignore the PROJ R package
 (see
 \href{https://hypertidy.github.io/reproj/reference/reproj-package.html}{reproj-package}).
-}
 }
 
 \section{Global options}{
@@ -113,7 +123,7 @@ or 7 and if this is preferred reproj can be set to ignore the PROJ R package
 
 The behaviour is controlled by user-settable options which on start up are
 \code{reproj.assume.longlat = TRUE} and
-\code{reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"}.
+\code{reproj.default.longlat = "OGC:CRS84"}.
 
 If the option \code{reproj.assume.longlat} is set to FALSE then the \code{source}
 argument must be named explicitly, i.e. \code{reproj(xy, t_srs, source = s_srs)},
@@ -137,11 +147,11 @@ testing for expert use.
 
 
 There are a number of limitations to the PROJ library please use at your own
-risk. The sf package provides a better supported facility to modern code and
-especially for datum transformations.
+risk. The sf package provides a better supported facility. The libproj package
+will be used if it makes it to CRAN.
 }
 
 \examples{
 reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84",
-                         source = "+proj=longlat +datum=WGS84")
+                         source = "OGC:CRS84")
 }

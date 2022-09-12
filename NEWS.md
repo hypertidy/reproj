@@ -1,3 +1,12 @@
+# reproj 0.4.3
+
+* Now using longlat-order compliant "OGC:CRS84" string throughout, rather than projstring
+ 'longlat' or EPSG code 4326.
+ 
+* New helper functions `reproj_xyz()` and `reproj_xy()` to return those specific cases. 
+
+* Removed unused LazyData element from DESCRIPTION. 
+
 # reproj 0.4.2
 
 * Removed tibble dependency (was used to write-in-place
