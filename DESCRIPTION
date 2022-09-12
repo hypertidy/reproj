@@ -16,7 +16,6 @@ Description: Transform coordinates from a specified source to a specified
  package should be aware of.) The 'PROJ' library is available at 
  <https://proj.org/>.  
 License: GPL-3
-LazyData: TRUE
 Depends: R (>= 3.2.5)
 Imports:
     proj4,
