@@ -37,9 +37,9 @@ test_that("identity reprojection ok", {
 })
 
 test_that("basic reprojection works", {
-  expect_equal(dim(reproj(dat, source = llproj, target = laeaproj, four = TRUE)), c(dim(dat)[1L], 4L))
-  expect_equal(dim(reproj(pdat, source = laeaproj, target = llproj, four = TRUE)), c(dim(dat)[1L], 4L))
-
+  #expect_equal(dim(reproj(dat, source = llproj, target = laeaproj, four = TRUE)), c(dim(dat)[1L], 4L))
+  #expect_equal(dim(reproj(pdat, source = laeaproj, target = llproj, four = TRUE)), c(dim(dat)[1L], 4L))
+expect_error(reproj(dat, source = llproj, target = laeaproj, four = TRUE))
 })
 test_that("unit change", {
   expect_equivalent(reproj(dat, source = llproj, target = "+proj=laea +ellps=WGS84 +units=km")[,1:2, drop = FALSE], pdat/1000)

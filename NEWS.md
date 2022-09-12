@@ -1,5 +1,7 @@
 # reproj 0.4.3
 
+* Argument 'four' is now disabled as we cannot support it. 
+
 * Now using longlat-order compliant "OGC:CRS84" string throughout, rather than projstring
  'longlat' or EPSG code 4326.
  

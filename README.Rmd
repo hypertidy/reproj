@@ -31,9 +31,11 @@ knitr::opts_chunk$set(
 
 The goal of reproj is to reproject data between coordinate systems. 
 
-The basic function `reproj()` takes input in diverse forms (matrix, data frame) and returns a 3-column matrix (or 4-column if `four = TRUE`), by transforming from map projection specfied by the  `source` argument to that specified by the `target` argument.
+The basic function `reproj()` takes input in diverse forms (matrix, data frame) and returns a 3-column matrix, by transforming from map projection specfied by the  `source` argument to that specified by the `target` argument.
 
 The functions `reproj_xy()` and `reproj_xyz()` drive the underlying `reproj()` for those specific cases for convenience. 
+
+We cannot currently do time-dependent transformations. 
 
 Matrix and data frame is the basic data structure in R, and this model also
 allows adding methods for specific data formats that already carry a suitable
