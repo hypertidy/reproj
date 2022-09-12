@@ -51,10 +51,9 @@ Reproject coordinates from a matrix or data frame by explicitly specifying the
 'source' and 'target' projections.
 }
 \details{
-If the modern version of the library 'proj' is available, \code{reproj()} uses
-the PROJ package, otherwise it falls pack to the proj4 package.
+We currently use the proj4 package.
 
-If using proj4, reproj drives the function \code{\link[proj4:transform]{proj4::ptransform()}} and sorts out
+The \code{\link[=reproj]{reproj()}} and related functions drive \code{\link[proj4:transform]{proj4::ptransform()}} and sort out
 the requirements for it so that we can simply give coordinates in data frame
 or matrix form, with a source projection and a target projection.
 
@@ -63,8 +62,8 @@ strings, not just "proj4string" and we are completely subject to the new
 rules and behaviours of the PROJ library. We always assume "visualization
 order", i.e. longitude then latitude, easting then northing (as X, Y).
 
-The basic function \code{reproj()} takes input in generic form (matrix or data
-frame) and returns a 3-column matrix (or 4-column if \code{four = TRUE}), by
+The basic function \code{\link[=reproj]{reproj()}} takes input in generic form (matrix or data
+frame) and returns a 3-column matrix, by
 transforming from map projection specified by the  \code{source} argument to that
 specified by the \code{target} argument.  Only column order is respected, column
 names are ignored.
@@ -82,16 +81,15 @@ The \code{source} argument must be named, and if it is not present a light check
 is made that the source data could be "longitude/latitude" and transformation
 to \code{target} is applied (this can be controlled by setting options).
 
-The function\code{reproj()} always returns a 3-column matrix \emph{unless} \code{four = TRUE}, and \code{\link[PROJ:ok_proj6]{PROJ::ok_proj6()}} is \code{TRUE} and then a 4-column matrix is returned.
+The function \code{\link[=reproj]{reproj()}} always returns a 3-column matrix \emph{unless} \code{four = TRUE}, and \code{\link[PROJ:ok_proj6]{PROJ::ok_proj6()}} is \code{TRUE} and then a 4-column matrix is returned.
 
-Functions \code{reproj_xy()} and \code{reproj_xyz()} are helpers for \code{reproj()} and always
+Functions \code{\link[=reproj_xy]{reproj_xy()}} and \code{\link[=reproj_xyz]{reproj_xyz()}} are helpers for \code{\link[=reproj]{reproj()}} and always
 return 2- or 3-column matrix respectively.
 
 Note that any integer input for \code{source} or \code{target} will be formatted to a
-character string like "EPSG:<integer_code>" ('PROJ' package in use) or
-"+init=epsg:<integer_code>" ('proj4' package in use), depending on the
-outcome of \code{PROJ::ok_proj6()}. This test function can be configured to
-alternatively use 'proj4' for expert use.
+character string like "EPSG:<integer_code>" as a simple convenience. Note that
+there are other authorities besides EPSG, so the pattern "AUTH:code" is a general
+one and you should really be explicit.
 
 Until recently the \code{proj4} package was the only one available for generic
 data that will transform between arbitrary coordinate systems specified by
