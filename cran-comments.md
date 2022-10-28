@@ -1,6 +1,6 @@
-## reproj 0.4.2
+## reproj 0.4.3
 
-New release to utilize lower level PROJ package. 
+New release to add small helper functions. 
 
 ## Test environments
 
