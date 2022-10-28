@@ -2,18 +2,9 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Travis build
-status](https://travis-ci.org/hypertidy/reproj.svg?branch=master)](https://travis-ci.org/hypertidy/reproj)
-[![R build
-status](https://github.com/hypertidy/reproj/workflows/R-CMD-check/badge.svg)](https://github.com/hypertidy/reproj/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/reproj)](https://cran.r-project.org/package=reproj)
 [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/reproj)](https://cran.r-project.org/package=reproj)
-[![R build
-status](https://github.com/hypertidy/reproj/workflows/test-coverage/badge.svg)](https://github.com/hypertidy/reproj/actions)
-[![R build
-status](https://github.com/hypertidy/reproj/workflows/pkgdown/badge.svg)](https://github.com/hypertidy/reproj/actions)
 [![R-CMD-check](https://github.com/hypertidy/reproj/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hypertidy/reproj/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -90,22 +81,27 @@ This example shows how to convert between coordinate systems:
 ``` r
 library(reproj)
 (pt <- (reproj(cbind(c(147, 148), c(-42, -45)), target = "+proj=laea +datum=WGS84", source = "OGC:CRS84")))
-#>           x_        y_  
-#> [1,] 5969744  -9803200 0
-#> [2,] 5362760 -10052226 0
+#> Warning in to_proj(source): not a proj-like string
+
+#> Warning in to_proj(source): not a proj-like string
+#>         [,1]      [,2] [,3]
+#> [1,] 5969744  -9803200    0
+#> [2,] 5362760 -10052226    0
 
 ## to another coordinate system
 (pt1 <- reproj(pt, target = "+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84", source = "+proj=laea +datum=WGS84"))
-#>            x_       y_ z_
-#> [1,] 12701201 -9158714  0
-#> [2,] 12538357 -9514556  0
+#>          [,1]     [,2] [,3]
+#> [1,] 12701201 -9158714    0
+#> [2,] 12538357 -9514556    0
 
 ## and back again
 
 reproj(pt1, target = "OGC:CRS84", source = "+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84")
-#>       x_  y_ z_
-#> [1,] 147 -42  0
-#> [2,] 148 -45  0
+#> Warning in to_proj(target): not a proj-like string
+#> Warning in to_proj(target): not a proj-like string
+#>      [,1] [,2] [,3]
+#> [1,]  147  -42    0
+#> [2,]  148  -45    0
 ```
 
 Note that the output is always in ‘xyz’ form, even if the z value is

@@ -1,11 +1,10 @@
-# anglr
+# affinity
 
 <details>
 
 * Version: 
-* Source code: ???
-* URL: https://github.com/hypertidy/reproj/
-* BugReports: https://github.com/hypertidy/reproj/issues/
+* GitHub: https://github.com/hypertidy/reproj
+* Source code: NA
 * Number of recursive dependencies: 0
 
 </details>
@@ -37,9 +36,74 @@
 <details>
 
 * Version: 
-* Source code: ???
-* URL: https://github.com/hypertidy/reproj/
-* BugReports: https://github.com/hypertidy/reproj/issues/
+* GitHub: https://github.com/hypertidy/reproj
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# mapscanner
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/hypertidy/reproj
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# osmdata
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/hypertidy/reproj
+* Source code: NA
 * Number of recursive dependencies: 0
 
 </details>
@@ -71,9 +135,8 @@
 <details>
 
 * Version: 
-* Source code: ???
-* URL: https://github.com/hypertidy/reproj/
-* BugReports: https://github.com/hypertidy/reproj/issues/
+* GitHub: https://github.com/hypertidy/reproj
+* Source code: NA
 * Number of recursive dependencies: 0
 
 </details>
@@ -105,9 +168,8 @@
 <details>
 
 * Version: 
-* Source code: ???
-* URL: https://github.com/hypertidy/reproj/
-* BugReports: https://github.com/hypertidy/reproj/issues/
+* GitHub: https://github.com/hypertidy/reproj
+* Source code: NA
 * Number of recursive dependencies: 0
 
 </details>
@@ -139,9 +201,8 @@
 <details>
 
 * Version: 
-* Source code: ???
-* URL: https://github.com/hypertidy/reproj/
-* BugReports: https://github.com/hypertidy/reproj/issues/
+* GitHub: https://github.com/hypertidy/reproj
+* Source code: NA
 * Number of recursive dependencies: 0
 
 </details>
@@ -173,9 +234,8 @@
 <details>
 
 * Version: 
-* Source code: ???
-* URL: https://github.com/hypertidy/reproj/
-* BugReports: https://github.com/hypertidy/reproj/issues/
+* GitHub: https://github.com/hypertidy/reproj
+* Source code: NA
 * Number of recursive dependencies: 0
 
 </details>

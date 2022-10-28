@@ -107,7 +107,7 @@
 #' @export
 #' @examples
 #' reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84",
-#'                          source = "OGC:CRS84")
+#'                          source = getOption("reproj.default.longlat"))
 reproj <- function(x, target, ..., source = NULL, four = FALSE) {
   UseMethod("reproj")
 }
