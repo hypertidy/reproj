@@ -1,3 +1,0 @@
-reproj-package          Reproject data from source to target coordinate
-                        system.
-reproj.sc               Reproject coordinates.
