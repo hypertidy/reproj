@@ -2,7 +2,7 @@ is_ll <- function(x) {
   if (is.factor(x)) x <- levels(x)[x]
   x <- tolower(trimws(as.character(x)))
   ss <- substr(trimws(x), 1, 1)
-  out <- (grepl("longlat", x) && ss == "+") | (grepl("lonlat", x) && ss == "+")
+  out <- (grepl("longlat", x) && ss == "+") | (grepl("lonlat", x) && ss == "+") | (grepl("ogc:crs84", x))
   if (isTRUE(out)) {
     return(out)  ## shortcut
   } else {
