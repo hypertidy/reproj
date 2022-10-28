@@ -3,10 +3,9 @@
 #' Reproject coordinates from a matrix or data frame by explicitly specifying the
 #' 'source' and 'target' projections.
 #'
-#' If the modern version of the library 'proj' is available, `reproj()` uses
-#' the PROJ package, otherwise it falls pack to the proj4 package.
+#' We currently use the proj4 package.
 #'
-#' If using proj4, reproj drives the function [proj4::ptransform()] and sorts out
+#' The [reproj()] and related functions drive [proj4::ptransform()] and sort out
 #' the requirements for it so that we can simply give coordinates in data frame
 #' or matrix form, with a source projection and a target projection.
 #'
@@ -15,8 +14,8 @@
 #' rules and behaviours of the PROJ library. We always assume "visualization
 #' order", i.e. longitude then latitude, easting then northing (as X, Y).
 #'
-#' The basic function `reproj()` takes input in generic form (matrix or data
-#' frame) and returns a 3-column matrix (or 4-column if `four = TRUE`), by
+#' The basic function [reproj()] takes input in generic form (matrix or data
+#' frame) and returns a 3-column matrix, by
 #' transforming from map projection specified by the  `source` argument to that
 #' specified by the `target` argument.  Only column order is respected, column
 #' names are ignored.
@@ -34,14 +33,16 @@
 #' is made that the source data could be "longitude/latitude" and transformation
 #' to `target` is applied (this can be controlled by setting options).
 #'
-#' The function`reproj()` always returns a 3-column matrix _unless_ `four =
+#' The function [reproj()] always returns a 3-column matrix _unless_ `four =
 #' TRUE`, and [PROJ::ok_proj6()] is `TRUE` and then a 4-column matrix is returned.
 #'
+#' Functions [reproj_xy()] and [reproj_xyz()] are helpers for [reproj()] and always
+#' return 2- or 3-column matrix respectively.
+#'
 #' Note that any integer input for `source` or `target` will be formatted to a
-#' character string like "EPSG:<integer_code>" ('PROJ' package in use) or
-#' "+init=epsg:<integer_code>" ('proj4' package in use), depending on the
-#' outcome of `PROJ::ok_proj6()`. This test function can be configured to
-#' alternatively use 'proj4' for expert use.
+#' character string like "EPSG:<integer_code>" as a simple convenience. Note that
+#' there are other authorities besides EPSG, so the pattern "AUTH:code" is a general
+#' one and you should really be explicit.
 #'
 #' Until recently the `proj4` package was the only one available for generic
 #' data that will transform between arbitrary coordinate systems specified by
@@ -56,10 +57,9 @@
 #'
 #' @section Dependencies:
 #'
-#' * The [PROJ](https://CRAN.r-project.org/package=PROJ) package is used
-#' preferentially if is functional, using the underlying 'PROJ-lib' at version 6
-#' or higher. * The [proj4](https://CRAN.r-project.org/package=proj4) package is
-#' used if PROJ is not functional.
+#' * The [PROJ](https://CRAN.r-project.org/package=PROJ) package is a stub atm
+#'  and is not used.
+#'
 #' The proj4 package works perfectly well with the PROJ-lib at versions 4, 5, 6,
 #' or 7 and if this is preferred reproj can be set to ignore the PROJ R package
 #' (see
@@ -71,7 +71,7 @@
 #'
 #' The behaviour is controlled by user-settable options which on start up are
 #' `reproj.assume.longlat = TRUE` and
-#' `reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"`.
+#' `reproj.default.longlat = "OGC:CRS84"`.
 #'
 #' If the option `reproj.assume.longlat` is set to FALSE then the `source`
 #' argument must be named explicitly, i.e. `reproj(xy, t_srs, source = s_srs)`,
@@ -91,8 +91,8 @@
 #' @section Warning:
 #'
 #' There are a number of limitations to the PROJ library please use at your own
-#' risk. The sf package provides a better supported facility to modern code and
-#' especially for datum transformations.
+#' risk. The sf package provides a better supported facility. The libproj package
+#' will be used if it makes it to CRAN.
 #'
 #' @param x coordinates
 #' @param source source specification (PROJ.4 string or epsg code)
@@ -101,19 +101,24 @@
 #' @param ... arguments passed to [proj4::ptransform()]
 #'
 #' @importFrom proj4 ptransform
-#' @return matrix
+#' @return numeric matrix of the transformed coordinates, either 2, 3, or 4 columns depending on the
+#' shape of the input, or the argument 'four' in [reproj()]. Use [reproj_xy()] or
+#' [reproj_xyz()] for those specific 2- and 3-column cases.
 #' @export
 #' @examples
 #' reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84",
-#'                          source = "+proj=longlat +datum=WGS84")
+#'                          source = "OGC:CRS84")
 reproj <- function(x, target, ..., source = NULL, four = FALSE) {
   UseMethod("reproj")
 }
 
+
 #' @rdname reproj
 #' @export
 reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
-
+  if (isTRUE(four)) {
+    stop("argument 'four' is not available currently")
+  }
   if (is.null(source) || is.na(source)) {
     if (ok_lon_lat(x) && isTRUE(getOption("reproj.assume.longlat"))) {
       source <- getOption("reproj.default.longlat")
@@ -131,7 +136,7 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
     if (dim(x)[2L] == 2L) {
       out <- PROJ::proj_trans(x, target = target, ..., source = source)
       out <- cbind(do.call(cbind, out), 0)
-      
+
     }
     if (dim(x)[2L] == 3L) {
       out <- PROJ::proj_trans(x[,1:2, drop = FALSE], target = target, ..., source = source,
@@ -147,7 +152,7 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
       if (!four) out <- out[ , 1:3, drop = FALSE]
     }
 
-    
+
     if (four) {
       if (dim(out)[2] == 2) {
         out <- cbind(out, 0, 0)
@@ -180,6 +185,19 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
 #' @export
 reproj.data.frame <- function(x, target, ..., source = NULL, four = FALSE) {
   reproj(as.matrix(x), target = target, ..., source = source, four = four)
+}
+
+
+#' @rdname reproj
+#' @export
+reproj_xy <- function(x, target, ..., source = NULL) {
+  reproj(x, target = target, source = source, ...)[,1:2]
+}
+
+#' @rdname reproj
+#' @export
+reproj_xyz <- function(x, target, ..., source = NULL) {
+  reproj(x, target = target, source = source, ...)[,1:3]
 }
 
 

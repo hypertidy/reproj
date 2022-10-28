@@ -16,7 +16,6 @@ Description: Transform coordinates from a specified source to a specified
  package should be aware of.) The 'PROJ' library is available at 
  <https://proj.org/>.  
 License: GPL-3
-LazyData: TRUE
 Depends: R (>= 3.2.5)
 Imports:
     proj4,
@@ -25,7 +24,7 @@ Imports:
 Suggests:
     testthat,
     covr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 SystemRequirements: PROJ (>= 4.4.6)

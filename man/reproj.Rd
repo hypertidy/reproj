@@ -8,6 +8,8 @@
 \alias{reproj}
 \alias{reproj.matrix}
 \alias{reproj.data.frame}
+\alias{reproj_xy}
+\alias{reproj_xyz}
 \title{Reproject coordinates.}
 \usage{
 \method{reproj}{sc}(x, target = NULL, ..., source = NULL)
@@ -23,6 +25,10 @@ reproj(x, target, ..., source = NULL, four = FALSE)
 \method{reproj}{matrix}(x, target, ..., source = NULL, four = FALSE)
 
 \method{reproj}{data.frame}(x, target, ..., source = NULL, four = FALSE)
+
+reproj_xy(x, target, ..., source = NULL)
+
+reproj_xyz(x, target, ..., source = NULL)
 }
 \arguments{
 \item{x}{coordinates}
@@ -36,17 +42,18 @@ reproj(x, target, ..., source = NULL, four = FALSE)
 \item{four}{if \code{TRUE}, and PROJ version 6 is available return four columns xyzt (not just three xyz)}
 }
 \value{
-matrix
+numeric matrix of the transformed coordinates, either 2, 3, or 4 columns depending on the
+shape of the input, or the argument 'four' in \code{\link[=reproj]{reproj()}}. Use \code{\link[=reproj_xy]{reproj_xy()}} or
+\code{\link[=reproj_xyz]{reproj_xyz()}} for those specific 2- and 3-column cases.
 }
 \description{
 Reproject coordinates from a matrix or data frame by explicitly specifying the
 'source' and 'target' projections.
 }
 \details{
-If the modern version of the library 'proj' is available, \code{reproj()} uses
-the PROJ package, otherwise it falls pack to the proj4 package.
+We currently use the proj4 package.
 
-If using proj4, reproj drives the function \code{\link[proj4:transform]{proj4::ptransform()}} and sorts out
+The \code{\link[=reproj]{reproj()}} and related functions drive \code{\link[proj4:transform]{proj4::ptransform()}} and sort out
 the requirements for it so that we can simply give coordinates in data frame
 or matrix form, with a source projection and a target projection.
 
@@ -55,8 +62,8 @@ strings, not just "proj4string" and we are completely subject to the new
 rules and behaviours of the PROJ library. We always assume "visualization
 order", i.e. longitude then latitude, easting then northing (as X, Y).
 
-The basic function \code{reproj()} takes input in generic form (matrix or data
-frame) and returns a 3-column matrix (or 4-column if \code{four = TRUE}), by
+The basic function \code{\link[=reproj]{reproj()}} takes input in generic form (matrix or data
+frame) and returns a 3-column matrix, by
 transforming from map projection specified by the  \code{source} argument to that
 specified by the \code{target} argument.  Only column order is respected, column
 names are ignored.
@@ -74,13 +81,15 @@ The \code{source} argument must be named, and if it is not present a light check
 is made that the source data could be "longitude/latitude" and transformation
 to \code{target} is applied (this can be controlled by setting options).
 
-The function\code{reproj()} always returns a 3-column matrix \emph{unless} \code{four = TRUE}, and \code{\link[PROJ:ok_proj6]{PROJ::ok_proj6()}} is \code{TRUE} and then a 4-column matrix is returned.
+The function \code{\link[=reproj]{reproj()}} always returns a 3-column matrix \emph{unless} \code{four = TRUE}, and \code{\link[PROJ:ok_proj6]{PROJ::ok_proj6()}} is \code{TRUE} and then a 4-column matrix is returned.
+
+Functions \code{\link[=reproj_xy]{reproj_xy()}} and \code{\link[=reproj_xyz]{reproj_xyz()}} are helpers for \code{\link[=reproj]{reproj()}} and always
+return 2- or 3-column matrix respectively.
 
 Note that any integer input for \code{source} or \code{target} will be formatted to a
-character string like "EPSG:<integer_code>" ('PROJ' package in use) or
-"+init=epsg:<integer_code>" ('proj4' package in use), depending on the
-outcome of \code{PROJ::ok_proj6()}. This test function can be configured to
-alternatively use 'proj4' for expert use.
+character string like "EPSG:<integer_code>" as a simple convenience. Note that
+there are other authorities besides EPSG, so the pattern "AUTH:code" is a general
+one and you should really be explicit.
 
 Until recently the \code{proj4} package was the only one available for generic
 data that will transform between arbitrary coordinate systems specified by
@@ -96,15 +105,14 @@ of workflows and applications that don't need that level of functionality.
 \section{Dependencies}{
 
 \itemize{
-\item The \href{https://CRAN.r-project.org/package=PROJ}{PROJ} package is used
-preferentially if is functional, using the underlying 'PROJ-lib' at version 6
-or higher. * The \href{https://CRAN.r-project.org/package=proj4}{proj4} package is
-used if PROJ is not functional.
+\item The \href{https://CRAN.r-project.org/package=PROJ}{PROJ} package is a stub atm
+and is not used.
+}
+
 The proj4 package works perfectly well with the PROJ-lib at versions 4, 5, 6,
 or 7 and if this is preferred reproj can be set to ignore the PROJ R package
 (see
 \href{https://hypertidy.github.io/reproj/reference/reproj-package.html}{reproj-package}).
-}
 }
 
 \section{Global options}{
@@ -113,7 +121,7 @@ or 7 and if this is preferred reproj can be set to ignore the PROJ R package
 
 The behaviour is controlled by user-settable options which on start up are
 \code{reproj.assume.longlat = TRUE} and
-\code{reproj.default.longlat = "+proj=longlat +datum=WGS84 +no_defs"}.
+\code{reproj.default.longlat = "OGC:CRS84"}.
 
 If the option \code{reproj.assume.longlat} is set to FALSE then the \code{source}
 argument must be named explicitly, i.e. \code{reproj(xy, t_srs, source = s_srs)},
@@ -137,11 +145,11 @@ testing for expert use.
 
 
 There are a number of limitations to the PROJ library please use at your own
-risk. The sf package provides a better supported facility to modern code and
-especially for datum transformations.
+risk. The sf package provides a better supported facility. The libproj package
+will be used if it makes it to CRAN.
 }
 
 \examples{
 reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84",
-                         source = "+proj=longlat +datum=WGS84")
+                         source = "OGC:CRS84")
 }
