@@ -4,8 +4,8 @@ New release to add small helper functions.
 
 ## Test environments
 
-* local ubuntu 18.04 install, R 3.6.3
-* win-builder (devel and release)
+* local ubuntu 
+* win-builder 
 
 ## R CMD check results
 
@@ -16,7 +16,12 @@ New release to add small helper functions.
 
 The packages on CRAN all pass check with this version. 
 
-* ceramic
-* quadmesh (0.4.5 new to CRAN)
-* rbgm
-* spex
+- affinity
+- ceramic
+- mapscanner
+- osmdata
+- quadmesh
+- rbgm
+- spex
+- trip
+

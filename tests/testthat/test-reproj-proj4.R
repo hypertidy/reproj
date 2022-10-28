@@ -56,7 +56,7 @@ test_that("bad arguments fail if we can't assume longlat", {
 test_that("bad arguments don't fail if we can assume longlat", {
   options(reproj.assume.longlat = TRUE)
   expect_warning(reproj(dat, target = laeaproj), "but looks like longitude/latitude values")
-  expect_message(reproj(pdat, llproj, source = laeaproj), "mock-no-proj6 mode")
+  expect_silent(reproj(pdat, llproj, source = laeaproj))
 })
 
 test_that("integer inputs become epsg strings", {
