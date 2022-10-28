@@ -151,5 +151,5 @@ will be used if it makes it to CRAN.
 
 \examples{
 reproj(cbind(147, -42), target = "+proj=laea +datum=WGS84",
-                         source = "OGC:CRS84")
+                         source = getOption("reproj.default.longlat"))
 }

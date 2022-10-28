@@ -7,13 +7,8 @@ output: github_document
 
 
 <!-- badges: start -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) 
-[![Travis build status](https://travis-ci.org/hypertidy/reproj.svg?branch=master)](https://travis-ci.org/hypertidy/reproj)
-[![R build status](https://github.com/hypertidy/reproj/workflows/R-CMD-check/badge.svg)](https://github.com/hypertidy/reproj/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/reproj)](https://cran.r-project.org/package=reproj)
 [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/reproj)](https://cran.r-project.org/package=reproj)
-[![R build status](https://github.com/hypertidy/reproj/workflows/test-coverage/badge.svg)](https://github.com/hypertidy/reproj/actions)
-[![R build status](https://github.com/hypertidy/reproj/workflows/pkgdown/badge.svg)](https://github.com/hypertidy/reproj/actions)
 [![R-CMD-check](https://github.com/hypertidy/reproj/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hypertidy/reproj/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
   
