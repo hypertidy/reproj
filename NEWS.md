@@ -1,3 +1,8 @@
+# reproj dev
+
+* New function `reproj_extent()` to produce a reprojected extent `xmin,xmax,ymin,ymax`. 
+
+
 # reproj 0.4.3
 
 * Argument 'four' is now disabled as we cannot support it. 
