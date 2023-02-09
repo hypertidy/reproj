@@ -1,6 +1,6 @@
-## reproj 0.4.3
+## reproj 0.5.0
 
-New release to add small helper functions. 
+New release to handle problem with raster::projection
 
 ## Test environments
 
@@ -18,6 +18,7 @@ The packages on CRAN all pass check with this version.
 
 - affinity
 - ceramic
+- graticule
 - mapscanner
 - osmdata
 - quadmesh
