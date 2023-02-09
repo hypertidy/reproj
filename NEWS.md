@@ -1,5 +1,7 @@
 # reproj dev
 
+* When encountering strings "WGS84" or "NAD27" these are now replaced by their PROJ  string versions. 
+
 * New function `reproj_extent()` to produce a reprojected extent `xmin,xmax,ymin,ymax`. 
 
 
