@@ -46,9 +46,14 @@ to_proj <- function(x) {
   if (x == "NAD27") x <- "+proj=longlat +datum=NAD27"
   if (x == "WGS84") x <- "+proj=longlat +datum=WGS84"
 
-  ## TODO: otherwise doesn't look like a proj string ...
-  ## only in older versions, because this might be WKT2 now
-  if (!PROJ::ok_proj6() && !substr(x, 1, 1) == "+") warning("not a proj-like string")
+  if (x == "WGS 84") x <- "+proj=longlat +datum=WGS84"
+
+  if (PROJ::ok_proj6()) {
+    ok <- try(PROJ::proj_crs_text(x), silent = TRUE)
+    if (inherits(ok, "try-error") || is.na(ok) || !nzchar(ok)) {
+      stop("not a string PROJ can understand")
+    }
+  }
   x
 }
 validate_proj <- function(x) {

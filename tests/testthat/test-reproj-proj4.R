@@ -1,6 +1,6 @@
 context("reproj-proj4")
 #options(reproj.mock.noproj6 = TRUE)
-testthat::skip_if_not(!PROJ::ok_proj6())
+testthat::skip_if_not(PROJ::ok_proj6())
 
 llproj <- "+proj=longlat +datum=WGS84"
 laeaproj <- "+proj=laea +datum=WGS84"
@@ -60,12 +60,11 @@ test_that("bad arguments don't fail if we can assume longlat", {
 })
 
 test_that("integer inputs become epsg strings", {
-  expect_true(grepl("init=epsg", to_proj(4326)))
-  expect_true(grepl("init=epsg", to_proj(3857)))
+  if (PROJ::ok_proj6()) {
 
-  expect_true(grepl("init=epsg", to_proj("4326")))
-  expect_true(grepl("init=epsg", to_proj("3857")))
-
+  expect_true(grepl("EPSG:4326", to_proj("4326")))
+  expect_true(grepl("EPSG:3857", to_proj("3857")))
+}
   expect_error(validate_proj(3434))
   expect_silent(reproj:::.onLoad())
   op <- options(reproj.assume.longlat = NULL)
@@ -73,7 +72,7 @@ test_that("integer inputs become epsg strings", {
   expect_silent(reproj:::.onLoad())
   expect_true("reproj.assume.longlat" %in% names(options()))
 
-  expect_warning(to_proj("I am longlat"), "not a proj-like string")
+  expect_error(to_proj("I am longlat"), "not a string PROJ can understand")
 })
 
 

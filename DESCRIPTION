@@ -30,3 +30,4 @@ Encoding: UTF-8
 SystemRequirements: PROJ (>= 4.4.6)
 BugReports: https://github.com/hypertidy/reproj/issues/
 URL: https://github.com/hypertidy/reproj/
+Remotes: hypertidy/PROJ
