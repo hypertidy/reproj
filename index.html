@@ -116,27 +116,22 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hypertidy/reproj/" class="external-link">reproj</a></span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">pt</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="reference/reproj.html">reproj</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">147</span>, <span class="fl">148</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">42</span>, <span class="op">-</span><span class="fl">45</span><span class="op">)</span><span class="op">)</span>, target <span class="op">=</span> <span class="st">"+proj=laea +datum=WGS84"</span>, source <span class="op">=</span> <span class="st">"OGC:CRS84"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in to_proj(source): not a proj-like string</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in to_proj(source): not a proj-like string</span></span>
-<span><span class="co">#&gt;         [,1]      [,2] [,3]</span></span>
-<span><span class="co">#&gt; [1,] 5969744  -9803200    0</span></span>
-<span><span class="co">#&gt; [2,] 5362760 -10052226    0</span></span>
+<span><span class="co">#&gt;           x_        y_  </span></span>
+<span><span class="co">#&gt; [1,] 5969744  -9803200 0</span></span>
+<span><span class="co">#&gt; [2,] 5362760 -10052226 0</span></span>
 <span></span>
 <span><span class="co">## to another coordinate system</span></span>
 <span><span class="op">(</span><span class="va">pt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/reproj.html">reproj</a></span><span class="op">(</span><span class="va">pt</span>, target <span class="op">=</span> <span class="st">"+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84"</span>, source <span class="op">=</span> <span class="st">"+proj=laea +datum=WGS84"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;          [,1]     [,2] [,3]</span></span>
-<span><span class="co">#&gt; [1,] 12701201 -9158714    0</span></span>
-<span><span class="co">#&gt; [2,] 12538357 -9514556    0</span></span>
+<span><span class="co">#&gt;            x_       y_ z_</span></span>
+<span><span class="co">#&gt; [1,] 12701201 -9158714  0</span></span>
+<span><span class="co">#&gt; [2,] 12538357 -9514556  0</span></span>
 <span></span>
 <span><span class="co">## and back again</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/reproj.html">reproj</a></span><span class="op">(</span><span class="va">pt1</span>, target <span class="op">=</span> <span class="st">"OGC:CRS84"</span>, source <span class="op">=</span> <span class="st">"+proj=lcc +lat_1=-20 +lat_2=-10 +datum=WGS84"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in to_proj(target): not a proj-like string</span></span>
-<span><span class="co">#&gt; Warning in to_proj(target): not a proj-like string</span></span>
-<span><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
-<span><span class="co">#&gt; [1,]  147  -42    0</span></span>
-<span><span class="co">#&gt; [2,]  148  -45    0</span></span></code></pre></div>
+<span><span class="co">#&gt;       x_  y_ z_</span></span>
+<span><span class="co">#&gt; [1,] 147 -42  0</span></span>
+<span><span class="co">#&gt; [2,] 148 -45  0</span></span></code></pre></div>
 <p>Note that the output is always in ‘xyz’ form, even if the z value is implied zero. The input may also be ‘xyz’ and it is the user’s job to ensure this is specified correctly. It’s not possible to automate every case, because among the three main cases:</p>
 <ul>
 <li>longitude latitude and elevation,</li>
