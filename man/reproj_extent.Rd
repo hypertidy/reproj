@@ -4,7 +4,7 @@
 \alias{reproj_extent}
 \title{Reproject extent}
 \usage{
-reproj_extent(extent, target, ..., source = NULL, nn = 80)
+reproj_extent(extent, target, limit = NULL, ..., source = NULL)
 }
 \arguments{
 \item{extent}{a four element vector of extent \code{c(xmin, xmax, ymin, ymax)}}
@@ -14,8 +14,6 @@ reproj_extent(extent, target, ..., source = NULL, nn = 80)
 \item{...}{arguments passed to \code{\link[proj4:transform]{proj4::ptransform()}}}
 
 \item{source}{source specification (PROJ.4 string or epsg code)}
-
-\item{nn}{number of vertices to use for linear approximation along each edge}
 }
 \value{
 four value extent \code{c(xmin, xmax, ymin, ymax)}
