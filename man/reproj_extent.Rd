@@ -11,6 +11,8 @@ reproj_extent(extent, target, limit = NULL, ..., source = NULL)
 
 \item{target}{target specification (PROJ.4 string or epsg code)}
 
+\item{limit}{if used, a one or two element numeric vector to give the maximum radius to the edge of the extent from the middle}
+
 \item{...}{arguments passed to \code{\link[proj4:transform]{proj4::ptransform()}}}
 
 \item{source}{source specification (PROJ.4 string or epsg code)}

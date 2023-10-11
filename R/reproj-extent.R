@@ -29,10 +29,13 @@
   right <- cbind(xl[2], yl[2:1])[,2:1] ## rev for same x
   bot <- cbind(xl[2:1], yl[1])
   left <- cbind(xl[1], yl)[,2:1] ## rev for same x
-  xc <- vaster::x_corner(dm, extent)
+  xl <- extent[1:2]
+  yl <- extent[3:4]
+  ##resx <- vaster:::x_res(x$extent, x$dimension)
+  xc <- seq(xl[1L], xl[2L], length.out = dm[1L] + 1L)
+  yc <- seq(yl[1L], yl[2L], length.out = dm[2L] + 1L)
 
-  cbind(xc,
-              rep(vaster::y_corner(dm, extent), each = length(xc)))
+  cbind(xc, rep(yc, each = length(xc)))
 
 }
 
@@ -51,6 +54,7 @@
 #'
 #' @inheritParams reproj
 #' @param extent a four element vector of extent `c(xmin, xmax, ymin, ymax)`
+#' @param limit if used, a one or two element numeric vector to give the maximum radius to the edge of the extent from the middle
 #'
 #' @return four value extent `c(xmin, xmax, ymin, ymax)`
 #' @export
