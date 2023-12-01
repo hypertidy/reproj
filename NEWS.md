@@ -1,4 +1,4 @@
-# reproj dev
+# reproj 0.6.0
 
 * `reproj_extent()` now handles more situations, and gains a `limit` argument for
 one or two radius values to limit the distance from centre to edges to this value. 

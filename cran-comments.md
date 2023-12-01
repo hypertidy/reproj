@@ -1,6 +1,6 @@
-## reproj 0.5.0
+## reproj 0.6.0
 
-New release to handle problem with raster::projection
+New version. 
 
 ## Test environments
 
@@ -17,7 +17,6 @@ New release to handle problem with raster::projection
 The packages on CRAN all pass check with this version. 
 
 - affinity
-- ceramic
 - graticule
 - mapscanner
 - osmdata
@@ -25,4 +24,5 @@ The packages on CRAN all pass check with this version.
 - rbgm
 - spex
 - trip
+- tripEstimation
 
