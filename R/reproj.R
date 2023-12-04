@@ -34,7 +34,7 @@
 #' to `target` is applied (this can be controlled by setting options).
 #'
 #' The function [reproj()] always returns a 3-column matrix _unless_ `four =
-#' TRUE`, and [PROJ::ok_proj6()] is `TRUE` and then a 4-column matrix is returned.
+#' TRUE`, and PROJ package is available then a 4-column matrix is returned.
 #'
 #' Functions [reproj_xy()] and [reproj_xyz()] are helpers for [reproj()] and always
 #' return 2- or 3-column matrix respectively.
@@ -131,7 +131,7 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
     source <- to_proj(source)
   }
   target <- to_proj(target)  ## just sprintf("EPSG:%i", target) or sprintf("+init=epsg:%i", target)
-  if (PROJ::ok_proj6()) {
+  if (.ok_PROJ()) {
 
     if (dim(x)[2L] == 2L) {
       out <- PROJ::proj_trans(x, target = target, ..., source = source)

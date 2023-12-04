@@ -1,3 +1,7 @@
+.ok_PROJ <- function() {
+    requireNamespace("PROJ", quietly = TRUE)
+}
+
 is_ll <- function(x) {
   if (is.factor(x)) x <- levels(x)[x]
   x <- tolower(trimws(as.character(x)))
@@ -33,7 +37,7 @@ to_proj <- function(x) {
   ## or is a character string
   if (is.numeric(x) || (nchar(x) %in% c(4, 5, 6) && grepl("^[0-9]{1,5}$", x))) {
     ## here we need PROJ::ok_proj6() pivot
-    if (!PROJ::ok_proj6()) {
+    if (!.ok_PROJ()) {
       ## we are PROJ library version < 6
       x <- sprintf("+init=epsg:%i", as.integer(x))
     } else {
@@ -48,7 +52,7 @@ to_proj <- function(x) {
 
   if (x == "WGS 84") x <- "+proj=longlat +datum=WGS84"
 
-  if (PROJ::ok_proj6()) {
+  if (.ok_PROJ()) {
     ok <- try(PROJ::proj_crs_text(x), silent = TRUE)
     if (inherits(ok, "try-error") || is.na(ok) || !nzchar(ok)) {
       stop("not a string PROJ can understand")

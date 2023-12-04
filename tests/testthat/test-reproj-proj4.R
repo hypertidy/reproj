@@ -1,6 +1,6 @@
 context("reproj-proj4")
 #options(reproj.mock.noproj6 = TRUE)
-testthat::skip_if_not(PROJ::ok_proj6())
+testthat::skip_if_not(.ok_PROJ())
 
 llproj <- "+proj=longlat +datum=WGS84"
 laeaproj <- "+proj=laea +datum=WGS84"
@@ -60,7 +60,7 @@ test_that("bad arguments don't fail if we can assume longlat", {
 })
 
 test_that("integer inputs become epsg strings", {
-  if (PROJ::ok_proj6()) {
+  if (.ok_PROJ()) {
 
   expect_true(grepl("EPSG:4326", to_proj("4326")))
   expect_true(grepl("EPSG:3857", to_proj("3857")))

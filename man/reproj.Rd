@@ -81,7 +81,7 @@ The \code{source} argument must be named, and if it is not present a light check
 is made that the source data could be "longitude/latitude" and transformation
 to \code{target} is applied (this can be controlled by setting options).
 
-The function \code{\link[=reproj]{reproj()}} always returns a 3-column matrix \emph{unless} \code{four = TRUE}, and \code{\link[PROJ:ok_proj6]{PROJ::ok_proj6()}} is \code{TRUE} and then a 4-column matrix is returned.
+The function \code{\link[=reproj]{reproj()}} always returns a 3-column matrix \emph{unless} \code{four = TRUE}, and PROJ package is available then a 4-column matrix is returned.
 
 Functions \code{\link[=reproj_xy]{reproj_xy()}} and \code{\link[=reproj_xyz]{reproj_xyz()}} are helpers for \code{\link[=reproj]{reproj()}} and always
 return 2- or 3-column matrix respectively.
