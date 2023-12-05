@@ -127,10 +127,8 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
     } else {
       stop("no 'source' projection included, and does not look like longitude/latitude values")
     }
-  } else {
-    source <- to_proj(source)
   }
-  target <- to_proj(target)  ## just sprintf("EPSG:%i", target) or sprintf("+init=epsg:%i", target)
+
   if (.ok_PROJ()) {
 
     if (dim(x)[2L] == 2L) {
@@ -163,12 +161,7 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
     }
   } else {
 
-    target <- to_proj(target)
-    validate_proj(target)
 
-
-    source <- to_proj(source)
-    validate_proj(source)
 
     srcmult <- if (is_ll(source)) {pi/180} else {1}
     tarmult <-  if(is_ll(target)) {180/pi} else {1}

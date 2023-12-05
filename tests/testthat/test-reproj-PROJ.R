@@ -63,20 +63,6 @@ test_that("bad arguments don't fail if we can assume longlat", {
   expect_silent(reproj(pdat, llproj, source = laeaproj))
 })
 
-test_that("integer inputs become epsg strings", {
-    expect_true(grepl("EPSG:", to_proj(4326)))
-    expect_true(grepl("EPSG:", to_proj(3857)))
-
-    expect_true(grepl("EPSG:", to_proj("4326")))
-    expect_true(grepl("EPSG:", to_proj("3857")))
-
-    expect_silent(reproj(dat, laeaproj, source = getOption("reproj.default.longlat")))
-    expect_silent(reproj(pdat, getOption("reproj.default.longlat"), source = laeaproj))
-
-  expect_error(validate_proj(3434))
-
-  ##expect_silent(.onLoad())
-})
 
 test_that("z and t works", {
   expect_silent({

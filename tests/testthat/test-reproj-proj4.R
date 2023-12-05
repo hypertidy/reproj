@@ -26,9 +26,7 @@ test_that("basic reprojection works", {
   expect_equivalent(reproj(dat, source = llproj, target = laeaproj)[,1:2, drop = FALSE], pdat)
   expect_equivalent(reproj(pdat, source = laeaproj, target = llproj)[,1:2, drop = FALSE], dat)
 
-  leading <- " +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"
-  nospace <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"
-  expect_false(to_proj(leading) == leading)
+
 })
 
 test_that("identity reprojection ok", {
@@ -60,17 +58,13 @@ test_that("bad arguments don't fail if we can assume longlat", {
 
 test_that("integer inputs become epsg strings", {
 
-  ##expect_true(grepl("EPSG:4326", to_proj("4326")))
-  ##expect_true(grepl("EPSG:3857", to_proj("3857")))
-
-  expect_error(validate_proj(3434))
   expect_silent(reproj:::.onLoad())
   op <- options(reproj.assume.longlat = NULL)
   expect_true(!"reproj.assume.longlat" %in% names(options()))
   expect_silent(reproj:::.onLoad())
   expect_true("reproj.assume.longlat" %in% names(options()))
 
-  #expect_error(to_proj("I am longlat"), "not a string PROJ can understand")
+
 })
 
 

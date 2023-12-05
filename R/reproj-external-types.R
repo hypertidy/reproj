@@ -39,7 +39,7 @@ if (is.null(source)) source <- get_proj_sc(x)
 #' @export
 reproj.mesh3d <- function(x, target, ..., source = NULL) {
   xy <- t(x$vb[1:2, , drop = FALSE])
-  x$vb[1:2, ] <- t(reproj(cbind(xy, z = x$vb[3, , drop = TRUE]), target = target, source = to_proj(x$crs), ...))
+  x$vb[1:2, ] <- t(reproj(cbind(xy, z = x$vb[3, , drop = TRUE]), target = target, source = x$crs, ...))
   x
 }
 #' @rdname reproj
