@@ -135,7 +135,7 @@ from user, or process controlled mechanism.</p>
 <p>The <code>source</code> argument must be named, and if it is not present a light check
 is made that the source data could be "longitude/latitude" and transformation
 to <code>target</code> is applied (this can be controlled by setting options).</p>
-<p>The function <code>reproj()</code> always returns a 3-column matrix <em>unless</em> <code>four = TRUE</code>, and <code><a href="https://rdrr.io/pkg/PROJ/man/ok_proj6.html" class="external-link">PROJ::ok_proj6()</a></code> is <code>TRUE</code> and then a 4-column matrix is returned.</p>
+<p>The function <code>reproj()</code> always returns a 3-column matrix <em>unless</em> <code>four = TRUE</code>, and PROJ package is available then a 4-column matrix is returned.</p>
 <p>Functions <code>reproj_xy()</code> and <code>reproj_xyz()</code> are helpers for <code>reproj()</code> and always
 return 2- or 3-column matrix respectively.</p>
 <p>Note that any integer input for <code>source</code> or <code>target</code> will be formatted to a
