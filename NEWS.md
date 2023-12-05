@@ -1,5 +1,7 @@
 # reproj 0.6.0
 
+* Fix drop problem in 1 row reproj_xy and reproj_xyz. 
+
 * PROJ package is now in Suggests, because a future release will not allow non-functional lib support. 
 
 * `reproj_extent()` now handles more situations, and gains a `limit` argument for

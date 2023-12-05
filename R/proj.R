@@ -2,6 +2,7 @@
     requireNamespace("PROJ", quietly = TRUE)
 }
 
+
 is_ll <- function(x) {
   if (is.factor(x)) x <- levels(x)[x]
   x <- tolower(trimws(as.character(x)))

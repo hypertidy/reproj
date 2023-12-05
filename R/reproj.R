@@ -191,13 +191,13 @@ reproj.data.frame <- function(x, target, ..., source = NULL, four = FALSE) {
 #' @rdname reproj
 #' @export
 reproj_xy <- function(x, target, ..., source = NULL) {
-  reproj(x, target = target, source = source, ...)[,1:2]
+  reproj(x, target = target, source = source, ...)[,1:2, drop = FALSE]
 }
 
 #' @rdname reproj
 #' @export
 reproj_xyz <- function(x, target, ..., source = NULL) {
-  reproj(x, target = target, source = source, ...)[,1:3]
+  reproj(x, target = target, source = source, ...)[,1:3, drop = FALSE]
 }
 
 
