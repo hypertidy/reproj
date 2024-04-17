@@ -35,7 +35,7 @@
   xc <- seq(xl[1L], xl[2L], length.out = dm[1L] + 1L)
   yc <- seq(yl[1L], yl[2L], length.out = dm[2L] + 1L)
 
-  cbind(xc, rep(yc, each = length(xc)))
+  cbind(x = xc, y = rep(yc, each = length(xc)))
 
 }
 

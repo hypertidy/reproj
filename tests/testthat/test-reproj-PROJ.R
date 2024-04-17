@@ -81,6 +81,6 @@ test_that("sc works", {
 })
 
 test_that("geocentric works", {
-  xyz <- reproj::reproj(cbind(147, -42), target = "+proj=geocent", source = "EPSG:4326")
+  xyz <- reproj::reproj(cbind(147, -42, 0), target = "+proj=geocent", source = "EPSG:4326")
   expect_equal(c(xyz > 0), c(FALSE, TRUE, FALSE))
 })

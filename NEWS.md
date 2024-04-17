@@ -1,3 +1,7 @@
+# reproj dev
+
+* PROJ proj_trans returns a matrix with columns matching input, so we align to that here. 
+
 # reproj 0.6.0
 
 * Fix drop problem in 1 row reproj_xy and reproj_xyz. 

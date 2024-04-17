@@ -116,6 +116,9 @@ reproj <- function(x, target, ..., source = NULL, four = FALSE) {
 #' @rdname reproj
 #' @export
 reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
+  nms <- colnames(x)
+  ## make sure all columns have names, or none
+  if (any(nzchar(nms))) colnames(x) <- NULL
   if (isTRUE(four)) {
     stop("argument 'four' is not available currently")
   }
@@ -131,46 +134,11 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
 
   if (.ok_PROJ()) {
 
-    if (dim(x)[2L] == 2L) {
       out <- PROJ::proj_trans(x, target = target, ..., source = source)
-      out <- cbind(do.call(cbind, out), 0)
-
-    }
-    if (dim(x)[2L] == 3L) {
-      out <- PROJ::proj_trans(x[,1:2, drop = FALSE], target = target, ..., source = source,
-                                      z_ = x[, 3L, drop = TRUE])
-      out <- do.call(cbind, out)
-      if (!four) out <- out[ , 1:3, drop = FALSE]
-    }
-    if (dim(x)[2L] > 3L) {
-      out <- PROJ::proj_trans(x[,1:2, drop = FALSE], target = target, ..., source = source,
-                                      z_ = x[, 3L, drop = TRUE],
-                                      t_ = x[, 4L, drop = TRUE])
-      out <- do.call(cbind, out)
-      if (!four) out <- out[ , 1:3, drop = FALSE]
-    }
+    
 
 
-    if (four) {
-      if (dim(out)[2] == 2) {
-        out <- cbind(out, 0, 0)
-      }
-      if (dim(out)[2] == 3) {
-        out <- cbind(out, 0)
-      }
-    }
-  } else {
-
-
-
-    srcmult <- if (is_ll(source)) {pi/180} else {1}
-    tarmult <-  if(is_ll(target)) {180/pi} else {1}
-
-    x[, 1:2] <- x[,1:2] * srcmult
-    out <- proj4::ptransform(x, source, target, ...)
-    out[,1:2] <- out[, 1:2] * tarmult
-    if (four) warning("argument 'four' is ignored when PROJ version 6 not available")
-  }
+  } 
   out
 }
 
@@ -190,6 +158,8 @@ reproj_xy <- function(x, target, ..., source = NULL) {
 #' @rdname reproj
 #' @export
 reproj_xyz <- function(x, target, ..., source = NULL) {
+  if (ncol(x) > 3L) x <- x[,1:3, drop = FALSE]
+  if (ncol(x) == 2L) x <- cbind(x, 0.0)
   reproj(x, target = target, source = source, ...)[,1:3, drop = FALSE]
 }
 
