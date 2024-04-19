@@ -1,15 +1,13 @@
-## reproj 0.6.0
+## reproj 0.6.5
 
-New version. 
+Patch release to prepare for changes in PROJ. I've checked revdeps
+with this version. 
+
 
 ## Test environments
 
 * local ubuntu 
 * win-builder 
-
-## R CMD check results
-
-0 errors | 0 warnings | 0 notes
 
 
 ## Reverse dependencies

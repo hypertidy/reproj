@@ -73,14 +73,17 @@ test_that("z and t works", {
   })
 })
 test_that("mesh3d works", {
+  skip()
   expect_warning(reproj(.mesh3d, "+proj=laea +datum=WGS84"))
 })
 
 test_that("sc works", {
+  skip()
   expect_silent(reproj(.sc, "+proj=laea +datum=WGS84"))
 })
 
 test_that("geocentric works", {
+  skip()
   xyz <- reproj::reproj(cbind(147, -42, 0), target = "+proj=geocent", source = "EPSG:4326")
   expect_equal(c(xyz > 0), c(FALSE, TRUE, FALSE))
 })

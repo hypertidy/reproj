@@ -114,8 +114,12 @@ reproj <- function(x, target, ..., source = NULL, four = FALSE) {
 
 
 #' @rdname reproj
+#' @importFrom utils packageVersion
 #' @export
 reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
+  if (packageVersion("PROJ") <= "0.4.5") {
+    x <- x[,1:2, drop = FALSE]
+  }
   nms <- colnames(x)
   ## make sure all columns have names, or none
   if (any(nzchar(nms))) colnames(x) <- NULL
@@ -134,11 +138,15 @@ reproj.matrix <- function(x, target, ..., source = NULL, four = FALSE) {
 
   if (.ok_PROJ()) {
 
+   
       out <- PROJ::proj_trans(x, target = target, ..., source = source)
     
 
 
   } 
+  if (packageVersion("PROJ") <= "0.4.5") {
+    out <- do.call(cbind, out)
+  }
   out
 }
 

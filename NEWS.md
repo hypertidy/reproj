@@ -1,6 +1,6 @@
-# reproj dev
+# reproj 0.6.5
 
-* PROJ proj_trans returns a matrix with columns matching input, so we align to that here. 
+* PROJ proj_trans returns a matrix with columns matching input, so we align to that here with some protection for older style for revdeps. 
 
 # reproj 0.6.0
 

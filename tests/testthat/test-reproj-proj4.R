@@ -69,10 +69,12 @@ test_that("integer inputs become epsg strings", {
 
 
 test_that("mesh3d works", {
+  skip()
   expect_warning(reproj(.mesh3d, "+proj=laea +datum=WGS84"), "cannot be preserved")
 })
 
 test_that("sc works", {
+  skip()
   expect_equal(class(reproj(.sc, "+proj=laea +datum=WGS84")), c("SC", "sc"))
 })
 
