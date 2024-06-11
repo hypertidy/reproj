@@ -19,11 +19,11 @@ License: GPL-3
 Depends: R (>= 3.2.5)
 Imports:
     proj4,
-    crsmeta (>= 0.3.0)
+    crsmeta (>= 0.3.0),
+    PROJ (>= 0.4.5)
 Suggests:
     testthat,
-    covr,
-    PROJ (>= 0.4.5)
+    covr
 RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
