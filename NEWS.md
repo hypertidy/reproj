@@ -1,4 +1,4 @@
-# reproj 0.6.5
+# reproj 0.7.0
 
 * PROJ proj_trans returns a matrix with columns matching input, so we align to that here with some protection for older style for revdeps. 
 

@@ -1,8 +1,7 @@
-## reproj 0.6.5
+## reproj 0.7.0
 
 Patch release to prepare for changes in PROJ. I've checked revdeps
 with this version. 
-
 
 ## Test environments
 
