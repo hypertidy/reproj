@@ -1,7 +1,9 @@
 ## reproj 0.7.0
 
-Patch release to prepare for changes in PROJ. I've checked revdeps
-with this version. 
+Release to prepare for changes in PROJ. 
+
+
+Second submission, fixed Imports and checked with revdepcheck. 
 
 ## Test environments
 
