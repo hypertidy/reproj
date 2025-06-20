@@ -1,7 +1,7 @@
 Package: reproj
 Type: Package
 Title: Coordinate System Transformations for Generic Map Data
-Version: 0.7.0
+Version: 0.7.0.9001
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com", comment=c(ORCID = "0000-0002-2471-7511"))
 Description: Transform coordinates from a specified source to a specified 
@@ -20,11 +20,12 @@ Depends: R (>= 3.2.5)
 Imports:
     proj4,
     crsmeta (>= 0.3.0),
-    PROJ (>= 0.4.5)
+    PROJ (>= 0.4.5), 
+    wk
 Suggests:
     testthat,
     covr
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 SystemRequirements: PROJ (>= 4.4.6)

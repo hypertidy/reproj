@@ -1,4 +1,7 @@
-# reproj 0.7.0
+# reproj dev
+
+* `reproj_extent` has been reworked to allow 4-column matrix input (xmin,xmax,ymin,ymax), original form (vector) is also accepted
+# reproj 0.7.0. `limit` argument is now ignored, with a message about deprecation. 
 
 * PROJ proj_trans returns a matrix with columns matching input, so we align to that here with some protection for older style for revdeps. 
 
