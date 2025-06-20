@@ -4,21 +4,21 @@
 \alias{reproj_extent}
 \title{Reproject extent}
 \usage{
-reproj_extent(extent, target, limit = NULL, ..., source = NULL)
+reproj_extent(extent, target, ..., source = NULL, dimension = c(64, 64))
 }
 \arguments{
-\item{extent}{a four element vector of extent \code{c(xmin, xmax, ymin, ymax)}}
+\item{extent}{a four element vector of extent \code{c(xmin, xmax, ymin, ymax)}, or matrix with 4 columns}
 
 \item{target}{target specification (PROJ.4 string or epsg code)}
-
-\item{limit}{if used, a one or two element numeric vector to give the maximum radius to the edge of the extent from the middle}
 
 \item{...}{arguments passed to \code{\link[proj4:transform]{proj4::ptransform()}}}
 
 \item{source}{source specification (PROJ.4 string or epsg code)}
+
+\item{dimension}{a 2 element integer to give the discretization within each extent (defaults to 64x64)}
 }
 \value{
-four value extent \code{c(xmin, xmax, ymin, ymax)}
+four value extent \code{c(xmin, xmax, ymin, ymax)} or a matrix with four columns (matching the input)
 }
 \description{
 A four figure extent (xmin, xmax, ymin, ymax) is used to approximate the boundary of its
