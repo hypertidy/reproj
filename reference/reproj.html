@@ -4,7 +4,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reproj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0.9001</span>
       </span>
     </div>
 
@@ -32,20 +32,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/hypertidy/reproj/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Reproject coordinates.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/hypertidy/reproj/blob/HEAD/R/reproj-external-types.R" class="external-link"><code>R/reproj-external-types.R</code></a>, <a href="https://github.com/hypertidy/reproj/blob/HEAD/R/reproj.R" class="external-link"><code>R/reproj.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/hypertidy/reproj/blob/main/R/reproj-external-types.R" class="external-link"><code>R/reproj-external-types.R</code></a>, <a href="https://github.com/hypertidy/reproj/blob/main/R/reproj.R" class="external-link"><code>R/reproj.R</code></a></small>
     <div class="hidden name"><code>reproj.Rd</code></div>
     </div>
 
@@ -55,24 +55,24 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for sc</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'sc'</span></span>
 <span><span class="fu">reproj</span><span class="op">(</span><span class="va">x</span>, target <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, source <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for mesh3d</span></span>
+<span><span class="co"># S3 method for class 'mesh3d'</span></span>
 <span><span class="fu">reproj</span><span class="op">(</span><span class="va">x</span>, <span class="va">target</span>, <span class="va">...</span>, source <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for quadmesh</span></span>
+<span><span class="co"># S3 method for class 'quadmesh'</span></span>
 <span><span class="fu">reproj</span><span class="op">(</span><span class="va">x</span>, <span class="va">target</span>, <span class="va">...</span>, source <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for triangmesh</span></span>
+<span><span class="co"># S3 method for class 'triangmesh'</span></span>
 <span><span class="fu">reproj</span><span class="op">(</span><span class="va">x</span>, <span class="va">target</span>, <span class="va">...</span>, source <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">reproj</span><span class="op">(</span><span class="va">x</span>, <span class="va">target</span>, <span class="va">...</span>, source <span class="op">=</span> <span class="cn">NULL</span>, four <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for matrix</span></span>
+<span><span class="co"># S3 method for class 'matrix'</span></span>
 <span><span class="fu">reproj</span><span class="op">(</span><span class="va">x</span>, <span class="va">target</span>, <span class="va">...</span>, source <span class="op">=</span> <span class="cn">NULL</span>, four <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for data.frame</span></span>
+<span><span class="co"># S3 method for class 'data.frame'</span></span>
 <span><span class="fu">reproj</span><span class="op">(</span><span class="va">x</span>, <span class="va">target</span>, <span class="va">...</span>, source <span class="op">=</span> <span class="cn">NULL</span>, four <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">reproj_xy</span><span class="op">(</span><span class="va">x</span>, <span class="va">target</span>, <span class="va">...</span>, source <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
@@ -82,31 +82,31 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>x</dt>
+
+
+<dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>coordinates</p></dd>
 
 
-<dt>target</dt>
+<dt id="arg-target">target<a class="anchor" aria-label="anchor" href="#arg-target"></a></dt>
 <dd><p>target specification (PROJ.4 string or epsg code)</p></dd>
 
 
-<dt>...</dt>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>arguments passed to <code><a href="https://rdrr.io/pkg/proj4/man/transform.html" class="external-link">proj4::ptransform()</a></code></p></dd>
 
 
-<dt>source</dt>
+<dt id="arg-source">source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
 <dd><p>source specification (PROJ.4 string or epsg code)</p></dd>
 
 
-<dt>four</dt>
+<dt id="arg-four">four<a class="anchor" aria-label="anchor" href="#arg-four"></a></dt>
 <dd><p>if <code>TRUE</code>, and PROJ version 6 is available return four columns xyzt (not just three xyz)</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>numeric matrix of the transformed coordinates, either 2, 3, or 4 columns depending on the
+    <p>numeric matrix of the transformed coordinates, either 2, 3, or 4 columns depending on the
 shape of the input, or the argument 'four' in <code>reproj()</code>. Use <code>reproj_xy()</code> or
 <code>reproj_xyz()</code> for those specific 2- and 3-column cases.</p>
     </div>
@@ -154,7 +154,7 @@ of workflows and applications that don't need that level of functionality.</p>
     </div>
     <div id="dependencies">
     <h2>Dependencies</h2>
-    
+
 
 <ul><li><p>The <a href="https://CRAN.r-project.org/package=PROJ" class="external-link">PROJ</a> package is a stub atm
 and is not used.</p></li>
@@ -165,7 +165,7 @@ or 7 and if this is preferred reproj can be set to ignore the PROJ R package
     </div>
     <div id="global-options">
     <h2>Global options</h2>
-    
+
 
 <div class="section">
 <h3 id="assuming-longitude-latitude-input">Assuming longitude/latitude input<a class="anchor" aria-label="anchor" href="#assuming-longitude-latitude-input"></a></h3>
@@ -195,7 +195,7 @@ testing for expert use.</p>
     </div>
     <div id="warning">
     <h2>Warning</h2>
-    
+
 
 
 <p>There are a number of limitations to the PROJ library please use at your own
@@ -207,7 +207,7 @@ will be used if it makes it to CRAN.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">reproj</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">147</span>, <span class="op">-</span><span class="fl">42</span><span class="op">)</span>, target <span class="op">=</span> <span class="st">"+proj=laea +datum=WGS84"</span>,</span></span>
 <span class="r-in"><span>                         source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"reproj.default.longlat"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           x_       y_</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            x        y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 5969744 -9803200</span>
 </code></pre></div>
     </div>
@@ -223,15 +223,15 @@ will be used if it makes it to CRAN.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
