@@ -20,7 +20,7 @@ reproj_ext <- function(x, target, dm = c(64, 64), ..., source = NULL) {
   for (i in seq_len(nrow(x))) {
     offset <- x[i, c(1, 3), drop = TRUE]
     scale <- diff(x[i, ])[c(1, 3)] / dm
-    xyl[[i]] <- c(apply(wk_reproj(xy0 * matrix(scale, dim(xy0)[1], 2, byrow = TRUE) + matrix(offset, dim(xy0)[1], 2, byrow = TRUE), trans), 2, range, na.rm = TRUE, finite = TRUE), trans)
+    xyl[[i]] <- c(apply(wk_reproj(xy0 * matrix(scale, dim(xy0)[1], 2, byrow = TRUE) + matrix(offset, dim(xy0)[1], 2, byrow = TRUE), trans), 2, range, na.rm = TRUE, finite = TRUE))
 
   }
   do.call(rbind, xyl)
