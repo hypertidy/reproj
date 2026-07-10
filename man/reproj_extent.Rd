@@ -11,7 +11,7 @@ reproj_extent(extent, target, ..., source = NULL, dimension = c(64, 64))
 
 \item{target}{target specification (PROJ.4 string or epsg code)}
 
-\item{...}{arguments passed to \code{\link[proj4:transform]{proj4::ptransform()}}}
+\item{...}{arguments passed to \code{\link[PROJ:proj_trans]{PROJ::proj_trans()}}}
 
 \item{source}{source specification (PROJ.4 string or epsg code)}
 

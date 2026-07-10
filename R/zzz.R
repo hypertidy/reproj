@@ -1,13 +1,8 @@
-err <- try(proj4::ptransform(cbind(0, 0), "OGC:CRS84", "+proj=laea"), silent = TRUE)
-if (inherits(err, "try-error")) {
-  df <- "+proj=longlat +datum=WGS84"
-} else {
-  df <- "OGC:CRS84"
-}
+## PROJ (>= 0.7.0) requires libproj >= 6.3.1, which understands OGC:CRS84
+df <- "OGC:CRS84"
 
 reproj_default_options <- function() {
   list(
-  reproj.mock.noproj6 = FALSE,
   reproj.assume.longlat = TRUE,
   reproj.default.longlat = df
 )}

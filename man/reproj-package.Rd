@@ -5,10 +5,10 @@
 \alias{reproj-package}
 \title{reproj: Coordinate System Transformations for Generic Map Data}
 \description{
-Transform coordinates from a specified source to a specified target map projection. This uses the 'PROJ' library directly, by wrapping the 'PROJ' package which leverages 'libproj', otherwise the 'proj4' package. The 'reproj()' function is generic, methods may be added to remove the need for an explicit source definition. If 'proj4' is in use 'reproj()' handles the requirement for conversion of angular units where necessary. This is for use primarily to transform generic data formats and direct leverage of the underlying 'PROJ' library. (There are transformations that aren't possible with 'PROJ' and that are provided by the 'GDAL' library, a limitation which users of this package should be aware of.) The 'PROJ' library is available at \url{https://proj.org/}.
+Transform coordinates from a specified source to a specified target map projection. This uses the 'PROJ' library directly, via the 'PROJ' package. The 'reproj()' function is generic, methods may be added to remove the need for an explicit source definition. This is for use primarily to transform generic data formats and direct leverage of the underlying 'PROJ' library. (There are transformations that aren't possible with 'PROJ' and that are provided by the 'GDAL' library, a limitation which users of this package should be aware of.) The 'PROJ' library is available at \url{https://proj.org/}.
 
-reproj provides helpers for easily reprojecting generic data, by depending
-on a reprojection engine (proj4 for now).
+reproj provides helpers for easily reprojecting generic data, using the
+PROJ package as the reprojection engine.
 }
 \details{
 The function \code{reproj} is designed to take an input data set \code{x} and then a
@@ -23,11 +23,6 @@ that logic.
 
 See \link{reproj} for global options to control assumptions about data that
 is input in longitude latitude form.
-
-There is an option set at start up \code{reproj.mock.noproj6} which is designed
-for testing the support in the PROJ package. Even if this package is
-functional this option can be set to true so that reproj falls-back to
-use the proj4 package instead.
 }
 \seealso{
 Useful links:
@@ -40,6 +35,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Michael D. Sumner \email{mdsumner@gmail.com} (\href{https://orcid.org/0000-0002-2471-7511}{ORCID})
+
+Authors:
+\itemize{
+  \item Michael D. Sumner \email{mdsumner@gmail.com} (\href{https://orcid.org/0000-0002-2471-7511}{ORCID})
+}
 
 }
 \keyword{internal}

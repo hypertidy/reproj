@@ -1,4 +1,16 @@
-# reproj dev
+# reproj 0.8.0
+
+* reproj now requires PROJ (>= 0.7.0) and uses it unconditionally as the
+ transformation engine. The proj4 package is no longer used and has been
+ dropped from Imports, along with the defunct `reproj.mock.noproj6` option.
+
+* `reproj()` for matrix and data frame input returns coordinate columns
+ matching the input (2, 3, or 4 columns), restoring z (and m) transformation
+ with PROJ (>= 0.7.0). `reproj_xyz()` works again.
+
+* Fixed `reproj()` method for 'mesh3d' to write back all three coordinate
+ rows (previously transformed z was discarded), and it now honors the
+ `source` argument.
 
 * `reproj_extent` has been reworked to allow 4-column matrix input (xmin,xmax,ymin,ymax), original form (vector) is also accepted
 # reproj 0.7.0. `limit` argument is now ignored, with a message about deprecation. 
