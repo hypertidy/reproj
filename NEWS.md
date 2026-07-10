@@ -1,5 +1,13 @@
 # reproj 0.8.0
 
+* Fixed `reproj_extent()` overshooting the input extent by one grid cell on
+ the xmax/ymax sides; the boundary grid now spans the extent exactly (an
+ identity transform returns the input extent unchanged).
+
+* Removed dead internal code (`to_proj()`, `is_ll()`, `validate_proj()`) and
+ the internal EPSG code table; these were unused, modern PROJ resolves
+ strings like "WGS84" and "NAD27" directly.
+
 * reproj now requires PROJ (>= 0.7.0) and uses it unconditionally as the
  transformation engine. The proj4 package is no longer used and has been
  dropped from Imports, along with the defunct `reproj.mock.noproj6` option.

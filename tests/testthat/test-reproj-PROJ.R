@@ -1,6 +1,5 @@
 context("reproj-PROJ")
 #options(reproj.mock.noproj6 = TRUE)
-testthat::skip_if_not(.ok_PROJ())
 
 llproj <- "+proj=longlat +datum=WGS84"
 laeaproj <- "+proj=laea +datum=WGS84"

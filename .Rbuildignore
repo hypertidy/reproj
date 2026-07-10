@@ -16,3 +16,5 @@
 ^ci$
 ^.Rhistory$
 ^CRAN-SUBMISSION$
+^\.positai$
+^\.claude$

@@ -9,9 +9,9 @@ reproj_ext <- function(x, target, dm = c(64, 64), ..., source = NULL) {
     source <- "EPSG:4326"
 
   }
-  dm1 <- dm + 1  ## use +1 so we have rectangle pixels, entire extent
-  xc0 <- seq(0, dm1[1L])
-  yc0 <- seq(0, dm1[2L])
+  xc0 <- seq(0, dm[1L])
+  yc0 <- seq(0, dm[2L])
+  
   ## repeat for every extent
   xy0 <- cbind(x = xc0, y = rep(yc0, each = length(xc0)))
   xyl <- vector("list", nrow(x))
