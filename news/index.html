@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reproj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -47,6 +47,20 @@
       <small>Source: <a href="https://github.com/hypertidy/reproj/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.1" id="reproj-081">reproj 0.8.1<a class="anchor" aria-label="anchor" href="#reproj-081"></a></h2>
+<ul><li>Replaced deprecated dot-name arguments in structure() calls (.Dim, .Dimnames, .Names) with standard attribute names, per CRAN check NOTE.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.0" id="reproj-080">reproj 0.8.0<small>2026-07-10</small><a class="anchor" aria-label="anchor" href="#reproj-080"></a></h2>
+<ul><li><p>Fixed <code><a href="../reference/reproj_extent.html">reproj_extent()</a></code> overshooting the input extent by one grid cell on the xmax/ymax sides; the boundary grid now spans the extent exactly (an identity transform returns the input extent unchanged).</p></li>
+<li><p>Removed dead internal code (<code>to_proj()</code>, <code>is_ll()</code>, <code>validate_proj()</code>) and the internal EPSG code table; these were unused, modern PROJ resolves strings like “WGS84” and “NAD27” directly.</p></li>
+<li><p>reproj now requires PROJ (&gt;= 0.7.0) and uses it unconditionally as the transformation engine. The proj4 package is no longer used and has been dropped from Imports, along with the defunct <code>reproj.mock.noproj6</code> option.</p></li>
+<li><p><code><a href="../reference/reproj.html">reproj()</a></code> for matrix and data frame input returns coordinate columns matching the input (2, 3, or 4 columns), restoring z (and m) transformation with PROJ (&gt;= 0.7.0). <code><a href="../reference/reproj.html">reproj_xyz()</a></code> works again.</p></li>
+<li><p>Fixed <code><a href="../reference/reproj.html">reproj()</a></code> method for ‘mesh3d’ to write back all three coordinate rows (previously transformed z was discarded), and it now honors the <code>source</code> argument.</p></li>
+<li><p><code>reproj_extent</code> has been reworked to allow 4-column matrix input (xmin,xmax,ymin,ymax), original form (vector) is also accepted # reproj 0.7.0. <code>limit</code> argument is now ignored, with a message about deprecation.</p></li>
+<li><p>PROJ proj_trans returns a matrix with columns matching input, so we align to that here with some protection for older style for revdeps.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.0" id="reproj-060">reproj 0.6.0<a class="anchor" aria-label="anchor" href="#reproj-060"></a></h2>
 <ul><li><p>Fix drop problem in 1 row reproj_xy and reproj_xyz.</p></li>
@@ -111,7 +125,7 @@ library (for versions projlib &gt;= 6.0.0).</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

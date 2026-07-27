@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reproj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>arguments passed to <code><a href="https://rdrr.io/pkg/proj4/man/transform.html" class="external-link">proj4::ptransform()</a></code></p></dd>
+<dd><p>arguments passed to <code><a href="https://hypertidy.github.io/PROJ/reference/proj_trans.html" class="external-link">PROJ::proj_trans()</a></code></p></dd>
 
 
 <dt id="arg-source">source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
@@ -101,27 +101,27 @@
 
 
 <dt id="arg-four">four<a class="anchor" aria-label="anchor" href="#arg-four"></a></dt>
-<dd><p>if <code>TRUE</code>, and PROJ version 6 is available return four columns xyzt (not just three xyz)</p></dd>
+<dd><p>defunct, was 'if <code>TRUE</code> return four columns xyzt', use the shape of the input instead</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>numeric matrix of the transformed coordinates, either 2, 3, or 4 columns depending on the
-shape of the input, or the argument 'four' in <code>reproj()</code>. Use <code>reproj_xy()</code> or
+shape of the input. Use <code>reproj_xy()</code> or
 <code>reproj_xyz()</code> for those specific 2- and 3-column cases.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>We currently use the proj4 package.</p>
-<p>The <code>reproj()</code> and related functions drive <code><a href="https://rdrr.io/pkg/proj4/man/transform.html" class="external-link">proj4::ptransform()</a></code> and sort out
-the requirements for it so that we can simply give coordinates in data frame
+    <p>The transformation engine is the PROJ package, a wrapper around the PROJ
+library, so that we can simply give coordinates in data frame
 or matrix form, with a source projection and a target projection.</p>
-<p>If using PROJ, reproj can pass in a wider variety of source and target
-strings, not just "proj4string" and we are completely subject to the new
+<p>reproj accepts a wide variety of source and target
+strings, not just "proj4string", and we are completely subject to the
 rules and behaviours of the PROJ library. We always assume "visualization
 order", i.e. longitude then latitude, easting then northing (as X, Y).</p>
 <p>The basic function <code>reproj()</code> takes input in generic form (matrix or data
-frame) and returns a 3-column matrix, by
+frame) and returns a matrix with columns matching the coordinate columns
+of the input (2, 3, or 4 of x, y, z, m), by
 transforming from map projection specified by the  <code>source</code> argument to that
 specified by the <code>target</code> argument.  Only column order is respected, column
 names are ignored.</p>
@@ -135,18 +135,12 @@ from user, or process controlled mechanism.</p>
 <p>The <code>source</code> argument must be named, and if it is not present a light check
 is made that the source data could be "longitude/latitude" and transformation
 to <code>target</code> is applied (this can be controlled by setting options).</p>
-<p>The function <code>reproj()</code> always returns a 3-column matrix <em>unless</em> <code>four = TRUE</code>, and PROJ package is available then a 4-column matrix is returned.</p>
 <p>Functions <code>reproj_xy()</code> and <code>reproj_xyz()</code> are helpers for <code>reproj()</code> and always
 return 2- or 3-column matrix respectively.</p>
 <p>Note that any integer input for <code>source</code> or <code>target</code> will be formatted to a
 character string like "EPSG:&lt;integer_code&gt;" as a simple convenience. Note that
 there are other authorities besides EPSG, so the pattern "AUTH:code" is a general
 one and you should really be explicit.</p>
-<p>Until recently the <code>proj4</code> package was the only one available for generic
-data that will transform between arbitrary coordinate systems specified by
-<em>source</em> and <em>target</em> coordinate systems and with control over 'xy' versus
-'xyz' input and output.  This package adds some further features by wrapping
-the need to convert longitude/latitude data to or from radians.</p>
 <p>Other R packages for transforming coordinates are geared toward data
 that's in a particular format. It's true that only GDAL provides the full
 gamut of available geographic map projections, but this leaves a huge variety
@@ -156,12 +150,9 @@ of workflows and applications that don't need that level of functionality.</p>
     <h2>Dependencies</h2>
 
 
-<ul><li><p>The <a href="https://CRAN.r-project.org/package=PROJ" class="external-link">PROJ</a> package is a stub atm
-and is not used.</p></li>
-</ul><p>The proj4 package works perfectly well with the PROJ-lib at versions 4, 5, 6,
-or 7 and if this is preferred reproj can be set to ignore the PROJ R package
-(see
-<a href="https://hypertidy.github.io/reproj/reference/reproj-package.html" class="external-link">reproj-package</a>).</p>
+
+<p>The <a href="https://CRAN.r-project.org/package=PROJ" class="external-link">PROJ</a> package (&gt;= 0.7.0)
+does all transformation work, wrapping the PROJ library (&gt;= 6.3.1).</p>
     </div>
     <div id="global-options">
     <h2>Global options</h2>
@@ -176,31 +167,12 @@ or 7 and if this is preferred reproj can be set to ignore the PROJ R package
 <code>reproj.default.longlat = "OGC:CRS84"</code>.</p>
 <p>If the option <code>reproj.assume.longlat</code> is set to FALSE then the <code>source</code>
 argument must be named explicitly, i.e. <code>reproj(xy, t_srs, source = s_srs)</code>,
-this is to help catch mistakes being made. The <code>target</code> is the second
-argument in <code>reproj</code> though it is the third argument in <code><a href="https://rdrr.io/pkg/proj4/man/transform.html" class="external-link">proj4::ptransform</a></code>.
-This function also converts to radians on input or output as required.</p>
+this is to help catch mistakes being made.</p>
 <p>If the option <code>reproj.assume.longlat</code> is set to TRUE and the input data
 appear to be sensible longitude/latitude values, then the value of
 <code>reproj.default.longlat</code> is used as the assumed source projection.</p>
 </div>
 
-<div class="section">
-<h3 id="controlling-use-or-proj-or-proj-">Controlling use or PROJ or proj4<a class="anchor" aria-label="anchor" href="#controlling-use-or-proj-or-proj-"></a></h3>
-
-
-<p>See <a href="reproj-package.html">reproj-package</a> for another option set <code>reproj.mock.noproj6</code> for package
-testing for expert use.</p>
-</div>
-
-    </div>
-    <div id="warning">
-    <h2>Warning</h2>
-
-
-
-<p>There are a number of limitations to the PROJ library please use at your own
-risk. The sf package provides a better supported facility. The libproj package
-will be used if it makes it to CRAN.</p>
     </div>
 
     <div id="ref-examples">
@@ -223,7 +195,7 @@ will be used if it makes it to CRAN.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

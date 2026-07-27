@@ -18,7 +18,7 @@ reprojected version by interpolating new vertices along each edge."><!-- mathjax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reproj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -71,7 +71,7 @@ reprojected version by interpolating new vertices along each edge.</p>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>arguments passed to <code><a href="https://rdrr.io/pkg/proj4/man/transform.html" class="external-link">proj4::ptransform()</a></code></p></dd>
+<dd><p>arguments passed to <code><a href="https://hypertidy.github.io/PROJ/reference/proj_trans.html" class="external-link">PROJ::proj_trans()</a></code></p></dd>
 
 
 <dt id="arg-source">source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
@@ -98,7 +98,7 @@ the raster package 'projectExtent()'.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">reproj_extent</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>, <span class="st">"+proj=laea"</span>, source <span class="op">=</span> <span class="st">"+proj=longlat"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]       0 1129109       0 2243734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]       0 1111783       0 2209293</span>
 </code></pre></div>
     </div>
   </div>
@@ -113,7 +113,7 @@ the raster package 'projectExtent()'.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>
