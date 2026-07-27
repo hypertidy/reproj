@@ -1,3 +1,8 @@
+# reproj 0.8.1
+
+* Replaced deprecated dot-name arguments in structure() calls (.Dim,
+  .Dimnames, .Names) with standard attribute names, per CRAN check NOTE.
+
 # reproj 0.8.0
 
 * Fixed `reproj_extent()` overshooting the input extent by one grid cell on
